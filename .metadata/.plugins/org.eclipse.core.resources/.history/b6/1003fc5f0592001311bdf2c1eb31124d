@@ -1,0 +1,50 @@
+import java.util.HashMap;
+
+
+public class tttBoard {
+
+	int size;
+	int magicNum;
+	String player0;
+	String player1;
+	HashMap<Integer, String> boardMap;
+	HashMap<Integer, Integer> perfectSquare;
+	
+	public tttBoard(Integer size, String p0, String p1) {
+		this.size = size;
+		magicNum = size * (size * size + 1) / 2;
+		player0 = p0;
+		player1 = p1;
+		boardMap = new HashMap<Integer, String>(size*size, (float) 1.0);
+		perfectSquare = new HashMap<Integer, Integer>(size*size, (float) 1.0);
+		loadPerfectSquare();
+	}
+	
+	private void loadPerfectSquare() {
+		//load Integer values into the correct values in the perfectSquare map
+	}
+	
+	//params x and y: coordinates within the square
+	//return int key corresponding to the key in the maps for those coords
+	private int getKey(int x, int y) {
+		return x + size*y;
+	}
+	
+	//param player: 0 or 1, the player number
+	//params x and y: coordinates within the square
+	//return boolean true if move successful, false otherwise
+	private boolean move(int player, int x, int y) {
+		if (boardMap.containsKey(getKey(x,y))) { //already occupied
+			return false;
+		}
+		if (player != 0 && player != 1) { //invalid player
+			return false;
+		}
+		if (x >= size || y >= size) { //invalid coords
+			return false;
+		}
+		//valid move
+		boardMap.put(getKey(x,y),player==1 ? player1 : player0);
+	}
+
+}

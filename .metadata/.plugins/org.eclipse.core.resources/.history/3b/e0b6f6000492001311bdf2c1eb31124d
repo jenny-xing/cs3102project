@@ -1,0 +1,20 @@
+import java.util.HashMap;
+
+
+public class tttBoard {
+
+	int size;
+	String player0;
+	String player1;
+	HashMap<Integer, String> boardMap;
+	HashMap<Integer, Integer> perfectSquare;
+	
+	public tttBoard(Integer size, String p0, String p1) {
+		this.size = size;
+		player0 = p0;
+		player1 = p1;
+		boardMap = new HashMap<>(size*size, 1.0);
+		perfectSquare = new HashMap<>(size*size, 1.0);
+	}
+
+}
