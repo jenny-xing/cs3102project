@@ -45,3 +45,212 @@ This warning can be switched off on the Team > Git > Confirmations and Warnings 
 
 !ENTRY org.eclipse.m2e.logback.appender 4 0 2014-02-09 22:32:19.787
 !MESSAGE Failed to open search index.
+!SESSION 2014-02-10 20:06:50.357 -----------------------------------------------
+eclipse.buildId=M20120208-0800
+java.version=1.7.0_45
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=en_US
+Framework arguments:  C:\Users\Jenny\Documents\GitHub\cs3102project\tttBoard.java
+Command-line arguments:  -os win32 -ws win32 -arch x86 -data C:\Users\Jenny\Documents\GitHub\cs3102project C:\Users\Jenny\Documents\GitHub\cs3102project\tttBoard.java
+
+!ENTRY org.eclipse.ui 4 4 2014-02-10 20:36:15.578
+!MESSAGE Invalid preference page path: XML Syntax
+!SESSION 2014-02-10 20:38:17.312 -----------------------------------------------
+eclipse.buildId=M20120208-0800
+java.version=1.7.0_45
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=en_US
+Framework arguments:  C:\Users\Jenny\Documents\GitHub\cs3102project\tttBoard.java
+Command-line arguments:  -os win32 -ws win32 -arch x86 -data C:\Users\Jenny\Documents\GitHub\cs3102project C:\Users\Jenny\Documents\GitHub\cs3102project\tttBoard.java
+
+!ENTRY org.eclipse.ui 4 4 2014-02-10 20:39:31.592
+!MESSAGE Invalid preference page path: XML Syntax
+
+!ENTRY org.eclipse.equinox.p2.operations 4 0 2014-02-10 21:07:05.317
+!MESSAGE Operation details
+!SUBENTRY 1 org.eclipse.equinox.p2.director 4 1 2014-02-10 21:07:05.317
+!MESSAGE Cannot complete the install because one or more required items could not be found.
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 0 2014-02-10 21:07:05.317
+!MESSAGE Software being installed: Eclipse Color Theme 0.13.0.201311210852 (com.github.eclipsecolortheme.feature.feature.group 0.13.0.201311210852)
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 0 2014-02-10 21:07:05.317
+!MESSAGE Missing requirement: Eclipse Color Theme 0.13.0.201311210852 (com.github.eclipsecolortheme 0.13.0.201311210852) requires 'bundle org.eclipse.e4.ui.workbench.addons.swt 0.0.0' but it could not be found
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 1 2014-02-10 21:07:05.317
+!MESSAGE Cannot satisfy dependency:
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2014-02-10 21:07:05.317
+!MESSAGE From: Eclipse Color Theme 0.13.0.201311210852 (com.github.eclipsecolortheme.feature.feature.group 0.13.0.201311210852)
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2014-02-10 21:07:05.317
+!MESSAGE To: com.github.eclipsecolortheme [0.13.0.201311210852]
+
+!ENTRY org.eclipse.equinox.p2.operations 4 0 2014-02-10 21:07:05.360
+!MESSAGE Operation details
+!SUBENTRY 1 org.eclipse.equinox.p2.director 4 1 2014-02-10 21:07:05.361
+!MESSAGE Cannot complete the install because one or more required items could not be found.
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 0 2014-02-10 21:07:05.361
+!MESSAGE Software being installed: Eclipse Color Theme 0.13.0.201311210852 (com.github.eclipsecolortheme.feature.feature.group 0.13.0.201311210852)
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 0 2014-02-10 21:07:05.361
+!MESSAGE Missing requirement: Eclipse Color Theme 0.13.0.201311210852 (com.github.eclipsecolortheme 0.13.0.201311210852) requires 'bundle org.eclipse.e4.ui.workbench.addons.swt 0.0.0' but it could not be found
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 1 2014-02-10 21:07:05.361
+!MESSAGE Cannot satisfy dependency:
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2014-02-10 21:07:05.361
+!MESSAGE From: Eclipse Color Theme 0.13.0.201311210852 (com.github.eclipsecolortheme.feature.feature.group 0.13.0.201311210852)
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2014-02-10 21:07:05.361
+!MESSAGE To: com.github.eclipsecolortheme [0.13.0.201311210852]
+
+!ENTRY org.eclipse.equinox.p2.core 4 0 2014-02-10 21:12:55.844
+!MESSAGE Provisioning exception
+!STACK 1
+org.eclipse.equinox.p2.core.ProvisionException: No repository found at file:/C:/Users/Jenny/Downloads/eclipse-color-theme-0.12.0/features/com.github.eclipsecolortheme.feature_0.12.0.201207240713/.
+	at org.eclipse.equinox.internal.p2.repository.helpers.AbstractRepositoryManager.fail(AbstractRepositoryManager.java:393)
+	at org.eclipse.equinox.internal.p2.repository.helpers.AbstractRepositoryManager.loadRepository(AbstractRepositoryManager.java:636)
+	at org.eclipse.equinox.internal.p2.metadata.repository.MetadataRepositoryManager.loadRepository(MetadataRepositoryManager.java:96)
+	at org.eclipse.equinox.internal.p2.metadata.repository.MetadataRepositoryManager.loadRepository(MetadataRepositoryManager.java:92)
+	at org.eclipse.equinox.p2.ui.LoadMetadataRepositoryJob.doLoad(LoadMetadataRepositoryJob.java:117)
+	at org.eclipse.equinox.p2.ui.LoadMetadataRepositoryJob.runModal(LoadMetadataRepositoryJob.java:102)
+	at org.eclipse.equinox.internal.p2.ui.sdk.PreloadingRepositoryHandler$2.runModal(PreloadingRepositoryHandler.java:82)
+	at org.eclipse.equinox.p2.operations.ProvisioningJob.run(ProvisioningJob.java:177)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+!SUBENTRY 1 org.eclipse.equinox.p2.metadata.repository 4 1000 2014-02-10 21:12:55.848
+!MESSAGE No repository found at file:/C:/Users/Jenny/Downloads/eclipse-color-theme-0.12.0/features/com.github.eclipsecolortheme.feature_0.12.0.201207240713/.
+
+!ENTRY org.eclipse.equinox.p2.core 4 0 2014-02-10 21:13:00.196
+!MESSAGE Provisioning exception
+!STACK 1
+org.eclipse.equinox.p2.core.ProvisionException: No repository found at file:/C:/Users/Jenny/Downloads/eclipse-color-theme-0.12.0/plugins/.
+	at org.eclipse.equinox.internal.p2.repository.helpers.AbstractRepositoryManager.fail(AbstractRepositoryManager.java:393)
+	at org.eclipse.equinox.internal.p2.repository.helpers.AbstractRepositoryManager.loadRepository(AbstractRepositoryManager.java:636)
+	at org.eclipse.equinox.internal.p2.metadata.repository.MetadataRepositoryManager.loadRepository(MetadataRepositoryManager.java:96)
+	at org.eclipse.equinox.internal.p2.metadata.repository.MetadataRepositoryManager.loadRepository(MetadataRepositoryManager.java:92)
+	at org.eclipse.equinox.p2.ui.LoadMetadataRepositoryJob.doLoad(LoadMetadataRepositoryJob.java:117)
+	at org.eclipse.equinox.p2.ui.LoadMetadataRepositoryJob.runModal(LoadMetadataRepositoryJob.java:102)
+	at org.eclipse.equinox.internal.p2.ui.sdk.PreloadingRepositoryHandler$2.runModal(PreloadingRepositoryHandler.java:82)
+	at org.eclipse.equinox.p2.operations.ProvisioningJob.run(ProvisioningJob.java:177)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+!SUBENTRY 1 org.eclipse.equinox.p2.metadata.repository 4 1000 2014-02-10 21:13:00.196
+!MESSAGE No repository found at file:/C:/Users/Jenny/Downloads/eclipse-color-theme-0.12.0/plugins/.
+
+!ENTRY org.eclipse.equinox.p2.core 4 0 2014-02-10 21:13:25.920
+!MESSAGE Provisioning exception
+!STACK 1
+org.eclipse.equinox.p2.core.ProvisionException: No repository found at jar:file:/C:/Users/Jenny/Downloads/eclipse-color-theme-0.12.0/plugins/com.github.eclipsecolortheme_0.12.0.201207240713.jar!/.
+	at org.eclipse.equinox.internal.p2.repository.helpers.AbstractRepositoryManager.fail(AbstractRepositoryManager.java:393)
+	at org.eclipse.equinox.internal.p2.repository.helpers.AbstractRepositoryManager.loadRepository(AbstractRepositoryManager.java:636)
+	at org.eclipse.equinox.internal.p2.metadata.repository.MetadataRepositoryManager.loadRepository(MetadataRepositoryManager.java:96)
+	at org.eclipse.equinox.internal.p2.metadata.repository.MetadataRepositoryManager.loadRepository(MetadataRepositoryManager.java:92)
+	at org.eclipse.equinox.p2.ui.LoadMetadataRepositoryJob.doLoad(LoadMetadataRepositoryJob.java:117)
+	at org.eclipse.equinox.p2.ui.LoadMetadataRepositoryJob.runModal(LoadMetadataRepositoryJob.java:102)
+	at org.eclipse.equinox.internal.p2.ui.sdk.PreloadingRepositoryHandler$2.runModal(PreloadingRepositoryHandler.java:82)
+	at org.eclipse.equinox.p2.operations.ProvisioningJob.run(ProvisioningJob.java:177)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+!SUBENTRY 1 org.eclipse.equinox.p2.metadata.repository 4 1000 2014-02-10 21:13:25.920
+!MESSAGE No repository found at jar:file:/C:/Users/Jenny/Downloads/eclipse-color-theme-0.12.0/plugins/com.github.eclipsecolortheme_0.12.0.201207240713.jar!/.
+
+!ENTRY org.eclipse.equinox.p2.ui 4 1000 2014-02-10 21:13:26.397
+!MESSAGE Some sites could not be found.  See the error log for more detail.
+!SUBENTRY 1 org.eclipse.equinox.p2.metadata.repository 4 1000 2014-02-10 21:13:26.397
+!MESSAGE No repository found at file:/C:/Users/Jenny/Downloads/eclipse-color-theme-0.12.0/features/com.github.eclipsecolortheme.feature_0.12.0.201207240713/.
+!SUBENTRY 1 org.eclipse.equinox.p2.metadata.repository 4 1000 2014-02-10 21:13:26.397
+!MESSAGE No repository found at file:/C:/Users/Jenny/Downloads/eclipse-color-theme-0.12.0/plugins/.
+!SUBENTRY 1 org.eclipse.equinox.p2.metadata.repository 4 1000 2014-02-10 21:13:26.397
+!MESSAGE No repository found at jar:file:/C:/Users/Jenny/Downloads/eclipse-color-theme-0.12.0/plugins/com.github.eclipsecolortheme_0.12.0.201207240713.jar!/.
+!SESSION 2014-02-10 21:18:33.707 -----------------------------------------------
+eclipse.buildId=M20120208-0800
+java.version=1.7.0_45
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=en_US
+Command-line arguments:  -os win32 -ws win32 -arch x86
+
+!ENTRY org.eclipse.ui 4 4 2014-02-10 21:26:52.071
+!MESSAGE Invalid preference page path: XML Syntax
+!SESSION 2014-02-10 21:26:55.406 -----------------------------------------------
+eclipse.buildId=M20120208-0800
+java.version=1.7.0_45
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=en_US
+Command-line arguments:  -os win32 -ws win32 -arch x86
+
+!ENTRY org.eclipse.equinox.p2.core 4 0 2014-02-10 21:34:40.859
+!MESSAGE Provisioning exception
+!STACK 1
+org.eclipse.equinox.p2.core.ProvisionException: No repository found at jar:file:/C:/Users/Jenny/Downloads/eclipse-color-theme-0.12.0.zip!/.
+	at org.eclipse.equinox.internal.p2.repository.helpers.AbstractRepositoryManager.fail(AbstractRepositoryManager.java:393)
+	at org.eclipse.equinox.internal.p2.repository.helpers.AbstractRepositoryManager.loadRepository(AbstractRepositoryManager.java:675)
+	at org.eclipse.equinox.internal.p2.metadata.repository.MetadataRepositoryManager.loadRepository(MetadataRepositoryManager.java:96)
+	at org.eclipse.equinox.internal.p2.metadata.repository.MetadataRepositoryManager.loadRepository(MetadataRepositoryManager.java:92)
+	at org.eclipse.equinox.p2.ui.LoadMetadataRepositoryJob.doLoad(LoadMetadataRepositoryJob.java:117)
+	at org.eclipse.equinox.p2.ui.LoadMetadataRepositoryJob.runModal(LoadMetadataRepositoryJob.java:102)
+	at org.eclipse.equinox.internal.p2.ui.sdk.PreloadingRepositoryHandler$2.runModal(PreloadingRepositoryHandler.java:82)
+	at org.eclipse.equinox.p2.operations.ProvisioningJob.run(ProvisioningJob.java:177)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+!SUBENTRY 1 org.eclipse.equinox.p2.metadata.repository 4 1000 2014-02-10 21:34:40.862
+!MESSAGE No repository found at jar:file:/C:/Users/Jenny/Downloads/eclipse-color-theme-0.12.0.zip!/.
+
+!ENTRY org.eclipse.equinox.p2.core 4 0 2014-02-10 21:34:41.570
+!MESSAGE Provisioning exception
+!STACK 1
+org.eclipse.equinox.p2.core.ProvisionException: No repository found at file:/C:/Users/Jenny/Downloads/eclipse-color-theme-0.12.0/features/com.github.eclipsecolortheme.feature_0.12.0.201207240713/.
+	at org.eclipse.equinox.internal.p2.repository.helpers.AbstractRepositoryManager.fail(AbstractRepositoryManager.java:393)
+	at org.eclipse.equinox.internal.p2.repository.helpers.AbstractRepositoryManager.loadRepository(AbstractRepositoryManager.java:675)
+	at org.eclipse.equinox.internal.p2.metadata.repository.MetadataRepositoryManager.loadRepository(MetadataRepositoryManager.java:96)
+	at org.eclipse.equinox.internal.p2.metadata.repository.MetadataRepositoryManager.loadRepository(MetadataRepositoryManager.java:92)
+	at org.eclipse.equinox.p2.ui.LoadMetadataRepositoryJob.doLoad(LoadMetadataRepositoryJob.java:117)
+	at org.eclipse.equinox.p2.ui.LoadMetadataRepositoryJob.runModal(LoadMetadataRepositoryJob.java:102)
+	at org.eclipse.equinox.internal.p2.ui.sdk.PreloadingRepositoryHandler$2.runModal(PreloadingRepositoryHandler.java:82)
+	at org.eclipse.equinox.p2.operations.ProvisioningJob.run(ProvisioningJob.java:177)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+!SUBENTRY 1 org.eclipse.equinox.p2.metadata.repository 4 1000 2014-02-10 21:34:41.571
+!MESSAGE No repository found at file:/C:/Users/Jenny/Downloads/eclipse-color-theme-0.12.0/features/com.github.eclipsecolortheme.feature_0.12.0.201207240713/.
+
+!ENTRY org.eclipse.equinox.p2.core 4 0 2014-02-10 21:34:46.028
+!MESSAGE Provisioning exception
+!STACK 1
+org.eclipse.equinox.p2.core.ProvisionException: No repository found at file:/C:/Users/Jenny/Downloads/eclipse-color-theme-0.12.0/plugins/.
+	at org.eclipse.equinox.internal.p2.repository.helpers.AbstractRepositoryManager.fail(AbstractRepositoryManager.java:393)
+	at org.eclipse.equinox.internal.p2.repository.helpers.AbstractRepositoryManager.loadRepository(AbstractRepositoryManager.java:675)
+	at org.eclipse.equinox.internal.p2.metadata.repository.MetadataRepositoryManager.loadRepository(MetadataRepositoryManager.java:96)
+	at org.eclipse.equinox.internal.p2.metadata.repository.MetadataRepositoryManager.loadRepository(MetadataRepositoryManager.java:92)
+	at org.eclipse.equinox.p2.ui.LoadMetadataRepositoryJob.doLoad(LoadMetadataRepositoryJob.java:117)
+	at org.eclipse.equinox.p2.ui.LoadMetadataRepositoryJob.runModal(LoadMetadataRepositoryJob.java:102)
+	at org.eclipse.equinox.internal.p2.ui.sdk.PreloadingRepositoryHandler$2.runModal(PreloadingRepositoryHandler.java:82)
+	at org.eclipse.equinox.p2.operations.ProvisioningJob.run(ProvisioningJob.java:177)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+!SUBENTRY 1 org.eclipse.equinox.p2.metadata.repository 4 1000 2014-02-10 21:34:46.028
+!MESSAGE No repository found at file:/C:/Users/Jenny/Downloads/eclipse-color-theme-0.12.0/plugins/.
+
+!ENTRY org.eclipse.equinox.p2.core 4 0 2014-02-10 21:35:14.449
+!MESSAGE Provisioning exception
+!STACK 1
+org.eclipse.equinox.p2.core.ProvisionException: No repository found at jar:file:/C:/Users/Jenny/Downloads/eclipse-color-theme-0.12.0/plugins/com.github.eclipsecolortheme_0.12.0.201207240713.jar!/.
+	at org.eclipse.equinox.internal.p2.repository.helpers.AbstractRepositoryManager.fail(AbstractRepositoryManager.java:393)
+	at org.eclipse.equinox.internal.p2.repository.helpers.AbstractRepositoryManager.loadRepository(AbstractRepositoryManager.java:675)
+	at org.eclipse.equinox.internal.p2.metadata.repository.MetadataRepositoryManager.loadRepository(MetadataRepositoryManager.java:96)
+	at org.eclipse.equinox.internal.p2.metadata.repository.MetadataRepositoryManager.loadRepository(MetadataRepositoryManager.java:92)
+	at org.eclipse.equinox.p2.ui.LoadMetadataRepositoryJob.doLoad(LoadMetadataRepositoryJob.java:117)
+	at org.eclipse.equinox.p2.ui.LoadMetadataRepositoryJob.runModal(LoadMetadataRepositoryJob.java:102)
+	at org.eclipse.equinox.internal.p2.ui.sdk.PreloadingRepositoryHandler$2.runModal(PreloadingRepositoryHandler.java:82)
+	at org.eclipse.equinox.p2.operations.ProvisioningJob.run(ProvisioningJob.java:177)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+!SUBENTRY 1 org.eclipse.equinox.p2.metadata.repository 4 1000 2014-02-10 21:35:14.450
+!MESSAGE No repository found at jar:file:/C:/Users/Jenny/Downloads/eclipse-color-theme-0.12.0/plugins/com.github.eclipsecolortheme_0.12.0.201207240713.jar!/.
+
+!ENTRY org.eclipse.equinox.p2.ui 4 1000 2014-02-10 21:35:15.852
+!MESSAGE Some sites could not be found.  See the error log for more detail.
+!SUBENTRY 1 org.eclipse.equinox.p2.metadata.repository 4 1000 2014-02-10 21:35:15.853
+!MESSAGE No repository found at jar:file:/C:/Users/Jenny/Downloads/eclipse-color-theme-0.12.0.zip!/.
+!SUBENTRY 1 org.eclipse.equinox.p2.metadata.repository 4 1000 2014-02-10 21:35:15.853
+!MESSAGE No repository found at file:/C:/Users/Jenny/Downloads/eclipse-color-theme-0.12.0/features/com.github.eclipsecolortheme.feature_0.12.0.201207240713/.
+!SUBENTRY 1 org.eclipse.equinox.p2.metadata.repository 4 1000 2014-02-10 21:35:15.853
+!MESSAGE No repository found at file:/C:/Users/Jenny/Downloads/eclipse-color-theme-0.12.0/plugins/.
+!SUBENTRY 1 org.eclipse.equinox.p2.metadata.repository 4 1000 2014-02-10 21:35:15.853
+!MESSAGE No repository found at jar:file:/C:/Users/Jenny/Downloads/eclipse-color-theme-0.12.0/plugins/com.github.eclipsecolortheme_0.12.0.201207240713.jar!/.
+
+!ENTRY org.eclipse.ui 4 4 2014-02-10 21:35:53.408
+!MESSAGE Invalid preference page path: XML Syntax
+!SESSION 2014-02-10 21:35:56.723 -----------------------------------------------
+eclipse.buildId=M20120208-0800
+java.version=1.7.0_45
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=en_US
+Command-line arguments:  -os win32 -ws win32 -arch x86
+
+!ENTRY org.eclipse.ui 4 4 2014-02-11 20:17:59.893
+!MESSAGE Invalid preference page path: XML Syntax
