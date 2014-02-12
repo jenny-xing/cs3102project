@@ -16,6 +16,10 @@ public class tttBoard {
 	TreeSet<Integer> player0Spots;
 	TreeSet<Integer> player1Spots;
 
+	public static void main(String args[]) {
+		// needed main to run for testing purposes
+	}
+
 	public tttBoard(Integer size, String p0, String p1) {
 		this.size = size;
 		magicNum = size * (size * size + 1) / 2;
@@ -28,10 +32,28 @@ public class tttBoard {
 
 	// load Integer values into the correct values in the perfectSquare map
 	private void loadPerfectSquare() {
-		if (size%2==0) throw new RuntimeException("Size must be odd for a magic square to be generated.");
+
+		if (size < 3)
+			throw new RuntimeException(
+					"magic squares of size less than 3 cannot be generated.");
+
+		if (size % 2 == 1) {
+			for (int row = 1; row <= size; row++) {
+				for (int col = 1; col <= size; col++) {
+					int num = size * ((row + col - 1 + size / 2) % size)
+							+ ((row + 2 * col - 2) % size) + 1;
+					perfectSquare.put(getKey(col - 1, row - 1), num);
+					// System.out.println("(" + (row - 1) + ", " + (col - 1)
+					// + "): " + num);
+				}
+
+			}
+		}
+		// TODO implement for even sizes
 	}
 
-	// params x and y: coordinates within the square
+	// params x(column) and y(row): coordinates within the square (0 to
+	// size^2-1)
 	// return int key corresponding to the key in the maps for those coords
 	private int getKey(int x, int y) {
 		return x + size * y;
