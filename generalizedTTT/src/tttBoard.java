@@ -12,12 +12,22 @@ public class tttBoard {
 	String player0;
 	String player1;
 	HashMap<Integer, String> boardMap;
-	HashMap<Integer, Integer> perfectSquare;
+	HashMap<Integer, Integer> magicSquare;
 	TreeSet<Integer> player0Spots;
 	TreeSet<Integer> player1Spots;
 
 	public static void main(String args[]) {
-		tttBoard testBoard = new tttBoard(4, "x", "o");
+		// just testin stuff
+		tttBoard testBoard = new tttBoard(98, "x", "o");
+		// testBoard.printMagicSquare();
+		String input = "8430 8481 8532 8583 8634 8685 8736 8787 8838 8889 8940 8991 9042 9093 9144 9195 9246 9297 9348 9399 9450 9501 9552 9603 1    52   103  154  205  256  307  358  409  460  511  562  613  664  715  766  817  868  919  970  1021 1072 1123 1174 1225 6029 6080 6131 6182 6233 6284 6335 6386 6437 6488 6539 6590 6641 6692 6743 6794 6845 6896 6947 6998 7049 7100 7151 7202 4803 4854 2504 2555 2606 2657 2708 2759 2810 2861 2912 2963 3014 3065 3116 3167 3218 3269 3320 3371 3422 3473 3524 3575 3626 ";
+		String[] vals = input.split("\\s+");
+		int total = 0;
+		for (String x : vals) {
+			total += Integer.parseInt(x);
+		}
+		// System.out.println(total + " should equal " + testBoard.magicNum);
+
 	}
 
 	public tttBoard(Integer size, String p0, String p1) {
@@ -26,12 +36,12 @@ public class tttBoard {
 		player0 = p0;
 		player1 = p1;
 		boardMap = new HashMap<Integer, String>(size * size, (float) 1.0);
-		perfectSquare = new HashMap<Integer, Integer>(size * size, (float) 1.0);
-		loadPerfectSquare();
+		magicSquare = new HashMap<Integer, Integer>(size * size, (float) 1.0);
+		loadMagicSquare();
 	}
 
-	// load Integer values into the correct values in the perfectSquare map
-	private void loadPerfectSquare() {
+	// load Integer values into the correct values in the magicSquare map
+	private void loadMagicSquare() {
 
 		if (size < 3)
 			throw new RuntimeException("invalid size for tic-tac-toe board.");
@@ -41,18 +51,17 @@ public class tttBoard {
 			for (int row = 1; row <= size; row++) {
 				for (int col = 1; col <= size; col++) {
 					// formula given by wikipedia
-					int num = size * ((row + col - 1 + size / 2) % size)
+					int value = size * ((row + col - 1 + size / 2) % size)
 							+ ((row + 2 * col - 2) % size) + 1;
-					perfectSquare.put(getKey(row - 1, col - 1), num);
+					magicSquare.put(getKey(row - 1, col - 1), value);
 				}
 			}
 			// printMagicSquare();
 		}
 
-		// generation for double even (divisible by 4) sizes. see
+		// generation for doubly even (divisible by 4) sizes.
 		// http://www.1728.org/magicsq2.htm
 		if (size % 4 == 0) {
-
 			// fills the "diagonals"
 			int count = 1;
 			final int smaller_size = size / 4;
@@ -66,13 +75,13 @@ public class tttBoard {
 							|| (col <= smaller_size && row > size
 									- smaller_size)
 							|| (col > size - smaller_size && row <= smaller_size)) {
-						perfectSquare.put(key, count);
+						magicSquare.put(key, count);
 					}
 
 					// fills the inner square that is size/2 x size/2
 					if (col > smaller_size && col <= size - smaller_size
 							&& row > smaller_size && row <= size - smaller_size) {
-						perfectSquare.put(key, count);
+						magicSquare.put(key, count);
 					}
 
 					count++;
@@ -84,8 +93,8 @@ public class tttBoard {
 			for (int row = size - 1; row >= 0; row--) {
 				for (int col = size - 1; col >= 0; col--) {
 					int key = getKey(row, col);
-					if (!perfectSquare.containsKey(key)) {
-						perfectSquare.put(key, count);
+					if (!magicSquare.containsKey(key)) {
+						magicSquare.put(key, count);
 					}
 					count++;
 				}
@@ -93,7 +102,83 @@ public class tttBoard {
 			// printMagicSquare();
 		}
 
-		// TODO implement for single even sizes http://www.1728.org/magicsq3.htm
+		// generation for singly even (divisible by 2 but not by 4) sizes
+		// http://www.1728.org/magicsq3.htm
+		if (size % 2 == 0 && !(size % 4 == 0)) {
+
+			final int smaller_size = size / 2;
+
+			// fills in the board with smaller odd size magic squares
+			for (int row = 1; row <= size; row++) {
+				for (int col = 1; col <= size; col++) {
+					// formula given by wikipedia
+					int value = smaller_size
+							* ((row + col - 1 + smaller_size / 2) % smaller_size)
+							+ ((row + 2 * col - 2) % smaller_size) + 1;
+					magicSquare.put(getKey(row - 1, col - 1), value);
+				}
+			}
+
+			// increments the quadrants so that they match the ACDB filling
+			// pattern
+			for (int row = 1; row <= size; row++) {
+				for (int col = 1; col <= size; col++) {
+					int key = getKey(row - 1, col - 1);
+					int value = magicSquare.get(key);
+					int s2 = smaller_size * smaller_size;
+
+					// quadrant A stays the same
+					// quadrant B
+					if (row > smaller_size && col > smaller_size)
+						magicSquare.put(key, value + s2);
+
+					// quadrant C
+					if (row <= smaller_size && col > smaller_size)
+						magicSquare.put(key, value + 2 * s2);
+
+					// quadrant D
+					if (row > smaller_size && col <= smaller_size)
+						magicSquare.put(key, value + 3 * s2);
+
+				}
+			}
+
+			// swap (almost) ALL the values!
+
+			// swaps right side values
+			int rightWidth = (smaller_size - 3) / 2;
+
+			for (int row = 1; row <= size; row++) {
+				for (int col = 1; col <= size; col++) {
+					if (col > size - rightWidth && row <= size / 2) {
+						// unnecessary variables are unnecessary
+						int key = getKey(row - 1, col - 1);
+						int swapkey = key + (size * size) / 2;
+						swapValues(key, swapkey);
+					}
+				}
+			}
+
+			// swaps left side values
+			int leftWidth = rightWidth + 1;
+
+			for (int row = 1; row <= size; row++) {
+				for (int col = 1; col <= size; col++) {
+					if (col <= leftWidth && row <= size / 2) {
+						// unnecessary variables are unnecessary
+						int key = getKey(row - 1, col - 1);
+						int swapkey = key + (size * size) / 2;
+						swapValues(key, swapkey);
+					}
+				}
+			}
+			// accounts for indent on left side values
+			swapValues(getKey(leftWidth, 0), getKey(leftWidth, 0)
+					+ (size * size) / 2);
+			swapValues(getKey(leftWidth, 0) + leftWidth, getKey(leftWidth, 0)
+					+ leftWidth + (size * size) / 2);
+		}
+
 	}
 
 	// params row and col: coordinates within the square (0 to
@@ -119,9 +204,9 @@ public class tttBoard {
 		// valid move
 		boardMap.put(getKey(row, col), player == 1 ? player1 : player0);
 		if (player == 1) {
-			player1Spots.add(perfectSquare.get(getKey(row, col)));
+			player1Spots.add(magicSquare.get(getKey(row, col)));
 		} else {
-			player0Spots.add(perfectSquare.get(getKey(row, col)));
+			player0Spots.add(magicSquare.get(getKey(row, col)));
 		}
 		return true;
 	}
@@ -210,9 +295,9 @@ public class tttBoard {
 		for (int row = 0; row < size; row++) {
 			for (int col = 0; col < size; col++) {
 				// System.out.println("(" + row + ", " + col + "): "
-				// + perfectSquare.get(getKey(row, col)));
-				if (perfectSquare.containsKey(getKey(row, col))) {
-					int value = perfectSquare.get(getKey(row, col));
+				// + magicSquare.get(getKey(row, col)));
+				if (magicSquare.containsKey(getKey(row, col))) {
+					int value = magicSquare.get(getKey(row, col));
 					System.out.print(value);
 					if (value < 10000)
 						System.out.print(" ");
@@ -227,5 +312,13 @@ public class tttBoard {
 			System.out.println();
 		}
 		System.out.println("end");
+	}
+
+	// x and y are the keys
+	private void swapValues(int x, int y) {
+		int xval = magicSquare.get(x);
+		int yval = magicSquare.get(y);
+		magicSquare.put(x, yval);
+		magicSquare.put(y, xval);
 	}
 }
