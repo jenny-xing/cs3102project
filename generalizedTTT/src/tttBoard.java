@@ -13,19 +13,19 @@ public class tttBoard {
 	private int magicNum;
 	private String player0;
 	private String player1;
-	private HashMap<Integer, String> boardMap;
+	private HashMap<Integer, Integer> boardMap; //values are 0 or 1
 	private HashMap<Integer, Integer> magicSquare;
-	private TreeSet<Integer> player0Spots;
-	private TreeSet<Integer> player1Spots;
-	private TreeSet<Integer> openSpots;
-	private TreeSet<Integer> player0Pairs;
+	private TreeSet<Integer> player0Spots; //contains magic square values
+	private TreeSet<Integer> player1Spots; //contains magic square values
+	private TreeSet<Integer> openSpots; //contains keys
+	private TreeSet<Integer> player0Pairs; //sums of magic square values
 	private TreeSet<Integer> player1Pairs;
 	
 	final int MAX_SPACES = 1000000;
 
 	public static void main(String args[]) {
 		// just testin stuff
-		tttBoard testBoard = new tttBoard(1000, "x", "o");
+		tttBoard testBoard = new tttBoard(3, "x", "o");
 		// testBoard.printMagicSquare();
 		String input = "8430 8481 8532 8583 8634 8685 8736 8787 8838 8889 8940 8991 9042 9093 9144 9195 9246 9297 9348 9399 9450 9501 9552 9603 1    52   103  154  205  256  307  358  409  460  511  562  613  664  715  766  817  868  919  970  1021 1072 1123 1174 1225 6029 6080 6131 6182 6233 6284 6335 6386 6437 6488 6539 6590 6641 6692 6743 6794 6845 6896 6947 6998 7049 7100 7151 7202 4803 4854 2504 2555 2606 2657 2708 2759 2810 2861 2912 2963 3014 3065 3116 3167 3218 3269 3320 3371 3422 3473 3524 3575 3626 ";
 		String[] vals = input.split("\\s+");
@@ -34,7 +34,28 @@ public class tttBoard {
 			total += Integer.parseInt(x);
 		}
 		// System.out.println(total + " should equal " + testBoard.magicNum);
-
+		testBoard.test();
+	}
+	
+	private void test() {
+		System.out.println("-----------------------------------------");
+		System.out.println("Initializing board of size: " + size);
+		System.out.println("Open spots: " + openSpots);
+		System.out.println("Player 0: " + player0);
+		System.out.println("Player 1: " + player1);
+		System.out.println("Board Map: ");
+		printBoardMap();
+		System.out.println("Magic number: " + magicNum);
+		System.out.println("Printing magic square: ");
+		printMagicSquare();
+		System.out.println("-----------------------------------------");
+		move(0, 1, 1);
+		move(0, 0, 1);
+		move(0, 2, 1);
+		System.out.println("Player 0 spots: " + player0Spots);
+		System.out.println("Player 0 pairs: " + player0Pairs);
+		System.out.println("Open spots: " + openSpots);
+		printBoardMap();
 	}
 
 	public tttBoard(Integer size, String p0, String p1) {
@@ -42,7 +63,7 @@ public class tttBoard {
 		magicNum = (size * (size * size + 1)) / 2;
 		player0 = p0;
 		player1 = p1;
-		boardMap = new HashMap<Integer, String>(size * size, (float) 1.0);
+		boardMap = new HashMap<Integer, Integer>(size * size, (float) 1.0);
 		magicSquare = new HashMap<Integer, Integer>(size * size, (float) 1.0);
 		loadMagicSquare();
 		player0Spots = new TreeSet<Integer>();
@@ -55,7 +76,7 @@ public class tttBoard {
 	
 	public int getSize() { return size; }
 	
-	public HashMap<Integer, String> getBoardMap() { return boardMap; }
+	public HashMap<Integer, Integer> getBoardMap() { return boardMap; }
 	
 	//load all possible key values into openSpots set
 	private void loadOpenSpots() {
@@ -218,7 +239,8 @@ public class tttBoard {
 	// params row and col: coordinates within the square
 	// return boolean true if move successful, false otherwise
 	private boolean move(int player, int row, int col) {
-		if (!openSpots.contains(getKey(row,col))) {
+		int key = getKey(row,col);
+		if (!openSpots.contains(key)) {
 			//already occupied or invalid coords
 			return false;
 		}
@@ -226,21 +248,20 @@ public class tttBoard {
 			return false;
 		}
 		// valid move
-		updatePairs(getKey(row,col),player); //update pairs set
-		boardMap.put(getKey(row, col), player == 1 ? player1 : player0);
+		boardMap.put(key, player);
 		if (player == 1) {
-			player1Spots.add(magicSquare.get(getKey(row, col)));
-		} else {
-			player0Spots.add(magicSquare.get(getKey(row, col)));
+			player1Spots.add(magicSquare.get(key));
+		} else if (player == 0) {
+			player0Spots.add(magicSquare.get(key));
 		}
-		openSpots.remove(getKey(row,col));
-		check(player); //check for winning move and draw, check for win is redundant
+		openSpots.remove(key);
+		check(key,player); //check for winning move and draw
+		updatePairs(key,player); //update pairs set
 		return true;
 	}
 	
 	//update pairs set for player to include all new possible pairs
-	//if the last move was a winning one, call win() method
-	//NOTE: the current move has NOT been added to the spots set
+	//NOTE: the current move HAS been added to the spots set
 	private boolean updatePairs(int key, int player) {
 		if (player != 0 && player != 1) { // invalid player
 			return false;
@@ -250,32 +271,27 @@ public class tttBoard {
 		}
 		TreeSet<Integer> pairs = (player == 0) ? player0Pairs : player1Pairs;
 		TreeSet<Integer> spots = (player == 0) ? player0Spots : player1Spots;
-		String playerS = (player == 0) ? player0 : player1;
 		int value = magicSquare.get(key);
-		int[] nPair = new int[size];
-		int[] nIndices = new int[size-1];
-		nPair[size-1] = value; //last value in nPair is the previous move
+		int[] nPair = new int[size-1]; //pair of size - 1 spots
+		int[] nIndices = new int[size-2];
+		nPair[size-2] = value; //last value in nPair is the current value
 		ArrayList<Integer> spotsList = new ArrayList<Integer>(spots);
-		for (int i = 0; i < spotsList.size() - size - 1; i++) {
+		spotsList.remove(spotsList.indexOf(value)); //don't add the current value twice to any pairs
+		for (int i = 0; i < spotsList.size() - (size - 2); i++) {
 			// loop over elements in the list, grabbing each possible
-			// combination of size-1 spots
+			// combination of size-2 spots
 			for (int j = 0; j < size - 2; j++) { // assign indices
 				nIndices[j] = i + j;
 				nPair[j] = spotsList.get(nIndices[j]);
 			} // indices default to first unchecked size elements
 			while (true) {
 				int sum = sum(nPair);
-				if (sum == magicNum) {
-					win(playerS);
-					return true; // player has won with latest move
-				}
 				pairs.add(sum);
-				if (nIndices[size - 1] == spotsList.size()-1)
+				if (nIndices[size - 3] == spotsList.size()-1)
 					break; // no more nPairs with this first value
-				for (int j = size - 2; j >= 0; j--) {
+				for (int j = size - 3; j >= 0; j--) {
 					nIndices[j]++;
 					nPair[j] = spotsList.get(nIndices[j]);
-
 				}
 			}
 		}
@@ -284,18 +300,21 @@ public class tttBoard {
 
 	// check for win or draw conditions
 	// update the relevant player pairs set to include pairs wit
-	//NOTE: the current move HAS been added to relevant pairs set
+	//NOTE: the current move has NOT been added to relevant pairs set
 	//param player: 0 or 1, the player number
-	private boolean check(int player) {
+	private boolean check(int key, int player) {
 		if (player != 0 && player != 1) { // invalid player
 			return false;
 		}
 		//checkWin() // deprecated
 		TreeSet<Integer> pairs = (player == 0) ? player0Pairs : player1Pairs;
 		String winner = (player == 0) ? player0 : player1; //not necessarily the winner yet
-		if (pairs.contains(magicNum)) { //should be redundant
-			win(winner);
-			return true;
+		int value = magicSquare.get(key);
+		for (int i : pairs) {
+			if (i + value == magicNum) {
+				win(winner);
+				return true;
+			}
 		}
 		checkDraw();
 		return true;
@@ -312,7 +331,7 @@ public class tttBoard {
 	
 	//perform draw operation
 	private void draw() {
-		
+		System.out.println("Draw!");
 	}
 	
 	
@@ -380,7 +399,7 @@ public class tttBoard {
 
 	private int sum(int[] nPair) {
 		int retval = 0;
-		for (int i = 0; i < size; i++) {
+		for (int i = 0; i < nPair.length; i++) {
 			retval += nPair[i];
 		}
 		return retval;
@@ -388,12 +407,12 @@ public class tttBoard {
 
 	// perform the winning operation given the winner
 	private void win(String winner) {
-
+		System.out.println(winner + " has won!");
 	}
 
 	// prints magic square in row-major oder
 	private void printMagicSquare() {
-		System.out.println("start");
+		System.out.println("Start MagicSquare");
 		for (int row = 0; row < size; row++) {
 			for (int col = 0; col < size; col++) {
 				// System.out.println("(" + row + ", " + col + "): "
@@ -413,7 +432,35 @@ public class tttBoard {
 			}
 			System.out.println();
 		}
-		System.out.println("end");
+		System.out.println("End MagicSquare");
+	}
+	
+	private void printBoardMap() {
+		int spaces = Math.max(player0.length(), player1.length()) + 3;
+		String string0 = player0;
+		while (string0.length() < spaces)
+			string0 += " ";
+		String string1 = player1;
+		while (string1.length() < spaces)
+			string1 += " ";
+		String blank = " ";
+		for (int i=0; i < spaces-1; i++) {
+			blank += blank;
+		}
+		System.out.println("Start BoardMap");
+		for (int row = 0; row < size; row++) {
+			for (int col = 0; col < size; col++) {
+				int key = getKey(row,col);
+				if (!boardMap.containsKey(key))
+					System.out.print(blank);
+				else if (boardMap.get(key) == 0)
+					System.out.print(string0);
+				else
+					System.out.println(string1);
+			}
+			System.out.println();
+		}
+		System.out.println("End BoardMap");
 	}
 
 	// x and y are the keys

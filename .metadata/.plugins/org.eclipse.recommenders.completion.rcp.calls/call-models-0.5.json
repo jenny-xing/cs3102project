@@ -3,5 +3,10 @@
     "coordinate": "jre:jre:zip:call:1.0.0",
     "location": "C:\\Program Files\\Java\\jre7\\lib\\rt.jar",
     "status": "RESOLVED"
+  },
+  "C:\\Users\\Robert\\Documents\\GitHub\\cs3102project\\generalizedTTT\\src": {
+    "location": "C:\\Users\\Robert\\Documents\\GitHub\\cs3102project\\generalizedTTT\\src",
+    "status": "UNRESOLVED",
+    "error": "No class path info available for \u0027C:\\Users\\Robert\\Documents\\GitHub\\cs3102project\\generalizedTTT\\src\u0027. Skipped."
   }
 }
