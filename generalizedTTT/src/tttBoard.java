@@ -15,11 +15,11 @@ public class tttBoard {
 	private String player1;
 	private HashMap<Integer, Integer> boardMap; // values are 0 or 1
 	private HashMap<Integer, Integer> magicSquare;
-	private TreeSet<Integer> player0Spots; // contains magic square values
-	private TreeSet<Integer> player1Spots; // contains magic square values
-	private TreeSet<Integer> openSpots; // contains keys
-	private TreeSet<Integer> player0Pairs; // sums of magic square values
-	private TreeSet<Integer> player1Pairs;
+	private HashSet<Integer> player0Spots; // contains magic square values
+	private HashSet<Integer> player1Spots; // contains magic square values
+	private HashSet<Integer> openSpots; // contains keys
+	private HashSet<Integer> player0Pairs; // sums of magic square values
+	private HashSet<Integer> player1Pairs;
 
 	final int MAX_SPACES = 1000000;
 
@@ -66,12 +66,12 @@ public class tttBoard {
 		boardMap = new HashMap<Integer, Integer>(size * size, (float) 1.0);
 		magicSquare = new HashMap<Integer, Integer>(size * size, (float) 1.0);
 		loadMagicSquare();
-		player0Spots = new TreeSet<Integer>();
-		player1Spots = new TreeSet<Integer>();
-		openSpots = new TreeSet<Integer>();
+		player0Spots = new HashSet<Integer>();
+		player1Spots = new HashSet<Integer>();
+		openSpots = new HashSet<Integer>();
 		loadOpenSpots();
-		player0Pairs = new TreeSet<Integer>();
-		player1Pairs = new TreeSet<Integer>();
+		player0Pairs = new HashSet<Integer>();
+		player1Pairs = new HashSet<Integer>();
 	}
 
 	public int getSize() {
@@ -273,8 +273,8 @@ public class tttBoard {
 		if (key >= size * size) { // invalid coords
 			return false;
 		}
-		TreeSet<Integer> pairs = (player == 0) ? player0Pairs : player1Pairs;
-		TreeSet<Integer> spots = (player == 0) ? player0Spots : player1Spots;
+		HashSet<Integer> pairs = (player == 0) ? player0Pairs : player1Pairs;
+		HashSet<Integer> spots = (player == 0) ? player0Spots : player1Spots;
 		int value = magicSquare.get(key);
 		int[] nPair = new int[size - 1]; // pair of size - 1 spots
 		int[] nIndices = new int[size - 2];
@@ -282,7 +282,7 @@ public class tttBoard {
 		ArrayList<Integer> spotsList = new ArrayList<Integer>(spots);
 		spotsList.remove(spotsList.indexOf(value)); // don't add the current
 													// value twice to any pairs
-		for (int i = 0; i < spotsList.size() - (size - 2); i++) {
+		for (int i = 0; i < spotsList.size() - (size - 3); i++) {
 			// loop over elements in the list, grabbing each possible
 			// combination of size-2 spots
 			for (int j = 0; j < size - 2; j++) { // assign indices
@@ -312,7 +312,7 @@ public class tttBoard {
 			return false;
 		}
 		// checkWin() // deprecated
-		TreeSet<Integer> pairs = (player == 0) ? player0Pairs : player1Pairs;
+		HashSet<Integer> pairs = (player == 0) ? player0Pairs : player1Pairs;
 		String winner = (player == 0) ? player0 : player1; // not necessarily
 															// the winner yet
 		int value = magicSquare.get(key);
@@ -460,7 +460,7 @@ public class tttBoard {
 				else if (boardMap.get(key) == 0)
 					System.out.print(string0);
 				else
-					System.out.println(string1);
+					System.out.print(string1);
 			}
 			System.out.println();
 		}
