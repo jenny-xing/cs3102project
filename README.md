@@ -1,4 +1,23 @@
-cs3102project
-=============
+====================================
+Tactful Tic-Tac-Toe Tactics
+CS 3102 Spring 2014 Term Project
+Authors: Rober Mina and Jenny Xing
+====================================
 
-generalized tic-tac-toe 
+A stimulator and AI for playing multidimensional, multiplayer, and multi-size tic-tac-toe.
+
+====================================
+Operation
+====================================
+
+====================================
+File manifest
+====================================
+
+====================================
+Known bugs
+====================================
+
+====================================
+Credits and acknowledgments
+====================================
