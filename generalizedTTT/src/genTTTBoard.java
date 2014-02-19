@@ -15,7 +15,7 @@ public class genTTTBoard {
 	private String player0;
 	private String player1;
 	private HashMap<Integer, String> boardMap;
-	private HashMap<Integer, Integer> magicSquare;
+	private HashMap<Integer, Integer> magicCube;
 	private TreeSet<Integer> player0Spots;
 	private TreeSet<Integer> player1Spots;
 	private TreeSet<Integer> openSpots;
@@ -35,8 +35,8 @@ public class genTTTBoard {
 		player0 = p0;
 		player1 = p1;
 		boardMap = new HashMap<Integer, String>(pow(size,dim), (float) 1.0);
-		magicSquare = new HashMap<Integer, Integer>(pow(size,dim), (float) 1.0);
-		loadMagicSquare();
+		magicCube = new HashMap<Integer, Integer>(pow(size,dim), (float) 1.0);
+		loadMagicCube();
 		player0Spots = new TreeSet<Integer>();
 		player1Spots = new TreeSet<Integer>();
 		openSpots = new TreeSet<Integer>();
@@ -71,7 +71,7 @@ public class genTTTBoard {
 
 	// load Integer values into the correct values in the magicSquare map
 	//TODO: implement for n-dimensions
-	private void loadMagicSquare() {
+	private void loadMagicCube() {
 
 	}
 
@@ -150,10 +150,10 @@ public class genTTTBoard {
 
 	// x and y are the keys
 	private void swapValues(int x, int y) {
-		int xval = magicSquare.get(x);
-		int yval = magicSquare.get(y);
-		magicSquare.put(x, yval);
-		magicSquare.put(y, xval);
+		int xval = magicCube.get(x);
+		int yval = magicCube.get(y);
+		magicCube.put(x, yval);
+		magicCube.put(y, xval);
 	}
 	
 	
