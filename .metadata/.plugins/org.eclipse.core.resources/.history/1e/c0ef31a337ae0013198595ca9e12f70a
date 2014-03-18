@@ -229,18 +229,9 @@ public class genTTTBoard {
 				for (int y=0; y<size; y++) {
 					int array[] = {x,y,z};
 					int key = getKey(array);
-					if (!boardMap.containsKey(key))
-						System.out.print(blank);
-					else if (boardMap.get(key)==0)
-						System.out.print(string0);
-					else
-						System.out.print(string1);
+					
 				}
-				System.out.println("");
 			}
-			System.out.println("");
-			System.out.println("");
-			System.out.println("");
 		}
 		System.out.println("End BoardMap");
 	}

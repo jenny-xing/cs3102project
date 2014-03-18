@@ -236,11 +236,7 @@ public class genTTTBoard {
 					else
 						System.out.print(string1);
 				}
-				System.out.println("");
 			}
-			System.out.println("");
-			System.out.println("");
-			System.out.println("");
 		}
 		System.out.println("End BoardMap");
 	}

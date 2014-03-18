@@ -161,7 +161,7 @@ public class genTTTBoard {
 			return false;
 		}
 		// checkWin() // deprecated
-		HashSet<Integer> pairs = (player == 0) ? player0Pairs : player1Pairs;
+		TreeSet<Integer> pairs = (player == 0) ? player0Pairs : player1Pairs;
 		String winner = (player == 0) ? player0 : player1; // not necessarily
 															// the winner yet
 		for (int i : pairs) {
@@ -209,40 +209,4 @@ public class genTTTBoard {
 		magicCube.put(y, xval);
 	}
 
-	//prints out a representation of the board, assuming it is 3-dimensional
-	private void printBoardMap3d() {
-		int spaces = Math.max(player0.length(), player1.length()) + 3;
-		String string0 = player0;
-		while (string0.length() < spaces)
-			string0 += " ";
-		String string1 = player1;
-		while (string1.length() < spaces)
-			string1 += " ";
-		String blank = " ";
-		for (int i = 0; i < spaces - 1; i++) {
-			blank += blank;
-		}
-		System.out.println("Start BoardMap");
-		for (int z=size-1; z>=0; z--) {
-			System.out.println("z = " + z);
-			for (int x=0; x<size; x++) {
-				for (int y=0; y<size; y++) {
-					int array[] = {x,y,z};
-					int key = getKey(array);
-					if (!boardMap.containsKey(key))
-						System.out.print(blank);
-					else if (boardMap.get(key)==0)
-						System.out.print(string0);
-					else
-						System.out.print(string1);
-				}
-				System.out.println("");
-			}
-			System.out.println("");
-			System.out.println("");
-			System.out.println("");
-		}
-		System.out.println("End BoardMap");
-	}
-	
 }

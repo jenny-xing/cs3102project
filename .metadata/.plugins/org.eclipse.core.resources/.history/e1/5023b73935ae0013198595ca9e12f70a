@@ -304,6 +304,7 @@ public class tttBoard {
 	}
 
 	// check for win or draw conditions
+	// update the relevant player pairs set to include pairs wit
 	// NOTE: the current move has NOT been added to relevant pairs set
 	// param player: 0 or 1, the player number
 	private boolean check(int key, int player) {
