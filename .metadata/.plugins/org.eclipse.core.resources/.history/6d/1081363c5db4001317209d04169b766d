@@ -50,7 +50,7 @@ public class genTTTBoard {
 	}
 
 	public HashMap<Integer, Integer> getBoardMap() {
-		return new HashMap<Integer, Integer>(boardMap);
+		return boardMap;
 	}
 	public HashSet<Integer> getOpenSpots() {
 		return new HashSet<Integer>(openSpots);	

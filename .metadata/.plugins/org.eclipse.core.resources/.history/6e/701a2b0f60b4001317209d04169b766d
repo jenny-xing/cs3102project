@@ -255,7 +255,7 @@ public class tttBoard {
 	// param player: 0 or 1, the player number
 	// params row and col: coordinates within the square
 	// return boolean true if move successful, false otherwise
-	public boolean move(int player, int row, int col) {
+	private boolean move(int player, int row, int col) {
 		int key = getKey(row, col);
 		if (!openSpots.contains(key)) {
 			// already occupied or invalid coords

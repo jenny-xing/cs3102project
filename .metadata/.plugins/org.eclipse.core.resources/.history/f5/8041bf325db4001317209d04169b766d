@@ -50,7 +50,7 @@ public class genTTTBoard {
 	}
 
 	public HashMap<Integer, Integer> getBoardMap() {
-		return new HashMap<Integer, Integer>(boardMap);
+		return boardMap;
 	}
 	public HashSet<Integer> getOpenSpots() {
 		return new HashSet<Integer>(openSpots);	
@@ -58,8 +58,8 @@ public class genTTTBoard {
 	public HashSet<Integer> getPlayerSpots(int player) {
 		return new HashSet<Integer>(player==0 ? player0Spots : player1Spots);
 	}
-	public HashMap<Integer, Integer> getMagicCube() {
-		return new HashMap<Integer,Integer>(magicCube);
+	public HashMap<Integer, Integer> getMagicSquare() {
+		return new HashMap<Integer,Integer>(magicSquare);
 	}
 	public HashSet<Integer> getPlayerPairs(int player) {
 		return new HashSet<Integer>(player==0 ? player0Pairs : player1Pairs);

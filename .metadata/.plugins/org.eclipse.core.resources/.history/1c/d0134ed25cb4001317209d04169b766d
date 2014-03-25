@@ -9,10 +9,10 @@ import java.util.*;
 
 public class tttBoard {
 
-	public final int size;
-	public final int magicNum;
-	private final String player0;
-	private final String player1;
+	private int size;
+	private final int magicNum;
+	private String player0;
+	private String player1;
 	private HashMap<Integer, Integer> boardMap; // values are 0 or 1
 	private HashMap<Integer, Integer> magicSquare;
 	private HashSet<Integer> player0Spots; // contains magic square values
@@ -79,20 +79,7 @@ public class tttBoard {
 	}
 
 	public HashMap<Integer, Integer> getBoardMap() {
-		return new HashMap<Integer, Integer>(boardMap);
-	}
-	
-	public HashSet<Integer> getOpenSpots() {
-		return new HashSet<Integer>(openSpots);	
-	}
-	public HashSet<Integer> getPlayerSpots(int player) {
-		return new HashSet<Integer>(player==0 ? player0Spots : player1Spots);
-	}
-	public HashMap<Integer, Integer> getMagicSquare() {
-		return new HashMap<Integer,Integer>(magicSquare);
-	}
-	public HashSet<Integer> getPlayerPairs(int player) {
-		return new HashSet<Integer>(player==0 ? player0Pairs : player1Pairs);
+		return boardMap;
 	}
 
 	// load all possible key values into openSpots set
@@ -255,7 +242,7 @@ public class tttBoard {
 	// param player: 0 or 1, the player number
 	// params row and col: coordinates within the square
 	// return boolean true if move successful, false otherwise
-	public boolean move(int player, int row, int col) {
+	private boolean move(int player, int row, int col) {
 		int key = getKey(row, col);
 		if (!openSpots.contains(key)) {
 			// already occupied or invalid coords
@@ -487,5 +474,14 @@ public class tttBoard {
 		magicSquare.put(y, xval);
 	}
 
-
+	public HashSet<Integer> getOpenSpots() {
+		return new HashSet<Integer>(openSpots);	
+	}
+	public HashSet<Integer> getPlayerSpos(int player) {
+		return new HashSet<Integer>(player==0 ? player0Spots : player1Spots);
+	}
+	public HashMap<Integer, Integer> getMagicSquare() {
+		return new HashMap<Integer,Integer>(magicSquare);
+	}
+	public HashSet<>
 }
