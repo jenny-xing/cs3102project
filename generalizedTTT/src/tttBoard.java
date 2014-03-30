@@ -112,17 +112,18 @@ public class tttBoard {
 	// param coords: coordinates within the n-cube
 	// return boolean true if move successful, false otherwise
 	private boolean move(int player, int[] coords) {
-		if (player != 0 && player != 1) {
+		if (player != 0 && player != 1) 
 			return false;
-		}
 		int key = getKey(coords);
 		if (!openSpots.contains(key))
+			// already occupied or invalid coords
 			return false;
-
 		boardMap.put(key, player);
 		if (player == 1) {
+			//XXX: should this be magicCube.get(key)?
 			player1Spots.add(key);
 		} else
+			//XXX: should this be magicCube.get(key)?
 			player0Spots.add(key);
 		openSpots.remove(key);
 		check(key, player);
@@ -176,7 +177,6 @@ public class tttBoard {
 		if (player != 0 && player != 1) { // invalid player
 			return false;
 		}
-		// checkWin() // deprecated
 		HashSet<Integer> pairs = (player == 0) ? player0Pairs : player1Pairs;
 		String winner = (player == 0) ? player0 : player1; // not necessarily
 															// the winner yet
@@ -200,10 +200,10 @@ public class tttBoard {
 
 	// perform draw operation
 	private void draw() {
-
+		System.out.println("Draw!");
 	}
 
-	// sum the int array
+	// sums an array of ints
 	private int sum(int[] nPair) {
 		int retval = 0;
 		for (int i = 0; i < nPair.length; i++) {
@@ -214,7 +214,7 @@ public class tttBoard {
 
 	// perform the winning operation given the winner
 	private void win(String winner) {
-
+		System.out.println(winner + " has won!");
 	}
 
 	// x and y are the keys

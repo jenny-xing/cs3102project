@@ -259,14 +259,12 @@ public class tttBoard2D {
 	// params row and col: coordinates within the square
 	// return boolean true if move successful, false otherwise
 	public boolean move(int player, int row, int col) {
+		if (player != 0 && player != 1) // invalid player
+			return false;
 		int key = getKey(row, col);
-		if (!openSpots.contains(key)) {
+		if (!openSpots.contains(key))
 			// already occupied or invalid coords
 			return false;
-		}
-		if (player != 0 && player != 1) { // invalid player
-			return false;
-		}
 		// valid move
 		boardMap.put(key, player);
 		if (player == 1) {
@@ -416,6 +414,7 @@ public class tttBoard2D {
 		}
 	}
 
+	// sums an array of ints
 	private int sum(int[] nPair) {
 		int retval = 0;
 		for (int i = 0; i < nPair.length; i++) {
@@ -427,6 +426,14 @@ public class tttBoard2D {
 	// perform the winning operation given the winner
 	private void win(String winner) {
 		System.out.println(winner + " has won!");
+	}
+
+	// x and y are the keys
+	private void swapValues(int x, int y) {
+		int xval = magicSquare.get(x);
+		int yval = magicSquare.get(y);
+		magicSquare.put(x, yval);
+		magicSquare.put(y, xval);
 	}
 
 	// prints magic square in row-major oder
@@ -480,14 +487,6 @@ public class tttBoard2D {
 			System.out.println();
 		}
 		System.out.println("End BoardMap");
-	}
-
-	// x and y are the keys
-	private void swapValues(int x, int y) {
-		int xval = magicSquare.get(x);
-		int yval = magicSquare.get(y);
-		magicSquare.put(x, yval);
-		magicSquare.put(y, xval);
 	}
 
 }
