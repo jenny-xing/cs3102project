@@ -9,7 +9,7 @@ import java.util.*;
 
 public class tttBoard {
 
-	private int size;
+	private int order;
 	private int magicNum;
 	private int dimension;
 	private String player0;
@@ -28,14 +28,14 @@ public class tttBoard {
 
 	}
 
-	public tttBoard(Integer size, Integer dim, String p0, String p1) {
-		this.size = size;
+	public tttBoard(Integer order, Integer dim, String p0, String p1) {
+		this.order = order;
 		dimension = dim;
-		magicNum = (size * (pow(size, dimension) + 1)) / 2;
+		magicNum = (order * (pow(order, dimension) + 1)) / 2;
 		player0 = p0;
 		player1 = p1;
-		boardMap = new HashMap<Integer, Integer>(pow(size, dim), (float) 1.0);
-		magicCube = new HashMap<Integer, Integer>(pow(size, dim), (float) 1.0);
+		boardMap = new HashMap<Integer, Integer>(pow(order, dim), (float) 1.0);
+		magicCube = new HashMap<Integer, Integer>(pow(order, dim), (float) 1.0);
 		loadMagicCube();
 		player0Spots = new HashSet<Integer>();
 		player1Spots = new HashSet<Integer>();
@@ -45,8 +45,8 @@ public class tttBoard {
 		player1Pairs = new HashSet<Integer>();
 	}
 
-	public int getSize() {
-		return size;
+	public int getOrder() {
+		return order;
 	}
 
 	public HashMap<Integer, Integer> getBoardMap() {
@@ -87,7 +87,7 @@ public class tttBoard {
 
 	// load all possible key values into openSpots set
 	private void loadOpenSpots() {
-		for (int i = 0; i < pow(size, dimension); i++) {
+		for (int i = 0; i < pow(order, dimension); i++) {
 			openSpots.add(i);
 		}
 	}
@@ -103,7 +103,7 @@ public class tttBoard {
 	private int getKey(int[] coords) {
 		int retval = 0;
 		for (int i = 0; i < dimension; i++) {
-			retval += pow(size, i) * coords[i];
+			retval += pow(order, i) * coords[i];
 		}
 		return retval;
 	}
@@ -143,25 +143,25 @@ public class tttBoard {
 		HashSet<Integer> pairs = (player == 0) ? player0Pairs : player1Pairs;
 		HashSet<Integer> spots = (player == 0) ? player0Spots : player1Spots;
 		int value = magicCube.get(key);
-		int[] nPair = new int[size - 1]; // pair of size - 1 spots
-		int[] nIndices = new int[size - 2];
-		nPair[size - 2] = value; // last value in nPair is the current value
+		int[] nPair = new int[order - 1]; // pair of order - 1 spots
+		int[] nIndices = new int[order - 2];
+		nPair[order - 2] = value; // last value in nPair is the current value
 		ArrayList<Integer> spotsList = new ArrayList<Integer>(spots);
 		spotsList.remove(spotsList.indexOf(value)); // don't add the current
 													// value twice to any pairs
-		for (int i = 0; i < spotsList.size() - (size - 3); i++) {
+		for (int i = 0; i < spotsList.size() - (order - 3); i++) {
 			// loop over elements in the list, grabbing each possible
 			// combination of size-2 spots
-			for (int j = 0; j < size - 2; j++) { // assign indices
+			for (int j = 0; j < order - 2; j++) { // assign indices
 				nIndices[j] = i + j;
 				nPair[j] = spotsList.get(nIndices[j]);
 			} // indices default to first unchecked size elements
 			while (true) {
 				int sum = sum(nPair);
 				pairs.add(sum);
-				if (nIndices[size - 3] == spotsList.size() - 1)
+				if (nIndices[order - 3] == spotsList.size() - 1)
 					break; // no more nPairs with this first value
-				for (int j = size - 3; j >= 0; j--) {
+				for (int j = order - 3; j >= 0; j--) {
 					nIndices[j]++;
 					nPair[j] = spotsList.get(nIndices[j]);
 				}
@@ -239,10 +239,10 @@ public class tttBoard {
 			blank += blank;
 		}
 		System.out.println("Start BoardMap");
-		for (int z = size - 1; z >= 0; z--) {
+		for (int z = order - 1; z >= 0; z--) {
 			System.out.println("z = " + z);
-			for (int x = 0; x < size; x++) {
-				for (int y = 0; y < size; y++) {
+			for (int x = 0; x < order; x++) {
+				for (int y = 0; y < order; y++) {
 					int array[] = { x, y, z };
 					int key = getKey(array);
 					if (!boardMap.containsKey(key))

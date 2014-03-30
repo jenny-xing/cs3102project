@@ -50,9 +50,5 @@ should we define a magic cube/hypercube one in which all possble lines of n cell
 (all lower dimension hypercubes of the same size contained in it will be perfect as well)
 would it be easier if we just brute force it rather than trying to construct the magic cube/hypercube?
 
-refactor size to order
-how to brute force even
-
 Research links:
-http://www.one-tab.com/page/M0OhuJKNSgijjQfXi0-LOg
-http://www.one-tab.com/page/E_XbS2g3RSel1rovo9tiiw
+http://www.one-tab.com/page/VoiFBpyZQAWQnGC8RqcgMw

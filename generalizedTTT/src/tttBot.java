@@ -84,7 +84,7 @@ public class tttBot {
 	private int randomMove(HashSet<Integer> openSpots) {
 		Random myRand = new Random();
 		while (true) {
-			int next = myRand.nextInt(board.size * board.size);
+			int next = myRand.nextInt(board.order * board.order);
 			if (openSpots.contains(next))
 				return next;
 		}

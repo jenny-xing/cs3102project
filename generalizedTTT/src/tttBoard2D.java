@@ -9,7 +9,7 @@ import java.util.*;
 
 public class tttBoard2D {
 
-	public final int size;
+	public final int order;
 	public final int magicNum;
 	private final String player0;
 	private final String player1;
@@ -39,7 +39,7 @@ public class tttBoard2D {
 
 	private void test() {
 		System.out.println("-----------------------------------------");
-		System.out.println("Initializing board of size: " + size);
+		System.out.println("Initializing board of order: " + order);
 		System.out.println("Open spots: " + openSpots);
 		System.out.println("Player 0: " + player0);
 		System.out.println("Player 1: " + player1);
@@ -58,13 +58,13 @@ public class tttBoard2D {
 		printBoardMap();
 	}
 
-	public tttBoard2D(Integer size, String p0, String p1) {
-		this.size = size;
-		magicNum = (size * (size * size + 1)) / 2;
+	public tttBoard2D(Integer order, String p0, String p1) {
+		this.order = order;
+		magicNum = (order * (order * order + 1)) / 2;
 		player0 = p0;
 		player1 = p1;
-		boardMap = new HashMap<Integer, Integer>(size * size, (float) 1.0);
-		magicSquare = new HashMap<Integer, Integer>(size * size, (float) 1.0);
+		boardMap = new HashMap<Integer, Integer>(order * order, (float) 1.0);
+		magicSquare = new HashMap<Integer, Integer>(order * order, (float) 1.0);
 		loadMagicSquare();
 		player0Spots = new HashSet<Integer>();
 		player1Spots = new HashSet<Integer>();
@@ -74,8 +74,8 @@ public class tttBoard2D {
 		player1Pairs = new HashSet<Integer>();
 	}
 
-	public int getSize() {
-		return size;
+	public int getOrder() {
+		return order;
 	}
 
 	public HashMap<Integer, Integer> getBoardMap() {
@@ -100,8 +100,8 @@ public class tttBoard2D {
 
 	// load all possible key values into openSpots set
 	private void loadOpenSpots() {
-		for (int i = 0; i < size; i++) {
-			for (int j = 0; j < size; j++) {
+		for (int i = 0; i < order; i++) {
+			for (int j = 0; j < order; j++) {
 				openSpots.add(getKey(i, j));
 			}
 		}
@@ -110,44 +110,45 @@ public class tttBoard2D {
 	// load Integer values into the correct values in the magicSquare map
 	private void loadMagicSquare() {
 
-		if (size < 3)
-			throw new RuntimeException("invalid size for tic-tac-toe board.");
+		if (order < 3)
+			throw new RuntimeException("invalid order for tic-tac-toe board.");
 
-		// generation for odd sizes
-		if (size % 2 == 1) {
-			for (int row = 1; row <= size; row++) {
-				for (int col = 1; col <= size; col++) {
+		// generation for odd orders
+		if (order % 2 == 1) {
+			for (int row = 1; row <= order; row++) {
+				for (int col = 1; col <= order; col++) {
 					// formula given by Wikipedia
-					int value = size * ((row + col - 1 + size / 2) % size)
-							+ ((row + 2 * col - 2) % size) + 1;
+					int value = order * ((row + col - 1 + order / 2) % order)
+							+ ((row + 2 * col - 2) % order) + 1;
 					magicSquare.put(getKey(row - 1, col - 1), value);
 				}
 			}
 			// printMagicSquare();
 		}
 
-		// generation for doubly even (divisible by 4) sizes.
+		// generation for doubly even (divisible by 4) orders.
 		// http://www.1728.org/magicsq2.htm
-		if (size % 4 == 0) {
+		if (order % 4 == 0) {
 			// fills the "diagonals"
 			int count = 1;
-			final int smaller_size = size / 4;
-			for (int row = 1; row <= size; row++) {
-				for (int col = 1; col <= size; col++) {
+			final int smaller_order = order / 4;
+			for (int row = 1; row <= order; row++) {
+				for (int col = 1; col <= order; col++) {
 					int key = getKey(row - 1, col - 1);
-					// fills in the corner squares that are size/4 x size/4
-					if ((col <= smaller_size && row <= smaller_size)
-							|| (col > size - smaller_size && row > size
-									- smaller_size)
-							|| (col <= smaller_size && row > size
-									- smaller_size)
-							|| (col > size - smaller_size && row <= smaller_size)) {
+					// fills in the corner squares that are order/4 x order/4
+					if ((col <= smaller_order && row <= smaller_order)
+							|| (col > order - smaller_order && row > order
+									- smaller_order)
+							|| (col <= smaller_order && row > order
+									- smaller_order)
+							|| (col > order - smaller_order && row <= smaller_order)) {
 						magicSquare.put(key, count);
 					}
 
-					// fills the inner square that is size/2 x size/2
-					if (col > smaller_size && col <= size - smaller_size
-							&& row > smaller_size && row <= size - smaller_size) {
+					// fills the inner square that is order/2 x order/2
+					if (col > smaller_order && col <= order - smaller_order
+							&& row > smaller_order
+							&& row <= order - smaller_order) {
 						magicSquare.put(key, count);
 					}
 
@@ -157,8 +158,8 @@ public class tttBoard2D {
 
 			// fills in the rest from the bottom right to top left
 			count = 1;
-			for (int row = size - 1; row >= 0; row--) {
-				for (int col = size - 1; col >= 0; col--) {
+			for (int row = order - 1; row >= 0; row--) {
+				for (int col = order - 1; col >= 0; col--) {
 					int key = getKey(row, col);
 					if (!magicSquare.containsKey(key)) {
 						magicSquare.put(key, count);
@@ -169,42 +170,42 @@ public class tttBoard2D {
 			// printMagicSquare();
 		}
 
-		// generation for singly even (divisible by 2 but not by 4) sizes
+		// generation for singly even (divisible by 2 but not by 4) orders
 		// http://www.1728.org/magicsq3.htm
-		if (size % 2 == 0 && !(size % 4 == 0)) {
+		if (order % 2 == 0 && !(order % 4 == 0)) {
 
-			final int smaller_size = size / 2;
+			final int smaller_order = order / 2;
 
-			// fills in the board with smaller odd size magic squares
-			for (int row = 1; row <= size; row++) {
-				for (int col = 1; col <= size; col++) {
+			// fills in the board with smaller odd order magic squares
+			for (int row = 1; row <= order; row++) {
+				for (int col = 1; col <= order; col++) {
 					// formula given by wikipedia
-					int value = smaller_size
-							* ((row + col - 1 + smaller_size / 2) % smaller_size)
-							+ ((row + 2 * col - 2) % smaller_size) + 1;
+					int value = smaller_order
+							* ((row + col - 1 + smaller_order / 2) % smaller_order)
+							+ ((row + 2 * col - 2) % smaller_order) + 1;
 					magicSquare.put(getKey(row - 1, col - 1), value);
 				}
 			}
 
 			// increments the quadrants so that they match the ACDB filling
 			// pattern
-			for (int row = 1; row <= size; row++) {
-				for (int col = 1; col <= size; col++) {
+			for (int row = 1; row <= order; row++) {
+				for (int col = 1; col <= order; col++) {
 					int key = getKey(row - 1, col - 1);
 					int value = magicSquare.get(key);
-					int s2 = smaller_size * smaller_size;
+					int s2 = smaller_order * smaller_order;
 
 					// quadrant A stays the same
 					// quadrant B
-					if (row > smaller_size && col > smaller_size)
+					if (row > smaller_order && col > smaller_order)
 						magicSquare.put(key, value + s2);
 
 					// quadrant C
-					if (row <= smaller_size && col > smaller_size)
+					if (row <= smaller_order && col > smaller_order)
 						magicSquare.put(key, value + 2 * s2);
 
 					// quadrant D
-					if (row > smaller_size && col <= smaller_size)
+					if (row > smaller_order && col <= smaller_order)
 						magicSquare.put(key, value + 3 * s2);
 
 				}
@@ -213,14 +214,14 @@ public class tttBoard2D {
 			// swap (almost) ALL the values!
 
 			// swaps right side values
-			int rightWidth = (smaller_size - 3) / 2;
+			int rightWidth = (smaller_order - 3) / 2;
 
-			for (int row = 1; row <= size; row++) {
-				for (int col = 1; col <= size; col++) {
-					if (col > size - rightWidth && row <= size / 2) {
+			for (int row = 1; row <= order; row++) {
+				for (int col = 1; col <= order; col++) {
+					if (col > order - rightWidth && row <= order / 2) {
 						// unnecessary variables are unnecessary
 						int key = getKey(row - 1, col - 1);
-						int swapkey = key + (size * size) / 2;
+						int swapkey = key + (order * order) / 2;
 						swapValues(key, swapkey);
 					}
 				}
@@ -229,30 +230,30 @@ public class tttBoard2D {
 			// swaps left side values
 			int leftWidth = rightWidth + 1;
 
-			for (int row = 1; row <= size; row++) {
-				for (int col = 1; col <= size; col++) {
-					if (col <= leftWidth && row <= size / 2) {
+			for (int row = 1; row <= order; row++) {
+				for (int col = 1; col <= order; col++) {
+					if (col <= leftWidth && row <= order / 2) {
 						// unnecessary variables are unnecessary
 						int key = getKey(row - 1, col - 1);
-						int swapkey = key + (size * size) / 2;
+						int swapkey = key + (order * order) / 2;
 						swapValues(key, swapkey);
 					}
 				}
 			}
 			// accounts for indent on left side values
 			swapValues(getKey(leftWidth, 0), getKey(leftWidth, 0)
-					+ (size * size) / 2);
+					+ (order * order) / 2);
 			swapValues(getKey(leftWidth, 0) + leftWidth, getKey(leftWidth, 0)
-					+ leftWidth + (size * size) / 2);
+					+ leftWidth + (order * order) / 2);
 		}
 
 	}
 
 	// params row and col: coordinates within the square (0 to
-	// size^2-1)
+	// order^2-1)
 	// return int key corresponding to the key in the maps for those coords
 	private int getKey(int row, int col) {
-		return size * row + col;
+		return order * row + col;
 	}
 
 	// param player: 0 or 1, the player number
@@ -284,31 +285,31 @@ public class tttBoard2D {
 		if (player != 0 && player != 1) { // invalid player
 			return false;
 		}
-		if (key >= size * size) { // invalid coords
+		if (key >= order * order) { // invalid coords
 			return false;
 		}
 		HashSet<Integer> pairs = (player == 0) ? player0Pairs : player1Pairs;
 		HashSet<Integer> spots = (player == 0) ? player0Spots : player1Spots;
 		int value = magicSquare.get(key);
-		int[] nPair = new int[size - 1]; // pair of size - 1 spots
-		int[] nIndices = new int[size - 2];
-		nPair[size - 2] = value; // last value in nPair is the current value
+		int[] nPair = new int[order - 1]; // pair of order - 1 spots
+		int[] nIndices = new int[order - 2];
+		nPair[order - 2] = value; // last value in nPair is the current value
 		ArrayList<Integer> spotsList = new ArrayList<Integer>(spots);
 		spotsList.remove(spotsList.indexOf(value)); // don't add the current
 													// value twice to any pairs
-		for (int i = 0; i < spotsList.size() - (size - 3); i++) {
+		for (int i = 0; i < spotsList.size() - (order - 3); i++) {
 			// loop over elements in the list, grabbing each possible
 			// combination of size-2 spots
-			for (int j = 0; j < size - 2; j++) { // assign indices
+			for (int j = 0; j < order - 2; j++) { // assign indices
 				nIndices[j] = i + j;
 				nPair[j] = spotsList.get(nIndices[j]);
 			} // indices default to first unchecked size elements
 			while (true) {
 				int sum = sum(nPair);
 				pairs.add(sum);
-				if (nIndices[size - 3] == spotsList.size() - 1)
+				if (nIndices[order - 3] == spotsList.size() - 1)
 					break; // no more nPairs with this first value
-				for (int j = size - 3; j >= 0; j--) {
+				for (int j = order - 3; j >= 0; j--) {
 					nIndices[j]++;
 					nPair[j] = spotsList.get(nIndices[j]);
 				}
@@ -354,17 +355,17 @@ public class tttBoard2D {
 
 	// deprecated method to check if there is a winner
 	private void checkWin() {
-		if (player0Spots.size() < size && player1Spots.size() < size)
+		if (player0Spots.size() < order && player1Spots.size() < order)
 			return; // not possible that someone has won
-		int[] nPair = new int[size];
-		int[] nIndices = new int[size];
+		int[] nPair = new int[order];
+		int[] nIndices = new int[order];
 		ArrayList<Integer> player0SpotsList = new ArrayList<Integer>(
 				player0Spots);
-		for (int i = 0; i < player0SpotsList.size() - size; i++) {
+		for (int i = 0; i < player0SpotsList.size() - order; i++) {
 			// loop over elements in the list, grabbing each possible
 			// combination of size spots and seeing if they sum to the magic
 			// number
-			for (int j = 0; j < size - 1; j++) { // assign indices
+			for (int j = 0; j < order - 1; j++) { // assign indices
 				nIndices[j] = i + j;
 				nPair[j] = player0SpotsList.get(nIndices[j]);
 			} // indices default to first unchecked size elements
@@ -376,9 +377,9 @@ public class tttBoard2D {
 				} else if (sum > magicNum)
 					break; // continue to next starting digit
 				else { // re-assign indices and nPair
-					if (nIndices[size - 1] == player0SpotsList.size() - 1)
+					if (nIndices[order - 1] == player0SpotsList.size() - 1)
 						break; // no more nPairs with this first value
-					for (int j = size - 1; j >= 0; j--) {
+					for (int j = order - 1; j >= 0; j--) {
 						nIndices[j]++;
 						nPair[j] = player0SpotsList.get(nIndices[j]);
 					}
@@ -387,11 +388,11 @@ public class tttBoard2D {
 		}
 		ArrayList<Integer> player1SpotsList = new ArrayList<Integer>(
 				player1Spots);
-		for (int i = 0; i < player1SpotsList.size() - size; i++) {
+		for (int i = 0; i < player1SpotsList.size() - order; i++) {
 			// loop over elements in the list, grabbing each possible
 			// combination of size spots and seeing if they sum to the magic
 			// number
-			for (int j = 0; j < size - 1; j++) { // assign indices
+			for (int j = 0; j < order - 1; j++) { // assign indices
 				nIndices[j] = i + j;
 				nPair[j] = player1SpotsList.get(nIndices[j]);
 			} // indices default to first unchecked size elements
@@ -403,9 +404,9 @@ public class tttBoard2D {
 				} else if (sum > magicNum)
 					break; // continue to next starting digit
 				else { // re-assign indices and nPair
-					if (nIndices[size - 1] == player1SpotsList.size() - 1)
+					if (nIndices[order - 1] == player1SpotsList.size() - 1)
 						break; // no more nPairs with this first value
-					for (int j = size - 1; j >= 0; j--) {
+					for (int j = order - 1; j >= 0; j--) {
 						nIndices[j]++;
 						nPair[j] = player1SpotsList.get(nIndices[j]);
 					}
@@ -439,8 +440,8 @@ public class tttBoard2D {
 	// prints magic square in row-major oder
 	private void printMagicSquare() {
 		System.out.println("Start MagicSquare");
-		for (int row = 0; row < size; row++) {
-			for (int col = 0; col < size; col++) {
+		for (int row = 0; row < order; row++) {
+			for (int col = 0; col < order; col++) {
 				// System.out.println("(" + row + ", " + col + "): "
 				// + magicSquare.get(getKey(row, col)));
 				if (magicSquare.containsKey(getKey(row, col))) {
@@ -474,8 +475,8 @@ public class tttBoard2D {
 			blank += blank;
 		}
 		System.out.println("Start BoardMap");
-		for (int row = 0; row < size; row++) {
-			for (int col = 0; col < size; col++) {
+		for (int row = 0; row < order; row++) {
+			for (int col = 0; col < order; col++) {
 				int key = getKey(row, col);
 				if (!boardMap.containsKey(key))
 					System.out.print(blank);
