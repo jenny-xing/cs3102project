@@ -1,0 +1,52 @@
+Magic square generation:
+•	on the construction of even order magic squares:
+http://arxiv.org/ftp/arxiv/papers/1202/1202.0948.pdf 
+•	constructing singly even magic squares:
+http://www.1728.org/magicsq3.htm
+•	constructing using smaller odd magic squares and swapping certain positions
+•	Algorithmic determination of magic squares:
+http://www.numin8r.us/numin/2000/APR00.HTM
+•	ring method
+	http://en.wikipedia.org/wiki/Magic_square
+•	medjig method
+
+
+Solving tic-tac-toe using magic squares:
+http://rowdy.msudenver.edu/~gordona/cs1050/progs/tictactoermccsc.pdf 
+
+
+IDEAS:
+•	*representing the board using magic squares
+•	taking turns (map)
+•	*computing the magic square/cube/n dimensions 
+•	moving pieces
+•	key=size^0*x(0) + size^1*x(1)+(size)(n-1) x(n-1) 
+•	multiplayer (size-1 players)
+
+
+TODO:
+•	write testing engine/AI
+•	account for multiple dimensions
+•	different rules (being able to move pieces)?
+•	runtime of magicSquare generator
+•	binary rep. of magicSquare
+•	memory efficiency vs algorithm efficiency
+•	where to cap the size (max of 1 million spaces, 12 dimensions-nth root of 1 million)
+•	Start project writeup
+
+
+***3/30/14***
+for the check method: is the key the most recent move?
+
+for a standard/simple magic cube (dim=3) on size 3, the magic number is 42
+the sum of each row, column, pillar, and 4 main space diagonals=42
+perfect magic cube: every cross section diagonal=42 (if not, it's a semiperfect magic cube)
+
+so what exactly are the rules for 3D (and beyond) tic tac toe?
+if a standard magic cube is constructed, that means we can't have wins on a cross section diagonal.
+perfect magic cubes of sizes 2-4 do not exist, and it's difficult to construct perfect magic cubes beyond size 10. 
+(magic cubes of size 5&6 were only discovered in 2003)
+
+should we define a magic cube/hypercube one in which all possble lines of n cells (n is the size) sum up to be the magic number?
+(all lower dimension hypercubes of the same size contained in it will be perfect as well)
+would it be easier if we just brute force it rather than trying to construct the magic cube/hypercube?

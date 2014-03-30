@@ -92,7 +92,7 @@ public class tttBoard {
 		}
 	}
 
-	// load Integer values into the correct values in the magicSquare map
+	// load Integer values into the correct values in the magicCube map
 	// TODO: implement for n-dimensions
 	private void loadMagicCube() {
 

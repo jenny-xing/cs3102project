@@ -117,7 +117,7 @@ public class tttBoard2D {
 		if (size % 2 == 1) {
 			for (int row = 1; row <= size; row++) {
 				for (int col = 1; col <= size; col++) {
-					// formula given by wikipedia
+					// formula given by Wikipedia
 					int value = size * ((row + col - 1 + size / 2) % size)
 							+ ((row + 2 * col - 2) % size) + 1;
 					magicSquare.put(getKey(row - 1, col - 1), value);
