@@ -120,11 +120,9 @@ public class tttBoard {
 			return false;
 		boardMap.put(key, player);
 		if (player == 1) {
-			//XXX: should this be magicCube.get(key)?
-			player1Spots.add(key);
+			player1Spots.add(magicCube.get(key));
 		} else
-			//XXX: should this be magicCube.get(key)?
-			player0Spots.add(key);
+			player0Spots.add(magicCube.get(key));
 		openSpots.remove(key);
 		check(key, player);
 		updatePairs(key, player);
