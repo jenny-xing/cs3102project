@@ -51,4 +51,4 @@ should we define a magic cube/hypercube one in which all possble lines of n cell
 would it be easier if we just brute force it rather than trying to construct the magic cube/hypercube?
 
 Research links:
-http://www.one-tab.com/page/VoiFBpyZQAWQnGC8RqcgMw
+http://www.one-tab.com/page/3jkTl-SKTdKStR91abXBjw
