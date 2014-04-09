@@ -37,21 +37,26 @@
 <part id="0"/>
 <part id="1"/>
 <part id="2"/>
+<part id="3"/>
 </presentation>
 </folder>
 </info>
 </editorArea>
-<editor activePart="true" focus="true" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="tttBoard.java" partName="tttBoard.java" path="C:/Users/Jenny/Documents/GitHub/cs3102project/generalizedTTT/src/tttBoard.java" title="tttBoard.java" tooltip="generalizedTTT/src/tttBoard.java" workbook="DefaultEditorWorkbook">
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="tttBoard.java" partName="tttBoard.java" path="C:/Users/Jenny/Documents/GitHub/cs3102project/generalizedTTT/src/tttBoard.java" title="tttBoard.java" tooltip="generalizedTTT/src/tttBoard.java" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/generalizedTTT/src/tttBoard.java"/>
 <editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="1119" selectionTopPixel="357"/>
 </editor>
-<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="tttBoard2D.java" partName="tttBoard2D.java" path="C:/Users/Jenny/Documents/GitHub/cs3102project/generalizedTTT/src/tttBoard2D.java" title="tttBoard2D.java" tooltip="generalizedTTT/src/tttBoard2D.java" workbook="DefaultEditorWorkbook">
+<editor activePart="true" focus="true" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="tttBoard2D.java" partName="tttBoard2D.java" path="C:/Users/Jenny/Documents/GitHub/cs3102project/generalizedTTT/src/tttBoard2D.java" title="tttBoard2D.java" tooltip="generalizedTTT/src/tttBoard2D.java" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/generalizedTTT/src/tttBoard2D.java"/>
 <editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="1553" selectionTopPixel="0"/>
 </editor>
 <editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="tttBot.java" partName="tttBot.java" path="C:/Users/Jenny/Documents/GitHub/cs3102project/generalizedTTT/src/tttBot.java" title="tttBot.java" tooltip="generalizedTTT/src/tttBot.java" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/generalizedTTT/src/tttBot.java"/>
 <editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="369" selectionTopPixel="0"/>
+</editor>
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="magicGenerator.java" partName="magicGenerator.java" path="C:/Users/Jenny/Documents/GitHub/cs3102project/generalizedTTT/src/magicGenerator.java" title="magicGenerator.java" tooltip="generalizedTTT/src/magicGenerator.java" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/generalizedTTT/src/magicGenerator.java"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="145" selectionTopPixel="0"/>
 </editor>
 </editors>
 <views>
@@ -62,6 +67,9 @@
 <viewState/>
 </view>
 <view id="com.android.ide.eclipse.hierarchyviewer.views.PixelPerfectView" partName="Pixel Perfect">
+<viewState/>
+</view>
+<view id="org.eclipse.ui.console.ConsoleView" partName="Console">
 <viewState/>
 </view>
 <view id="org.eclipse.jdt.ui.PackageExplorer" partName="Package Explorer">
@@ -98,7 +106,7 @@
 <viewState/>
 </view>
 </views>
-<perspectives activePart="org.eclipse.jdt.ui.PackageExplorer" activePerspective="org.eclipse.jdt.ui.JavaPerspective">
+<perspectives activePart="org.eclipse.jdt.ui.CompilationUnitEditor" activePerspective="org.eclipse.jdt.ui.JavaPerspective">
 <perspective editorAreaTrimState="2" editorAreaVisible="1" fixed="0" version="0.016">
 <descriptor class="org.eclipse.jdt.internal.ui.JavaPerspectiveFactory" id="org.eclipse.jdt.ui.JavaPerspective" label="Java"/>
 <alwaysOnActionSet id="org.eclipse.ui.cheatsheets.actionSet"/>
@@ -164,6 +172,7 @@
 <hide_toolbar_item_id id="org.eclipse.ui.edit.text.toggleShowSelectedElementOnly"/>
 <view id="org.eclipse.ui.views.ContentOutline"/>
 <view id="org.eclipse.jdt.ui.PackageExplorer"/>
+<view id="org.eclipse.ui.console.ConsoleView"/>
 <fastViewBars/>
 <layout>
 <mainWindow>
@@ -188,19 +197,21 @@
 </folder>
 </info>
 <info part="org.eclipse.ui.editorss" ratio="0.25" ratioLeft="250" ratioRight="750" relationship="2" relative="left"/>
-<info folder="true" part="bottom" ratio="0.75" ratioLeft="462" ratioRight="154" relationship="4" relative="org.eclipse.ui.editorss">
-<folder appearance="2" expanded="2">
+<info folder="true" part="bottom" ratio="0.73828757" ratioLeft="457" ratioRight="162" relationship="4" relative="org.eclipse.ui.editorss">
+<folder activePageID="org.eclipse.ui.console.ConsoleView" appearance="2" expanded="2">
+<page content="org.eclipse.ui.console.ConsoleView" label="Console"/>
 <page content="org.eclipse.ui.views.ProblemView" label="LabelNotFound"/>
 <page content="org.eclipse.jdt.ui.JavadocView" label="LabelNotFound"/>
 <page content="org.eclipse.jdt.ui.SourceView" label="LabelNotFound"/>
 <page content="org.eclipse.search.ui.views.SearchView" label="LabelNotFound"/>
-<page content="org.eclipse.ui.console.ConsoleView" label="LabelNotFound"/>
 <page content="org.eclipse.ui.views.BookmarkView" label="LabelNotFound"/>
 <page content="org.eclipse.ui.views.ProgressView" label="LabelNotFound"/>
-<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory"/>
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
+<part id="0"/>
+</presentation>
 </folder>
 </info>
-<info folder="true" part="right" ratio="0.7493333" ratioLeft="562" ratioRight="188" relationship="2" relative="org.eclipse.ui.editorss">
+<info folder="true" part="right" ratio="0.7341198" ratioLeft="809" ratioRight="293" relationship="2" relative="org.eclipse.ui.editorss">
 <folder activePageID="org.eclipse.ui.views.ContentOutline" appearance="2" expanded="2">
 <page content="org.eclipse.ui.views.ContentOutline" label="Outline"/>
 <page content="org.eclipse.ui.texteditor.TemplatesView" label="LabelNotFound"/>
@@ -274,6 +285,9 @@
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/generalizedTTT/src/tttBot.java"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/generalizedTTT/src/tttBoard2D.java"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/generalizedTTT/src/tttBot.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/generalizedTTT/src/tttBoard.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/generalizedTTT/src/tttBoard2D.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/generalizedTTT/src/magicGenerator.java"/>
 </editors>
 <item historyLabel="tttBoard.java" index="0">
 <position info="not_deleted" x="4226" y="0"/>
@@ -350,8 +364,53 @@
 <item historyLabel="tttBot.java" index="4">
 <position info="not_deleted" x="5" y="0"/>
 </item>
-<item active="true" historyLabel="tttBot.java" index="4">
+<item historyLabel="tttBot.java" index="4">
 <position info="not_deleted" x="369" y="0"/>
+</item>
+<item historyLabel="tttBoard.java" index="5">
+<position info="not_deleted" x="1119" y="0"/>
+</item>
+<item historyLabel="tttBoard2D.java" index="6">
+<position info="not_deleted" x="5" y="0"/>
+</item>
+<item historyLabel="tttBoard2D.java" index="6">
+<position info="not_deleted" x="1553" y="0"/>
+</item>
+<item historyLabel="tttBot.java" index="4">
+<position info="not_deleted" x="5" y="0"/>
+</item>
+<item historyLabel="tttBot.java" index="4">
+<position info="not_deleted" x="369" y="0"/>
+</item>
+<item historyLabel="magicGenerator.java" index="7">
+<position info="not_deleted" x="7425" y="0"/>
+</item>
+<item historyLabel="magicGenerator.java" index="7">
+<position info="not_deleted" x="324" y="0"/>
+</item>
+<item historyLabel="magicGenerator.java" index="7">
+<position info="not_deleted" x="7190" y="0"/>
+</item>
+<item historyLabel="magicGenerator.java" index="7">
+<position info="not_deleted" x="7332" y="0"/>
+</item>
+<item historyLabel="magicGenerator.java" index="7">
+<position info="not_deleted" x="5748" y="0"/>
+</item>
+<item historyLabel="magicGenerator.java" index="7">
+<position info="not_deleted" x="5334" y="0"/>
+</item>
+<item historyLabel="magicGenerator.java" index="7">
+<position info="not_deleted" x="204" y="0"/>
+</item>
+<item historyLabel="tttBoard2D.java" index="6">
+<position info="not_deleted" x="1553" y="0"/>
+</item>
+<item historyLabel="magicGenerator.java" index="7">
+<position info="not_deleted" x="145" y="0"/>
+</item>
+<item active="true" historyLabel="tttBoard2D.java" index="6">
+<position info="not_deleted" x="1553" y="0"/>
 </item>
 </navigationHistory>
 <input factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/" type="8"/>
@@ -371,6 +430,9 @@
 </trimLayout>
 </window>
 <mruList>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="magicGenerator.java" tooltip="generalizedTTT/src/magicGenerator.java">
+<persistable path="/generalizedTTT/src/magicGenerator.java"/>
+</file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="tttBot.java" tooltip="generalizedTTT/src/tttBot.java">
 <persistable path="/generalizedTTT/src/tttBot.java"/>
 </file>

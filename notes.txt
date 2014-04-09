@@ -46,6 +46,8 @@ separate class to determine whether the pairing strategy can be used
 presentation wise: ppt, include equations and findings and screen captures of sample game (with analysis)
 
 ***4/9/14***
-I'm writing a new class that takes care of the magic square/magic cube stuff. how do we want to integrate/disintegrate this into our tttBoard?
+I'm writing a new class that takes care of the magic square/cube stuff. how do we want to integrate/disintegrate this into our tttBoard?
 do you want to keep the the 2D board separate from the higher dimension boards?
-
+reduce file size for magic squares/cubes
+eventually combine 2D and higher dimensions boards (keep everything though)
+how to gather magic cube/square data from websites... do we have anything for higher dimensions?

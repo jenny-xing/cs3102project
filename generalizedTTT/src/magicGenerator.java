@@ -2,12 +2,13 @@ import java.io.*;
 import java.util.*;
 
 public class magicGenerator {
+
 	public static void main(String[] args) {
-		magicGenerator tester = new magicGenerator(5, 2);
-		HashMap<Integer, Integer> testmagicsquare = tester.generateMagicThing();
+		magicGenerator tester = new magicGenerator(63, 2);
+		HashMap<Integer, Integer> testmagicsquare = tester.generateMagic();
 		// tester.printMagicThing();
-		tester.writeMagicThing();
-		tester.readMagicThing();
+		tester.writeMagic();
+		tester.readMagic();
 	}
 
 	private static int order;
@@ -176,8 +177,8 @@ public class magicGenerator {
 		return order * row + col;
 	}
 
-	public void writeMagicThing() {
-
+	// the hashmap is written to a file named so: order_dimension.ser
+	public void writeMagic() {
 		String filename = order + "_" + dimension + ".ser";
 
 		try {
@@ -192,7 +193,7 @@ public class magicGenerator {
 		}
 	}
 
-	public void readMagicThing() {
+	public void readMagic() {
 		String filename = order + "_" + dimension + ".ser";
 
 		try {
@@ -212,7 +213,7 @@ public class magicGenerator {
 
 		// prints out the deserialized hashmap
 		System.out.println("Deserialized magicThing:");
-		printMagicThing();
+		printMagic();
 	}
 
 	private void printMagicSquare() {
@@ -244,7 +245,7 @@ public class magicGenerator {
 		System.out.println("this has yet to be written.");
 	}
 
-	public void printMagicThing() {
+	public void printMagic() {
 		if (dimension == 2) {
 			printMagicSquare();
 		} else
@@ -252,7 +253,7 @@ public class magicGenerator {
 
 	}
 
-	public HashMap<Integer, Integer> generateMagicThing() {
+	public HashMap<Integer, Integer> generateMagic() {
 		if (dimension == 2) {
 			return generateMagicSquare();
 		}
