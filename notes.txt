@@ -1,19 +1,5 @@
-Magic square generation:
-•	on the construction of even order magic squares:
-http://arxiv.org/ftp/arxiv/papers/1202/1202.0948.pdf 
-•	constructing singly even magic squares:
-http://www.1728.org/magicsq3.htm
-•	constructing using smaller odd magic squares and swapping certain positions
-•	Algorithmic determination of magic squares:
-http://www.numin8r.us/numin/2000/APR00.HTM
-•	ring method
-	http://en.wikipedia.org/wiki/Magic_square
-•	medjig method
-
-
-Solving tic-tac-toe using magic squares:
-http://rowdy.msudenver.edu/~gordona/cs1050/progs/tictactoermccsc.pdf 
-
+LINKS:
+http://www.one-tab.com/page/TeI0NRYHSfuBKxCd9P7GhA
 
 IDEAS:
 •	*representing the board using magic squares
@@ -22,7 +8,6 @@ IDEAS:
 •	moving pieces
 •	key=size^0*x(0) + size^1*x(1)+(size)(n-1) x(n-1) 
 •	multiplayer (size-1 players)
-
 
 TODO:
 •	write testing engine/AI
@@ -49,9 +34,6 @@ perfect magic cubes of sizes 2-4 do not exist, and it's difficult to construct p
 should we define a magic cube/hypercube one in which all possble lines of n cells (n is the size) sum up to be the magic number?
 (all lower dimension hypercubes of the same size contained in it will be perfect as well)
 would it be easier if we just brute force it rather than trying to construct the magic cube/hypercube?
-
-Research links:
-http://www.one-tab.com/page/3jkTl-SKTdKStR91abXBjw
 
 ***4/5/14***
 implement pairing strategy?
