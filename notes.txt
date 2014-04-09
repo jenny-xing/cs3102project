@@ -52,3 +52,18 @@ would it be easier if we just brute force it rather than trying to construct the
 
 Research links:
 http://www.one-tab.com/page/3jkTl-SKTdKStR91abXBjw
+
+***4/5/14***
+implement pairing strategy?
+take magic hypercubes from mathematica (encode as binary file)
+superclass of AI, multiple subclasses (use board size and dimension (user input) to determine which AI will be used) 
+	dumb AI: pick the center spot, takes winning move or blocks a winning move, or then random spot 
+	best play AI: searches the entire game tree. use magic hypercubes.  
+	pairing AI: use pairing strategy if the board satisfies the condition for the pairing strategy 
+separate class to determine whether the pairing strategy can be used
+presentation wise: ppt, include equations and findings and screen captures of sample game (with analysis)
+
+***4/9/14***
+I'm writing a new class that takes care of the magic square/magic cube stuff. how do we want to integrate/disintegrate this into our tttBoard?
+do you want to keep the the 2D board separate from the higher dimension boards?
+
