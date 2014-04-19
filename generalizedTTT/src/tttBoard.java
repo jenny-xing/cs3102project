@@ -128,31 +128,42 @@ public class TttBoard {
 	// TODO: implement for n-dimensions
 	private void loadMagicNCube() {
 		if (dimension == 2) {
-			String filename = order + "_" + 2 + ".txt";
-			String filepath = "src/magic squares and cubes/" + filename;
+			loadMagicSquare();
+		} else if (dimension == 3) {
+			loadMagicCube();
+		} else {
+			System.out
+					.println("There are no known perfect magic hypercubes of dimension > 3.");
+		}
+	}
 
-			try {
-				Scanner scanner = new Scanner(new File(filepath));
-				while (scanner.hasNext()) {
-					for (int row = 0; row < order; row++) {
-						for (int col = 0; col < order; col++) {
-							if (scanner.hasNext()) {
-								String x = scanner.next();
-								Integer num = Integer.parseInt(x);
-								magicNCube.put(getKey(row, col), num);
-							}
+	private void loadMagicSquare() {
+		String filename = order + "_" + 2 + ".txt";
+		String filepath = "src/magic squares and cubes/" + filename;
+
+		try {
+			Scanner scanner = new Scanner(new File(filepath));
+			while (scanner.hasNext()) {
+				for (int row = 0; row < order; row++) {
+					for (int col = 0; col < order; col++) {
+						if (scanner.hasNext()) {
+							String x = scanner.next();
+							Integer num = Integer.parseInt(x);
+							magicNCube.put(getKey(row, col), num);
 						}
 					}
 				}
-				System.out.println("magic square has been read.");
-
-			} catch (IOException ex) {
-				System.out
-						.println("file does not exist: this magic square has not yet been generated.");
 			}
-		} else {
-			System.out.println("yet to be implemented");
+			System.out.println("magic square has been read.");
+
+		} catch (IOException ex) {
+			System.out
+					.println("file does not exist: this magic square has not yet been generated.");
 		}
+	}
+
+	private void loadMagicCube() {
+		// TODO
 	}
 
 	// for 2-d only
