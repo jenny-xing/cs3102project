@@ -7,11 +7,11 @@
 
 import java.util.*;
 
-public class tttBoard {
+public class TttBoard {
 
-	private int order;
-	private int magicNum;
-	private int dimension;
+	public int order;
+	public int magicNum;
+	public int dimension;
 	private String player0;
 	private String player1;
 	private HashMap<Integer, Integer> boardMap;
@@ -28,7 +28,7 @@ public class tttBoard {
 
 	}
 
-	public tttBoard(Integer order, Integer dim, String p0, String p1) {
+	public TttBoard(Integer order, Integer dim, String p0, String p1) {
 		this.order = order;
 		dimension = dim;
 		magicNum = (order * (pow(order, dimension) + 1)) / 2;
@@ -74,7 +74,7 @@ public class tttBoard {
 	}
 
 	// simple method to return x^exp for ints
-	private int pow(int x, int exp) {
+	public static int pow(int x, int exp) {
 		int retval = 1;
 		while (true) {
 			if (exp == 0)
@@ -100,7 +100,7 @@ public class tttBoard {
 
 	// param coords: coordinates within the n-cube
 	// return int key corresponding to the key in the maps for those coords
-	private int getKey(int[] coords) {
+	public int getKey(int[] coords) {
 		int retval = 0;
 		for (int i = 0; i < dimension; i++) {
 			retval += pow(order, i) * coords[i];
