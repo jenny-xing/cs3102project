@@ -20,9 +20,7 @@ public class TttTreeBot implements TttBot {
 	private int prev;
 	
 	public TttTreeBot(TttBoard board, int id) {
-		tree = new TttGameTree(board, id);
-		this.id = id;
-		this.board = board;
+		
 	}
 	
 	@Override

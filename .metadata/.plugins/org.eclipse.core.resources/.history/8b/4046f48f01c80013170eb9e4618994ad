@@ -20,17 +20,13 @@ public class TttTreeBot implements TttBot {
 	private int prev;
 	
 	public TttTreeBot(TttBoard board, int id) {
-		tree = new TttGameTree(board, id);
-		this.id = id;
-		this.board = board;
+		
 	}
 	
 	@Override
 	public int move() {
-		int ret = tree.findBestMove();
-		if (ret != -1)
-			return ret;
-		else return randomMove();
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 	/**

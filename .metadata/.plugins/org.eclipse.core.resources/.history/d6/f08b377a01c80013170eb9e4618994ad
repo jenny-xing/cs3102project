@@ -1,5 +1,4 @@
 import java.util.HashSet;
-import java.util.Random;
 
 /**
  * @author Robert Mina (ram2aq)
@@ -20,38 +19,19 @@ public class TttTreeBot implements TttBot {
 	private int prev;
 	
 	public TttTreeBot(TttBoard board, int id) {
-		tree = new TttGameTree(board, id);
-		this.id = id;
-		this.board = board;
+		
 	}
 	
 	@Override
 	public int move() {
-		int ret = tree.findBestMove();
-		if (ret != -1)
-			return ret;
-		else return randomMove();
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
-	/**
-	 * Because we are using HashSet, this will be an expensive O(n) operation.
-	 * 
-	 * @param openSpots
-	 * @return int representing random move
-	 */
-	private int randomMove(HashSet<Integer> openSpots) {
-		Random myRand = new Random();
-		while (true) {
-			int next = myRand.nextInt(TttBoard.pow(board.order, board.dimension));
-			if (openSpots.contains(next))
-				return next;
-		}
-	}
-	
 	@Override
 	public int randomMove() {
-		HashSet<Integer> openSpots = board.getOpenSpots();
-		return randomMove(openSpots);
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 	@Override

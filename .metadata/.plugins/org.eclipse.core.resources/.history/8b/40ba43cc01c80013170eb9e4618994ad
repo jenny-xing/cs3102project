@@ -21,8 +21,6 @@ public class TttTreeBot implements TttBot {
 	
 	public TttTreeBot(TttBoard board, int id) {
 		tree = new TttGameTree(board, id);
-		this.id = id;
-		this.board = board;
 	}
 	
 	@Override
