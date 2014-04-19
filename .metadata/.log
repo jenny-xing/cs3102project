@@ -818,3 +818,12 @@ Command-line arguments:  -os win32 -ws win32 -arch x86
 
 !ENTRY org.eclipse.ui 4 4 2014-04-19 11:50:15.689
 !MESSAGE Invalid preference page path: XML Syntax
+!SESSION 2014-04-19 13:36:32.635 -----------------------------------------------
+eclipse.buildId=M20120208-0800
+java.version=1.7.0_45
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=en_US
+Command-line arguments:  -os win32 -ws win32 -arch x86
+
+!ENTRY org.eclipse.osgi 2 1 2014-04-19 13:54:57.235
+!MESSAGE NLS missing message: CoverageViewColumnMissedBlocks_label in: com.mountainminds.eclemma.internal.ui.uimessages

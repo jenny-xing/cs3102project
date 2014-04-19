@@ -5,3 +5,6 @@
 1397923676097	Move file
 1397923834031	Move folder
 1397924003821	Move file
+1397929684323	Rename method 'loadMagicCube'
+1397929804046	Rename field 'magicCube'
+1397930041420	Rename method 'printBoardMap3d'

@@ -322,14 +322,7 @@ public class TttBoard {
 	}
 
 	private void printMagicNCube() {
-		if (dimension == 2) {
-			printMagicSquare();
-		} else if (dimension == 3) {
-			printMagicCube();
-		} else {
-			System.out
-					.println("Magic N-cubes of dimension greater than 3 have not been implemented. ");
-		}
+
 	}
 
 	private void printBoardMap2D() {
@@ -394,17 +387,6 @@ public class TttBoard {
 			System.out.println("");
 		}
 		System.out.println("End BoardMap");
-	}
-
-	private void printBoardMap() {
-		if (dimension == 2) {
-			printBoardMap2D();
-		} else if (dimension == 3) {
-			printBoardMap3D();
-		} else {
-			System.out
-					.println("Board maps of dimension greater than 3 have not been implemented. ");
-		}
 	}
 
 }

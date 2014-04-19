@@ -5,8 +5,6 @@
  * A Class for an n-dimensional tic-tac-toe board using magic n-cubes to determine winner
  */
 
-import java.io.File;
-import java.io.IOException;
 import java.util.*;
 
 public class TttBoard {
@@ -17,7 +15,7 @@ public class TttBoard {
 	private String player0;
 	private String player1;
 	private HashMap<Integer, Integer> boardMap;
-	private HashMap<Integer, Integer> magicNCube;
+	private HashMap<Integer, Integer> magicCube;
 	private HashSet<Integer> player0Spots;
 	private HashSet<Integer> player1Spots;
 	private HashSet<Integer> openSpots;
@@ -37,8 +35,8 @@ public class TttBoard {
 		player0 = p0;
 		player1 = p1;
 		boardMap = new HashMap<Integer, Integer>(pow(order, dim), (float) 1.0);
-		magicNCube = new HashMap<Integer, Integer>(pow(order, dim), (float) 1.0);
-		loadMagicNCube();
+		magicCube = new HashMap<Integer, Integer>(pow(order, dim), (float) 1.0);
+		loadMagicCube();
 		player0Spots = new HashSet<Integer>();
 		player1Spots = new HashSet<Integer>();
 		openSpots = new HashSet<Integer>();
@@ -51,7 +49,7 @@ public class TttBoard {
 		player0 = parent.player0;
 		player1 = parent.player1;
 		boardMap = parent.boardMap;
-		magicNCube = parent.magicNCube;
+		magicCube = parent.magicCube;
 		player0Spots = parent.player0Spots;
 		player1Spots = parent.player1Spots;
 		openSpots = parent.openSpots;
@@ -76,7 +74,7 @@ public class TttBoard {
 	}
 
 	public HashMap<Integer, Integer> getMagicCube() {
-		return new HashMap<Integer, Integer>(magicNCube);
+		return new HashMap<Integer, Integer>(magicCube);
 	}
 
 	public HashSet<Integer> getPlayerPairs(int player) {
@@ -86,14 +84,6 @@ public class TttBoard {
 
 	public int getDimension() {
 		return dimension;
-	}
-
-	public HashSet<Integer> getPlayer0Pairs() {
-		return player0Pairs;
-	}
-
-	public HashSet<Integer> getPlayer1Pairs() {
-		return player1Pairs;
 	}
 
 	// simple method to return x^exp for ints
@@ -108,15 +98,6 @@ public class TttBoard {
 		return retval;
 	}
 
-	// sums an array of ints
-	private int sum(int[] nPair) {
-		int retval = 0;
-		for (int i = 0; i < nPair.length; i++) {
-			retval += nPair[i];
-		}
-		return retval;
-	}
-
 	// load all possible key values into openSpots set
 	private void loadOpenSpots() {
 		for (int i = 0; i < pow(order, dimension); i++) {
@@ -126,41 +107,8 @@ public class TttBoard {
 
 	// load Integer values into the correct values in the magicCube map
 	// TODO: implement for n-dimensions
-	private void loadMagicNCube() {
-		if (dimension == 2) {
-			String filename = order + "_" + 2 + ".txt";
-			String filepath = "src/magic squares and cubes/" + filename;
+	private void loadMagicCube() {
 
-			try {
-				Scanner scanner = new Scanner(new File(filepath));
-				while (scanner.hasNext()) {
-					for (int row = 0; row < order; row++) {
-						for (int col = 0; col < order; col++) {
-							if (scanner.hasNext()) {
-								String x = scanner.next();
-								Integer num = Integer.parseInt(x);
-								magicNCube.put(getKey(row, col), num);
-							}
-						}
-					}
-				}
-				System.out.println("magic square has been read.");
-
-			} catch (IOException ex) {
-				System.out
-						.println("file does not exist: this magic square has not yet been generated.");
-			}
-		} else {
-			System.out.println("yet to be implemented");
-		}
-	}
-
-	// for 2-d only
-	// params row and col: coordinates within the square (0 to
-	// order^2-1)
-	// return int key corresponding to the key in the maps for those coords
-	private int getKey(int row, int col) {
-		return order * row + col;
 	}
 
 	// param coords: coordinates within the n-cube
@@ -190,9 +138,9 @@ public class TttBoard {
 			return false;
 		boardMap.put(key, player);
 		if (player == 1) {
-			player1Spots.add(magicNCube.get(key));
+			player1Spots.add(magicCube.get(key));
 		} else
-			player0Spots.add(magicNCube.get(key));
+			player0Spots.add(magicCube.get(key));
 		openSpots.remove(key);
 		check(key, player);
 		updatePairs(key, player);
@@ -205,9 +153,9 @@ public class TttBoard {
 			return false;
 		boardMap.put(key, player);
 		if (player == 1) {
-			player1Spots.add(magicNCube.get(key));
+			player1Spots.add(magicCube.get(key));
 		} else
-			player0Spots.add(magicNCube.get(key));
+			player0Spots.add(magicCube.get(key));
 		openSpots.remove(key);
 		updatePairs(key, player);
 		return true;
@@ -225,7 +173,7 @@ public class TttBoard {
 		HashSet<Integer> pairs = (player == 0) ? getPlayer0Pairs()
 				: getPlayer1Pairs();
 		HashSet<Integer> spots = (player == 0) ? player0Spots : player1Spots;
-		int value = magicNCube.get(key);
+		int value = magicCube.get(key);
 		int[] nPair = new int[order - 1]; // pair of order - 1 spots
 		int[] nIndices = new int[order - 2];
 		nPair[order - 2] = value; // last value in nPair is the current value
@@ -265,7 +213,7 @@ public class TttBoard {
 		String winner = (player == 0) ? player0 : player1; // not necessarily
 															// the winner yet
 		for (int i : pairs) {
-			if (i + magicNCube.get(key) == magicNum) {
+			if (i + magicCube.get(key) == magicNum) {
 				win(winner);
 				return true;
 			}
@@ -287,81 +235,30 @@ public class TttBoard {
 		System.out.println("Draw!");
 	}
 
+	// sums an array of ints
+	private int sum(int[] nPair) {
+		int retval = 0;
+		for (int i = 0; i < nPair.length; i++) {
+			retval += nPair[i];
+		}
+		return retval;
+	}
+
 	// perform the winning operation given the winner
 	private void win(String winner) {
 		System.out.println(winner + " has won!");
 	}
 
-	// prints magic square in row-major oder
-	private void printMagicSquare() {
-		System.out.println("Start MagicSquare");
-		for (int row = 0; row < order; row++) {
-			for (int col = 0; col < order; col++) {
-				// System.out.println("(" + row + ", " + col + "): "
-				// + magicSquare.get(getKey(row, col)));
-				if (magicNCube.containsKey(getKey(row, col))) {
-					int value = magicNCube.get(getKey(row, col));
-					System.out.print(value);
-					if (value < 10000)
-						System.out.print(" ");
-					if (value < 1000)
-						System.out.print(" ");
-					if (value < 100)
-						System.out.print(" ");
-					if (value < 10)
-						System.out.print(" ");
-				}
-			}
-			System.out.println();
-		}
-		System.out.println("End MagicSquare");
-	}
-
-	private void printMagicCube() {
-
-	}
-
-	private void printMagicNCube() {
-		if (dimension == 2) {
-			printMagicSquare();
-		} else if (dimension == 3) {
-			printMagicCube();
-		} else {
-			System.out
-					.println("Magic N-cubes of dimension greater than 3 have not been implemented. ");
-		}
-	}
-
-	private void printBoardMap2D() {
-		int spaces = Math.max(player0.length(), player1.length()) + 3;
-		String string0 = player0;
-		while (string0.length() < spaces)
-			string0 += " ";
-		String string1 = player1;
-		while (string1.length() < spaces)
-			string1 += " ";
-		String blank = " ";
-		for (int i = 0; i < spaces - 1; i++) {
-			blank += blank;
-		}
-		System.out.println("Start BoardMap");
-		for (int row = 0; row < order; row++) {
-			for (int col = 0; col < order; col++) {
-				int key = getKey(row, col);
-				if (!boardMap.containsKey(key))
-					System.out.print(blank);
-				else if (boardMap.get(key) == 0)
-					System.out.print(string0);
-				else
-					System.out.print(string1);
-			}
-			System.out.println();
-		}
-		System.out.println("End BoardMap");
+	// x and y are the keys
+	private void swapValues(int x, int y) {
+		int xval = magicCube.get(x);
+		int yval = magicCube.get(y);
+		magicCube.put(x, yval);
+		magicCube.put(y, xval);
 	}
 
 	// prints out a representation of the board, assuming it is 3-dimensional
-	private void printBoardMap3D() {
+	private void printBoardMap3d() {
 		int spaces = Math.max(player0.length(), player1.length()) + 3;
 		String string0 = player0;
 		while (string0.length() < spaces)
@@ -396,15 +293,12 @@ public class TttBoard {
 		System.out.println("End BoardMap");
 	}
 
-	private void printBoardMap() {
-		if (dimension == 2) {
-			printBoardMap2D();
-		} else if (dimension == 3) {
-			printBoardMap3D();
-		} else {
-			System.out
-					.println("Board maps of dimension greater than 3 have not been implemented. ");
-		}
+	public HashSet<Integer> getPlayer0Pairs() {
+		return player0Pairs;
+	}
+
+	public HashSet<Integer> getPlayer1Pairs() {
+		return player1Pairs;
 	}
 
 }

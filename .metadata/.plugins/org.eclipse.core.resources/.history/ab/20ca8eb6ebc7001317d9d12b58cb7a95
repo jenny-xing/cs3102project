@@ -136,6 +136,7 @@ public class TttBoard2D {
 			System.out
 					.println("file does not exist: this magic square has not yet been generated.");
 		}
+
 	}
 
 	// params row and col: coordinates within the square (0 to

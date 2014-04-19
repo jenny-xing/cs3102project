@@ -396,15 +396,4 @@ public class TttBoard {
 		System.out.println("End BoardMap");
 	}
 
-	private void printBoardMap() {
-		if (dimension == 2) {
-			printBoardMap2D();
-		} else if (dimension == 3) {
-			printBoardMap3D();
-		} else {
-			System.out
-					.println("Board maps of dimension greater than 3 have not been implemented. ");
-		}
-	}
-
 }

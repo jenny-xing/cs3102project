@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<workbench progressCount="30" version="2.0">
+<workbench progressCount="32" version="2.0">
 <workbenchAdvisor/>
 <window height="754" maximized="true" width="1370" x="-8" y="-8">
 <fastViewData fastViewLocation="1024"/>
@@ -25,38 +25,54 @@
 <coolItem id="group.nav" itemType="typeGroupMarker"/>
 <coolItem id="org.eclipse.ui.workbench.navigate" itemType="typeToolBarContribution" x="190" y="22"/>
 <coolItem id="group.editor" itemType="typeGroupMarker"/>
+<coolItem id="org.eclipse.jdt.ui.ClassFileEditor" itemType="typePlaceholder" x="-1" y="-1"/>
 <coolItem id="group.help" itemType="typeGroupMarker"/>
 <coolItem id="org.eclipse.ui.workbench.help" itemType="typeToolBarContribution" x="-1" y="-1"/>
 </coolbarLayout>
 <page aggregateWorkingSetId="Aggregate for window 1392080822271" focus="true" label="Workspace - Java">
 <editors>
-<editorArea activeWorkbook="DefaultEditorWorkbook">
-<info part="DefaultEditorWorkbook">
+<editorArea activeWorkbook="org.eclipse.ui.internal.EditorStack@bb2b4b">
+<info part="org.eclipse.ui.internal.EditorStack@bb2b4b">
 <folder appearance="1" expanded="2">
 <presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
 <part id="0"/>
 <part id="1"/>
 <part id="2"/>
 <part id="3"/>
+<part id="5"/>
+<part id="6"/>
+<part id="4"/>
 </presentation>
 </folder>
 </info>
 </editorArea>
-<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="tttBoard.java" partName="tttBoard.java" path="C:/Users/Jenny/Documents/GitHub/cs3102project/generalizedTTT/src/tttBoard.java" title="tttBoard.java" tooltip="generalizedTTT/src/tttBoard.java" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/generalizedTTT/src/tttBoard.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="1119" selectionTopPixel="387"/>
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="TttBoard2D.java" partName="TttBoard2D.java" path="C:/Users/Jenny/Documents/GitHub/cs3102project/generalizedTTT/src/TttBoard2D.java" title="TttBoard2D.java" tooltip="generalizedTTT/src/TttBoard2D.java" workbook="org.eclipse.ui.internal.EditorStack@bb2b4b">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/generalizedTTT/src/TttBoard2D.java"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="575" selectionTopPixel="0"/>
 </editor>
-<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="tttBoard2D.java" partName="tttBoard2D.java" path="C:/Users/Jenny/Documents/GitHub/cs3102project/generalizedTTT/src/tttBoard2D.java" title="tttBoard2D.java" tooltip="generalizedTTT/src/tttBoard2D.java" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/generalizedTTT/src/tttBoard2D.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="443" selectionTopPixel="197"/>
+<editor activePart="true" focus="true" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="TttBot.java" partName="TttBot.java" path="C:/Users/Jenny/Documents/GitHub/cs3102project/generalizedTTT/src/TttBot.java" title="TttBot.java" tooltip="generalizedTTT/src/TttBot.java" workbook="org.eclipse.ui.internal.EditorStack@bb2b4b">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/generalizedTTT/src/TttBot.java"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="598" selectionTopPixel="361"/>
 </editor>
-<editor activePart="true" focus="true" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="tttBot.java" partName="tttBot.java" path="C:/Users/Jenny/Documents/GitHub/cs3102project/generalizedTTT/src/tttBot.java" title="tttBot.java" tooltip="generalizedTTT/src/tttBot.java" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/generalizedTTT/src/tttBot.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="460" selectionTopPixel="0"/>
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="TttDumbBot.java" partName="TttDumbBot.java" path="C:/Users/Jenny/Documents/GitHub/cs3102project/generalizedTTT/src/TttDumbBot.java" title="TttDumbBot.java" tooltip="generalizedTTT/src/TttDumbBot.java" workbook="org.eclipse.ui.internal.EditorStack@bb2b4b">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/generalizedTTT/src/TttDumbBot.java"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="3358" selectionTopPixel="2177"/>
 </editor>
-<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="magicGenerator.java" partName="magicGenerator.java" path="C:/Users/Jenny/Documents/GitHub/cs3102project/generalizedTTT/src/magicGenerator.java" title="magicGenerator.java" tooltip="generalizedTTT/src/magicGenerator.java" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/generalizedTTT/src/magicGenerator.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="484" selectionTopPixel="228"/>
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="TttGameTree.java" partName="TttGameTree.java" path="C:/Users/Jenny/Documents/GitHub/cs3102project/generalizedTTT/src/TttGameTree.java" title="TttGameTree.java" tooltip="generalizedTTT/src/TttGameTree.java" workbook="org.eclipse.ui.internal.EditorStack@bb2b4b">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/generalizedTTT/src/TttGameTree.java"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="2287" selectionTopPixel="1606"/>
+</editor>
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="TttTreeBot.java" partName="TttTreeBot.java" path="C:/Users/Jenny/Documents/GitHub/cs3102project/generalizedTTT/src/TttTreeBot.java" title="TttTreeBot.java" tooltip="generalizedTTT/src/TttTreeBot.java" workbook="org.eclipse.ui.internal.EditorStack@bb2b4b">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/generalizedTTT/src/TttTreeBot.java"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="232" selectionTopPixel="0"/>
+</editor>
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="TttBoard.java" partName="TttBoard.java" path="C:/Users/Jenny/Documents/GitHub/cs3102project/generalizedTTT/src/TttBoard.java" title="TttBoard.java" tooltip="generalizedTTT/src/TttBoard.java" workbook="org.eclipse.ui.internal.EditorStack@bb2b4b">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/generalizedTTT/src/TttBoard.java"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="7315" selectionTopPixel="4693"/>
+</editor>
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="MagicGenerator.java" partName="MagicGenerator.java" path="C:/Users/Jenny/Documents/GitHub/cs3102project/generalizedTTT/src/MagicGenerator.java" title="MagicGenerator.java" tooltip="generalizedTTT/src/MagicGenerator.java" workbook="org.eclipse.ui.internal.EditorStack@bb2b4b">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/generalizedTTT/src/MagicGenerator.java"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="3941" selectionTopPixel="2311"/>
 </editor>
 </editors>
 <views>
@@ -106,7 +122,7 @@
 <viewState/>
 </view>
 </views>
-<perspectives activePart="org.eclipse.jdt.ui.CompilationUnitEditor" activePerspective="org.eclipse.jdt.ui.JavaPerspective">
+<perspectives activePart="org.eclipse.jdt.ui.PackageExplorer" activePerspective="org.eclipse.jdt.ui.JavaPerspective">
 <perspective editorAreaTrimState="2" editorAreaVisible="1" fixed="0" version="0.016">
 <descriptor class="org.eclipse.jdt.internal.ui.JavaPerspectiveFactory" id="org.eclipse.jdt.ui.JavaPerspective" label="Java"/>
 <alwaysOnActionSet id="org.eclipse.ui.cheatsheets.actionSet"/>
@@ -170,10 +186,15 @@
 <perspective_action id="com.android.ide.eclipse.hierarchyviewer.TreeViewPerspective"/>
 <hide_toolbar_item_id id="org.eclipse.jdt.ui.actions.OpenProjectWizard"/>
 <hide_toolbar_item_id id="org.eclipse.ui.edit.text.toggleShowSelectedElementOnly"/>
-<view id="org.eclipse.ui.views.ContentOutline"/>
-<view id="org.eclipse.jdt.ui.PackageExplorer"/>
 <view id="org.eclipse.ui.console.ConsoleView"/>
-<fastViewBars/>
+<view id="org.eclipse.jdt.ui.PackageExplorer"/>
+<fastViewBars>
+<fastViewBar fastViewLocation="131072" id="right" orientation="512" selectedTabId="org.eclipse.ui.views.ContentOutline" style="0">
+<fastViews>
+<view id="org.eclipse.ui.views.ContentOutline" ratio="0.3"/>
+</fastViews>
+</fastViewBar>
+</fastViewBars>
 <layout>
 <mainWindow>
 <info folder="true" part="left">
@@ -196,8 +217,8 @@
 <presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory"/>
 </folder>
 </info>
-<info part="org.eclipse.ui.editorss" ratio="0.25" ratioLeft="250" ratioRight="750" relationship="2" relative="left"/>
-<info folder="true" part="bottom" ratio="0.73828757" ratioLeft="457" ratioRight="162" relationship="4" relative="org.eclipse.ui.editorss">
+<info part="org.eclipse.ui.editorss" ratio="0.19503012" ratioLeft="259" ratioRight="1069" relationship="2" relative="left"/>
+<info folder="true" part="bottom" ratio="0.6575121" ratioLeft="407" ratioRight="212" relationship="4" relative="org.eclipse.ui.editorss">
 <folder activePageID="org.eclipse.ui.console.ConsoleView" appearance="2" expanded="2">
 <page content="org.eclipse.ui.console.ConsoleView" label="Console"/>
 <page content="org.eclipse.ui.views.ProblemView" label="LabelNotFound"/>
@@ -211,14 +232,12 @@
 </presentation>
 </folder>
 </info>
-<info folder="true" part="right" ratio="0.7341198" ratioLeft="809" ratioRight="293" relationship="2" relative="org.eclipse.ui.editorss">
-<folder activePageID="org.eclipse.ui.views.ContentOutline" appearance="2" expanded="2">
-<page content="org.eclipse.ui.views.ContentOutline" label="Outline"/>
+<info folder="true" part="right" ratio="0.8584337" ratioLeft="1140" ratioRight="188" relationship="2" relative="org.eclipse.ui.editorss">
+<folder appearance="2" expanded="0">
+<page content="org.eclipse.ui.views.ContentOutline" label="LabelNotFound"/>
 <page content="org.eclipse.ui.texteditor.TemplatesView" label="LabelNotFound"/>
 <page content="org.eclipse.ant.ui.views.AntView" label="LabelNotFound"/>
-<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
-<part id="0"/>
-</presentation>
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory"/>
 </folder>
 </info>
 <info part="org.eclipse.egit.ui.RepositoriesView" ratio="0.59902596" ratioLeft="369" ratioRight="247" relationship="4" relative="left"/>
@@ -280,167 +299,163 @@
 <workingSets/>
 <navigationHistory>
 <editors>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/generalizedTTT/src/tttBoard.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/generalizedTTT/src/tttBoard2D.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/generalizedTTT/src/tttBot.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/generalizedTTT/src/tttBoard2D.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/generalizedTTT/src/tttBot.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/generalizedTTT/src/tttBoard.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/generalizedTTT/src/tttBoard2D.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/generalizedTTT/src/magicGenerator.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/generalizedTTT/src/tttBoard.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/generalizedTTT/src/tttBot.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/generalizedTTT/src/magicGenerator.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/generalizedTTT/src/TttBoard2D.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/generalizedTTT/src/MagicGenerator.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/generalizedTTT/src/TttDumbBot.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/generalizedTTT/src/TttBoard.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/generalizedTTT/src/TttBot.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/generalizedTTT/src/TttGameTree.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/generalizedTTT/src/TttTreeBot.java"/>
 </editors>
-<item historyLabel="tttBoard.java" index="0">
-<position info="not_deleted" x="3918" y="0"/>
+<item historyLabel="TttBoard2D.java" index="0">
+<position info="not_deleted" x="8553" y="0"/>
 </item>
-<item historyLabel="tttBoard.java" index="0">
-<position info="not_deleted" x="908" y="6"/>
-</item>
-<item historyLabel="tttBoard.java" index="0">
-<position info="not_deleted" x="4185" y="0"/>
-</item>
-<item historyLabel="tttBoard.java" index="0">
+<item historyLabel="TttBoard2D.java" index="0">
 <position/>
 </item>
-<item historyLabel="tttBoard.java" index="0">
+<item historyLabel="MagicGenerator.java" index="1">
+<position info="not_deleted" x="474" y="0"/>
+</item>
+<item historyLabel="TttBoard2D.java" index="0">
 <position/>
 </item>
-<item historyLabel="tttBoard.java" index="0">
+<item historyLabel="MagicGenerator.java" index="1">
+<position info="not_deleted" x="552" y="0"/>
+</item>
+<item historyLabel="MagicGenerator.java" index="1">
+<position info="not_deleted" x="95" y="4"/>
+</item>
+<item historyLabel="MagicGenerator.java" index="1">
 <position/>
 </item>
-<item historyLabel="tttBoard.java" index="0">
-<position info="not_deleted" x="5" y="0"/>
+<item historyLabel="MagicGenerator.java" index="1">
+<position info="not_deleted" x="5303" y="0"/>
 </item>
-<item historyLabel="tttBoard.java" index="0">
-<position info="not_deleted" x="648" y="0"/>
+<item historyLabel="TttBoard2D.java" index="0">
+<position info="not_deleted" x="4300" y="0"/>
 </item>
-<item historyLabel="tttBoard.java" index="0">
-<position info="not_deleted" x="5" y="0"/>
+<item historyLabel="MagicGenerator.java" index="1">
+<position info="not_deleted" x="5303" y="0"/>
 </item>
-<item historyLabel="tttBoard.java" index="0">
-<position info="not_deleted" x="80" y="0"/>
+<item historyLabel="TttBoard2D.java" index="0">
+<position info="not_deleted" x="4335" y="0"/>
 </item>
-<item historyLabel="tttBoard.java" index="0">
-<position info="not_deleted" x="880" y="0"/>
+<item historyLabel="MagicGenerator.java" index="1">
+<position info="not_deleted" x="5528" y="0"/>
 </item>
-<item historyLabel="tttBoard.java" index="0">
-<position info="not_deleted" x="152" y="0"/>
+<item historyLabel="TttBoard2D.java" index="0">
+<position/>
 </item>
-<item historyLabel="tttBoard.java" index="0">
-<position info="not_deleted" x="112" y="8"/>
+<item historyLabel="MagicGenerator.java" index="1">
+<position info="not_deleted" x="5338" y="64"/>
 </item>
-<item historyLabel="tttBoard.java" index="0">
-<position info="not_deleted" x="311" y="0"/>
+<item historyLabel="TttBoard2D.java" index="0">
+<position info="not_deleted" x="4202" y="0"/>
 </item>
-<item historyLabel="tttBoard2D.java" index="1">
-<position info="not_deleted" x="5" y="0"/>
+<item historyLabel="MagicGenerator.java" index="1">
+<position info="not_deleted" x="5409" y="0"/>
 </item>
-<item historyLabel="tttBot.java" index="2">
-<position info="not_deleted" x="369" y="0"/>
+<item historyLabel="TttBoard2D.java" index="0">
+<position info="not_deleted" x="4147" y="0"/>
 </item>
-<item historyLabel="tttBoard2D.java" index="1">
-<position info="not_deleted" x="441" y="0"/>
+<item historyLabel="MagicGenerator.java" index="1">
+<position info="not_deleted" x="352" y="0"/>
 </item>
-<item historyLabel="tttBoard.java" index="0">
-<position info="not_deleted" x="311" y="0"/>
+<item historyLabel="TttBoard2D.java" index="0">
+<position info="not_deleted" x="4205" y="0"/>
 </item>
-<item historyLabel="tttBoard2D.java" index="1">
-<position info="not_deleted" x="1553" y="0"/>
+<item historyLabel="MagicGenerator.java" index="1">
+<position info="not_deleted" x="213" y="0"/>
 </item>
-<item historyLabel="tttBoard.java" index="0">
-<position info="not_deleted" x="311" y="0"/>
+<item historyLabel="MagicGenerator.java" index="1">
+<position info="not_deleted" x="323" y="0"/>
 </item>
-<item historyLabel="tttBoard2D.java" index="3">
-<position info="not_deleted" x="5" y="0"/>
+<item historyLabel="MagicGenerator.java" index="1">
+<position info="not_deleted" x="5182" y="0"/>
 </item>
-<item historyLabel="tttBoard2D.java" index="3">
-<position info="not_deleted" x="1553" y="0"/>
+<item historyLabel="TttBoard.java" index="3">
+<position/>
 </item>
-<item historyLabel="tttBot.java" index="4">
-<position info="not_deleted" x="5" y="0"/>
+<item historyLabel="TttBoard.java" index="3">
+<position/>
 </item>
-<item historyLabel="tttBot.java" index="4">
-<position info="not_deleted" x="369" y="0"/>
+<item historyLabel="MagicGenerator.java" index="1">
+<position info="not_deleted" x="5182" y="0"/>
 </item>
-<item historyLabel="tttBoard.java" index="5">
-<position info="not_deleted" x="1119" y="0"/>
+<item historyLabel="TttBoard2D.java" index="0">
+<position/>
 </item>
-<item historyLabel="tttBoard2D.java" index="6">
-<position info="not_deleted" x="5" y="0"/>
+<item historyLabel="MagicGenerator.java" index="1">
+<position info="not_deleted" x="5101" y="0"/>
 </item>
-<item historyLabel="tttBoard2D.java" index="6">
-<position info="not_deleted" x="1553" y="0"/>
+<item historyLabel="TttBoard2D.java" index="0">
+<position info="not_deleted" x="10877" y="0"/>
 </item>
-<item historyLabel="tttBot.java" index="4">
-<position info="not_deleted" x="5" y="0"/>
+<item historyLabel="TttBoard.java" index="3">
+<position/>
 </item>
-<item historyLabel="tttBot.java" index="4">
-<position info="not_deleted" x="369" y="0"/>
+<item historyLabel="TttBoard2D.java" index="0">
+<position info="not_deleted" x="10874" y="0"/>
 </item>
-<item historyLabel="magicGenerator.java" index="7">
-<position info="not_deleted" x="7425" y="0"/>
+<item historyLabel="MagicGenerator.java" index="1">
+<position info="not_deleted" x="5101" y="0"/>
 </item>
-<item historyLabel="magicGenerator.java" index="7">
-<position info="not_deleted" x="324" y="0"/>
+<item historyLabel="TttBoard2D.java" index="0">
+<position info="not_deleted" x="10876" y="0"/>
 </item>
-<item historyLabel="magicGenerator.java" index="7">
-<position info="not_deleted" x="7190" y="0"/>
+<item historyLabel="MagicGenerator.java" index="1">
+<position info="not_deleted" x="5056" y="0"/>
 </item>
-<item historyLabel="magicGenerator.java" index="7">
-<position info="not_deleted" x="7332" y="0"/>
+<item historyLabel="TttBoard2D.java" index="0">
+<position info="not_deleted" x="10735" y="0"/>
 </item>
-<item historyLabel="magicGenerator.java" index="7">
-<position info="not_deleted" x="5748" y="0"/>
+<item historyLabel="MagicGenerator.java" index="1">
+<position info="not_deleted" x="4227" y="0"/>
 </item>
-<item historyLabel="magicGenerator.java" index="7">
-<position info="not_deleted" x="5334" y="0"/>
+<item historyLabel="TttBoard2D.java" index="0">
+<position info="not_deleted" x="11485" y="1"/>
 </item>
-<item historyLabel="magicGenerator.java" index="7">
-<position info="not_deleted" x="204" y="0"/>
+<item historyLabel="TttBoard2D.java" index="0">
+<position info="not_deleted" x="4981" y="0"/>
 </item>
-<item historyLabel="tttBoard2D.java" index="6">
-<position info="not_deleted" x="1553" y="0"/>
+<item historyLabel="MagicGenerator.java" index="1">
+<position info="not_deleted" x="3951" y="0"/>
 </item>
-<item historyLabel="magicGenerator.java" index="7">
-<position info="not_deleted" x="145" y="0"/>
+<item historyLabel="TttBoard2D.java" index="0">
+<position info="not_deleted" x="250" y="0"/>
 </item>
-<item historyLabel="tttBoard2D.java" index="6">
-<position info="not_deleted" x="1553" y="0"/>
+<item historyLabel="MagicGenerator.java" index="1">
+<position info="not_deleted" x="4200" y="0"/>
 </item>
-<item historyLabel="tttBoard.java" index="8">
-<position info="not_deleted" x="5" y="0"/>
+<item historyLabel="TttBoard2D.java" index="0">
+<position info="not_deleted" x="575" y="0"/>
 </item>
-<item historyLabel="tttBoard.java" index="8">
-<position info="not_deleted" x="1119" y="0"/>
+<item historyLabel="TttBot.java" index="4">
+<position info="not_deleted" x="853" y="0"/>
 </item>
-<item historyLabel="tttBot.java" index="9">
-<position info="not_deleted" x="5" y="0"/>
+<item historyLabel="TttDumbBot.java" index="2">
+<position info="not_deleted" x="3358" y="0"/>
 </item>
-<item historyLabel="tttBot.java" index="9">
-<position info="not_deleted" x="369" y="0"/>
+<item historyLabel="TttGameTree.java" index="5">
+<position info="not_deleted" x="2689" y="0"/>
 </item>
-<item historyLabel="magicGenerator.java" index="10">
-<position info="not_deleted" x="145" y="0"/>
+<item historyLabel="TttBoard.java" index="3">
+<position info="not_deleted" x="7315" y="0"/>
 </item>
-<item historyLabel="tttBot.java" index="9">
-<position info="not_deleted" x="369" y="0"/>
+<item historyLabel="TttGameTree.java" index="5">
+<position info="not_deleted" x="2287" y="0"/>
 </item>
-<item historyLabel="magicGenerator.java" index="10">
-<position info="not_deleted" x="145" y="0"/>
+<item historyLabel="TttTreeBot.java" index="6">
+<position info="not_deleted" x="232" y="0"/>
 </item>
-<item historyLabel="tttBoard.java" index="8">
-<position info="not_deleted" x="1119" y="0"/>
+<item historyLabel="TttBoard.java" index="3">
+<position info="not_deleted" x="7315" y="0"/>
 </item>
-<item historyLabel="tttBoard2D.java" index="6">
-<position info="not_deleted" x="443" y="0"/>
+<item historyLabel="MagicGenerator.java" index="1">
+<position info="not_deleted" x="3941" y="0"/>
 </item>
-<item historyLabel="magicGenerator.java" index="10">
-<position info="not_deleted" x="484" y="0"/>
-</item>
-<item active="true" historyLabel="tttBot.java" index="9">
-<position info="not_deleted" x="460" y="0"/>
+<item active="true" historyLabel="TttBot.java" index="4">
+<position info="not_deleted" x="853" y="0"/>
 </item>
 </navigationHistory>
 <input factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/" type="8"/>
@@ -448,6 +463,13 @@
 <workbenchWindowAdvisor/>
 <actionBarAdvisor/>
 <trimLayout>
+<trimArea IMemento.internal.id="16384">
+<trimItem IMemento.internal.id="left"/>
+</trimArea>
+<trimArea IMemento.internal.id="131072">
+<trimItem IMemento.internal.id="org.eclipse.ui.editorss"/>
+<trimItem IMemento.internal.id="right"/>
+</trimArea>
 <trimArea IMemento.internal.id="128">
 <trimItem IMemento.internal.id="org.eclipse.mylyn.tasks.ui.trim.container"/>
 <trimItem IMemento.internal.id="org.eclipse.ui.internal.WorkbenchWindow.topBar"/>
@@ -460,6 +482,21 @@
 </trimLayout>
 </window>
 <mruList>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="TttTreeBot.java" tooltip="generalizedTTT/src/TttTreeBot.java">
+<persistable path="/generalizedTTT/src/TttTreeBot.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="TttGameTree.java" tooltip="generalizedTTT/src/TttGameTree.java">
+<persistable path="/generalizedTTT/src/TttGameTree.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="TttDumbBot.java" tooltip="generalizedTTT/src/TttDumbBot.java">
+<persistable path="/generalizedTTT/src/TttDumbBot.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="TttBot.java" tooltip="generalizedTTT/src/TttBot.java">
+<persistable path="/generalizedTTT/src/TttBot.java"/>
+</file>
+<file factoryID="org.eclipse.jdt.ui.ClassFileEditorInputFactory" id="org.eclipse.jdt.ui.ClassFileEditor" name="FileInputStream.class" tooltip="java.io.FileInputStream">
+<persistable org.eclipse.jdt.ui.ClassFileIdentifier="=generalizedTTT/C:\/Program Files\/Java\/jre7\/lib\/rt.jar&lt;java.io(FileInputStream.class"/>
+</file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="magicGenerator.java" tooltip="generalizedTTT/src/magicGenerator.java">
 <persistable path="/generalizedTTT/src/magicGenerator.java"/>
 </file>
