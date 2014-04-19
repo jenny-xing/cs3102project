@@ -97,27 +97,10 @@ public class TttGameTree {
 	}
 	
 	public int findBestMove() {
-		int opponent = (toMove==0) ? 1 : 0;
-		if (children.size() == 0) //we ran out of boards to check
-			return -1;
 		for (int key : children.keySet()) {
-			//look through direct children for win or block
-			//winning move
 			if (children.get(key).isWin(toMove))
 				return key;
-			//blocking move
-			else if (children.get(key).isWin(opponent))
-				return key;
 		}
-		//look through indirect descendants for win or block
-		for (int key : children.keySet()) {
-			int ret = children.get(key).findBestMove();
-			if (ret != -1)
-				return ret;
-			if (ret == -1 && children.get(key).children.size()==0) 
-				break;
-		}
-		return -1;
 	}
 	
 }
