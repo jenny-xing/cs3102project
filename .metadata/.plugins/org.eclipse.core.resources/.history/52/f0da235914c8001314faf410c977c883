@@ -1,0 +1,445 @@
+/**
+ * @author Robert Mina (ram2aq)
+ * @author Jenny Xing (yx4qu)
+ * 
+ * A Class for an n-dimensional tic-tac-toe board using magic n-cubes to determine winner
+ */
+
+import java.io.File;
+import java.io.IOException;
+import java.util.*;
+
+public class TttBoard {
+
+	public int order;
+	public int magicNum;
+	public int dimension;
+	private String player0;
+	private String player1;
+	private HashMap<Integer, Integer> boardMap;
+	private HashMap<Integer, Integer> magicNCube;
+	private HashSet<Integer> player0Spots;
+	private HashSet<Integer> player1Spots;
+	private HashSet<Integer> openSpots;
+	private HashSet<Integer> player0Pairs;
+	private HashSet<Integer> player1Pairs;
+
+	final int MAX_SPACES = 1000000;
+
+	public static void main(String args[]) {
+		TttBoard board = new TttBoard(3, 2, "x", "o");
+		TttBot ai0 = new TttTreeBot(board,0);
+		TttBot ai1 = new TttDumbBot(board,1);
+		int move = ai0.firstMove();
+		System.out.println("Player 0 bot wants: " + move);
+		board.move(0, move);
+		move = ai1.firstMove();
+		System.out.println("Player 1 bot wants: " + move);
+		board.move(1, move);
+		while (true) {
+			board.printBoardMap();
+			move = ai0.move();
+			System.out.println("Player 0 bot wants: " + move);
+			board.move(0, move);
+			move = ai1.move();
+			System.out.prinln("Player 1 bot wants: " + move);
+			board.move(1, move);
+		}
+	}
+
+	public TttBoard(Integer order, Integer dim, String p0, String p1) {
+		this.order = order;
+		dimension = dim;
+		if (dimension == 3 && order < 5)
+			System.out.println("Cannot play TTT on cube of size < 5!");
+		magicNum = (order * (pow(order, dimension) + 1)) / 2;
+		player0 = p0;
+		player1 = p1;
+		boardMap = new HashMap<Integer, Integer>(pow(order, dim), (float) 1.0);
+		magicNCube = new HashMap<Integer, Integer>(pow(order, dim), (float) 1.0);
+		loadMagicNCube();
+		player0Spots = new HashSet<Integer>();
+		player1Spots = new HashSet<Integer>();
+		openSpots = new HashSet<Integer>();
+		loadOpenSpots();
+		player0Pairs = new HashSet<Integer>();
+		player1Pairs = new HashSet<Integer>();
+	}
+
+	public TttBoard(TttBoard parent) {
+		//System.out.println("Copy constructor called");
+		player0 = parent.player0;
+		player1 = parent.player1;
+		order = parent.order;
+		dimension = parent.dimension;
+		boardMap = new HashMap<Integer,Integer>(parent.boardMap);
+		magicNCube = new HashMap<Integer,Integer>(parent.magicNCube);
+		player0Spots = new HashSet<Integer>(parent.player0Spots);
+		player1Spots = new HashSet<Integer>(parent.player1Spots);
+		openSpots = new HashSet<Integer>(parent.openSpots);
+		player0Pairs = new HashSet<Integer>(parent.getPlayer0Pairs());
+		player1Pairs = new HashSet<Integer>(parent.getPlayer1Pairs());
+	}
+
+	public int getOrder() {
+		return order;
+	}
+
+	public HashMap<Integer, Integer> getBoardMap() {
+		return new HashMap<Integer, Integer>(boardMap);
+	}
+
+	public HashSet<Integer> getOpenSpots() {
+		return new HashSet<Integer>(openSpots);
+	}
+
+	public HashSet<Integer> getPlayerSpots(int player) {
+		return new HashSet<Integer>(player == 0 ? player0Spots : player1Spots);
+	}
+
+	public HashMap<Integer, Integer> getMagicCube() {
+		return new HashMap<Integer, Integer>(magicNCube);
+	}
+
+	public HashSet<Integer> getPlayerPairs(int player) {
+		return new HashSet<Integer>(player == 0 ? getPlayer0Pairs()
+				: getPlayer1Pairs());
+	}
+
+	public int getDimension() {
+		return dimension;
+	}
+
+	public HashSet<Integer> getPlayer0Pairs() {
+		return player0Pairs;
+	}
+
+	public HashSet<Integer> getPlayer1Pairs() {
+		return player1Pairs;
+	}
+
+	// simple method to return x^exp for ints
+	public static int pow(int x, int exp) {
+		int retval = 1;
+		while (true) {
+			if (exp == 0)
+				break;
+			retval *= x;
+			exp--;
+		}
+		return retval;
+	}
+
+	// sums an array of ints
+	private int sum(int[] nPair) {
+		int retval = 0;
+		for (int i = 0; i < nPair.length; i++) {
+			retval += nPair[i];
+		}
+		return retval;
+	}
+
+	// load all possible key values into openSpots set
+	private void loadOpenSpots() {
+		for (int i = 0; i < pow(order, dimension); i++) {
+			openSpots.add(i);
+		}
+	}
+
+	// load Integer values into the correct values in the magicCube map
+	// TODO: implement for n-dimensions
+	private void loadMagicNCube() {
+		if (dimension == 2) {
+			loadMagicSquare();
+		} else if (dimension == 3) {
+			loadMagicCube();
+		} else {
+			System.out
+					.println("There are no known perfect magic hypercubes of dimension > 3.");
+		}
+	}
+
+	private void loadMagicSquare() {
+		String filename = order + "_" + 2 + ".txt";
+		String filepath = "src/magic squares and cubes/" + filename;
+
+		try {
+			Scanner scanner = new Scanner(new File(filepath));
+			while (scanner.hasNext()) {
+				for (int row = 0; row < order; row++) {
+					for (int col = 0; col < order; col++) {
+						if (scanner.hasNext()) {
+							String x = scanner.next();
+							Integer num = Integer.parseInt(x);
+							magicNCube.put(getKey(row, col), num);
+						}
+					}
+				}
+			}
+			System.out.println("magic square has been read.");
+
+		} catch (IOException ex) {
+			System.out
+					.println("file does not exist: this magic square has not yet been generated.");
+		}
+	}
+
+	private void loadMagicCube() {
+		// TODO
+	}
+
+	// for 2-d only
+	// params row and col: coordinates within the square (0 to
+	// order^2-1)
+	// return int key corresponding to the key in the maps for those coords
+	private int getKey(int row, int col) {
+		return order * row + col;
+	}
+
+	// param coords: coordinates within the n-cube
+	// return int key corresponding to the key in the maps for those coords
+	public int getKey(int[] coords) {
+		int retval = 0;
+		for (int i = 0; i < dimension; i++) {
+			retval += pow(order, i) * coords[i];
+		}
+		return retval;
+	}
+
+	// param player: 0 or 1, the player number
+	// param coords: coordinates within the n-cube
+	// return boolean true if move successful, false otherwise
+	public boolean move(int player, int[] coords) {
+		if (player != 0 && player != 1)
+			return false;
+		int key = getKey(coords);
+		return move(player, key);
+
+	}
+
+	public boolean move(int player, int key) {
+		if (!openSpots.contains(key))
+			// already occupied or invalid coords
+			return false;
+		boardMap.put(key, player);
+		if (player == 1) {
+			player1Spots.add(magicNCube.get(key));
+		} else
+			player0Spots.add(magicNCube.get(key));
+		openSpots.remove(key);
+		check(key, player);
+		updatePairs(key, player);
+		return true;
+	}
+
+	public boolean moveSuppressWin(int player, int key) {
+		//System.out.println("Player " + player + " is taking spot " + key);
+		//printBoardMap();
+		if (!openSpots.contains(key))
+			// already occupied or invalid coords
+			return false;
+		boardMap.put(key, player);
+		if (player == 1) {
+			player1Spots.add(magicNCube.get(key));
+		} else
+			player0Spots.add(magicNCube.get(key));
+		openSpots.remove(key);
+		updatePairs(key, player);
+		return true;
+	}
+
+	// update pairs set for player to include all new possible pairs
+	// NOTE: the current move HAS been added to the spots set
+	private boolean updatePairs(int key, int player) {
+		if (player != 0 && player != 1) { // invalid player
+			return false;
+		}
+		if (!boardMap.containsKey(key)) { // invalid coords
+			return false;
+		}
+		HashSet<Integer> pairs = (player == 0) ? getPlayer0Pairs()
+				: getPlayer1Pairs();
+		HashSet<Integer> spots = (player == 0) ? player0Spots : player1Spots;
+		int value = magicNCube.get(key);
+		int[] nPair = new int[order - 1]; // pair of order - 1 spots
+		int[] nIndices = new int[order - 2];
+		nPair[order - 2] = value; // last value in nPair is the current value
+		ArrayList<Integer> spotsList = new ArrayList<Integer>(spots);
+		spotsList.remove(spotsList.indexOf(value)); // don't add the current
+													// value twice to any pairs
+		for (int i = 0; i < spotsList.size() - (order - 3); i++) {
+			// loop over elements in the list, grabbing each possible
+			// combination of size-2 spots
+			for (int j = 0; j < order - 2; j++) { // assign indices
+				nIndices[j] = i + j;
+				nPair[j] = spotsList.get(nIndices[j]);
+			} // indices default to first unchecked size elements
+			while (true) {
+				int sum = sum(nPair);
+				pairs.add(sum);
+				if (nIndices[order - 3] == spotsList.size() - 1)
+					break; // no more nPairs with this first value
+				for (int j = order - 3; j >= 0; j--) {
+					nIndices[j]++;
+					nPair[j] = spotsList.get(nIndices[j]);
+				}
+			}
+		}
+		return true;
+	}
+
+	// check for win or draw conditions
+	// NOTE: the current move has NOT been added to relevant pairs set
+	// param player: 0 or 1, the player number
+	private boolean check(int key, int player) {
+		if (player != 0 && player != 1) { // invalid player
+			return false;
+		}
+		HashSet<Integer> pairs = (player == 0) ? getPlayer0Pairs()
+				: getPlayer1Pairs();
+		String winner = (player == 0) ? player0 : player1; // not necessarily
+															// the winner yet
+		for (int i : pairs) {
+			if (i + magicNCube.get(key) == magicNum) {
+				win(winner);
+				return true;
+			}
+		}
+		checkDraw();
+		return true;
+	}
+
+	// method to check for draw condition
+	// TODO: currently only checks that all spaces are filled
+	// TODO: draw condition can occur before this is true
+	private void checkDraw() {
+		if (openSpots.size() == 0)
+			draw();
+	}
+
+	// perform draw operation
+	private void draw() {
+		System.out.println("Draw!");
+	}
+
+	// perform the winning operation given the winner
+	private void win(String winner) {
+		System.out.println(winner + " has won!");
+	}
+
+	// prints magic square in row-major oder
+	private void printMagicSquare() {
+		System.out.println("Start MagicSquare");
+		for (int row = 0; row < order; row++) {
+			for (int col = 0; col < order; col++) {
+				// System.out.println("(" + row + ", " + col + "): "
+				// + magicSquare.get(getKey(row, col)));
+				if (magicNCube.containsKey(getKey(row, col))) {
+					int value = magicNCube.get(getKey(row, col));
+					System.out.print(value);
+					if (value < 10000)
+						System.out.print(" ");
+					if (value < 1000)
+						System.out.print(" ");
+					if (value < 100)
+						System.out.print(" ");
+					if (value < 10)
+						System.out.print(" ");
+				}
+			}
+			System.out.println();
+		}
+		System.out.println("End MagicSquare");
+	}
+
+	private void printMagicCube() {
+
+	}
+
+	private void printMagicNCube() {
+		if (dimension == 2) {
+			printMagicSquare();
+		} else if (dimension == 3) {
+			printMagicCube();
+		} else {
+			System.out
+					.println("Magic N-cubes of dimension greater than 3 have not been implemented. ");
+		}
+	}
+
+	private void printBoardMap2D() {
+		int spaces = Math.max(player0.length(), player1.length()) + 3;
+		String string0 = player0;
+		while (string0.length() < spaces)
+			string0 += " ";
+		String string1 = player1;
+		while (string1.length() < spaces)
+			string1 += " ";
+		String blank = " ";
+		for (int i = 0; i < spaces - 1; i++) {
+			blank += blank;
+		}
+		System.out.println("Start BoardMap");
+		for (int row = 0; row < order; row++) {
+			for (int col = 0; col < order; col++) {
+				int key = getKey(row, col);
+				if (!boardMap.containsKey(key))
+					System.out.print(blank);
+				else if (boardMap.get(key) == 0)
+					System.out.print(string0);
+				else
+					System.out.print(string1);
+			}
+			System.out.println();
+		}
+		System.out.println("End BoardMap");
+	}
+
+	// prints out a representation of the board, assuming it is 3-dimensional
+	private void printBoardMap3D() {
+		int spaces = Math.max(player0.length(), player1.length()) + 3;
+		String string0 = player0;
+		while (string0.length() < spaces)
+			string0 += " ";
+		String string1 = player1;
+		while (string1.length() < spaces)
+			string1 += " ";
+		String blank = " ";
+		for (int i = 0; i < spaces - 1; i++) {
+			blank += blank;
+		}
+		System.out.println("Start BoardMap");
+		for (int z = order - 1; z >= 0; z--) {
+			System.out.println("z = " + z);
+			for (int x = 0; x < order; x++) {
+				for (int y = 0; y < order; y++) {
+					int array[] = { x, y, z };
+					int key = getKey(array);
+					if (!boardMap.containsKey(key))
+						System.out.print(blank);
+					else if (boardMap.get(key) == 0)
+						System.out.print(string0);
+					else
+						System.out.print(string1);
+				}
+				System.out.println("");
+			}
+			System.out.println("");
+			System.out.println("");
+			System.out.println("");
+		}
+		System.out.println("End BoardMap");
+	}
+
+	public void printBoardMap() {
+		if (dimension == 2) {
+			printBoardMap2D();
+		} else if (dimension == 3) {
+			printBoardMap3D();
+		} else {
+			System.out
+					.println("Board maps of dimension greater than 3 have not been implemented. ");
+		}
+	}
+
+}

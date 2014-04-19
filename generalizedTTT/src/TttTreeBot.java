@@ -121,6 +121,7 @@ public class TttTreeBot implements TttBot {
 	// Update the game tree using the value of prev
 	// to specify the last move that was made.
 	private void updateTree() {
+		if (prev == -1) return;
 		tree = tree.selectChild(prev);
 	}
 

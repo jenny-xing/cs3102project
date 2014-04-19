@@ -39,59 +39,69 @@ public class TttGameTree {
 	}
 
 	public int populateChildren() {
+		//System.out.println("Calling populateChildren on this board:");
+		//root.printBoardMap();
 		int count = 0;
 		HashSet<Integer> openSpots = root.getOpenSpots();
-		while (treeCount < 1000) {
-			if (openSpots.size() < 1)
-				break;
-			for (int key : openSpots) {
-				if (!children.containsKey(key)) {
-					children.put(key, new TttGameTree(this, key, toMove));
-					count++;
-					treeCount++;
-					if (treeCount > 1000)
-						break;
-				}
-			}
-			for (TttGameTree child : children.values()) {
-				int temp = child.populateChildren(1000 - treeCount);
-				count += temp;
-				treeCount += temp;
-				if (treeCount > 1000)
+		for (int key : openSpots) {
+			if (!children.containsKey(key)) {
+				children.put(key, new TttGameTree(this, key, toMove));
+				count++;
+				//System.out.println(count);
+				treeCount++;
+				if (treeCount > 500)
 					break;
 			}
 		}
+		//System.out.println(children.size());
+		for (int key : children.keySet()) {
+			TttGameTree child = children.get(key);
+			int temp = child.populateChildren(500 - treeCount);
+			if (temp == 0) return count;
+			count += temp;
+			//System.out.println(temp);
+			//System.out.println(count);
+			treeCount += temp;
+			if (treeCount > 500)
+				break;
+		}
+
 		return count;
 	}
 
 	private int populateChildren(int max) {
 		int count = 0;
 		HashSet<Integer> openSpots = root.getOpenSpots();
-		while (count < max) {
-			if (openSpots.size() < 1)
-				break;
-			for (int key : openSpots) {
-				if (!children.containsKey(key)) {
-					children.put(key, new TttGameTree(this, key, toMove));
-					count++;
-					treeCount++;
-					if (count > max)
-						break;
-				}
-			}
-			for (TttGameTree child : children.values()) {
-				int temp = child.populateChildren(max - count);
-				count += temp;
-				treeCount += temp;
+		//System.out.println("Calling populateChildren with max=" + max + " and board: ");
+		//root.printBoardMap();
+		for (int key : openSpots) {
+			if (!children.containsKey(key)) {
+				children.put(key, new TttGameTree(this, key, toMove));
+				count++;
+				//System.out.println(count);
+				treeCount++;
 				if (count > max)
 					break;
 			}
+		}
+		for (TttGameTree child : children.values()) {
+			int temp = child.populateChildren(max - count);
+			if (temp == 0) return count;
+			count += temp;
+			treeCount += temp;
+			if (count > max)
+				break;
 		}
 		return count;
 	}
 
 	public TttGameTree selectChild(int key) {
-		TttGameTree newRoot = children.get(key);
+		if (children.containsKey(key)) {
+			TttGameTree newRoot = children.get(key);
+			newRoot.populateChildren();
+			return newRoot;
+		}
+		TttGameTree newRoot = new TttGameTree(this, key, toMove);
 		newRoot.populateChildren();
 		return newRoot;
 	}

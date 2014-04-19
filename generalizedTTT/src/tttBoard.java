@@ -27,12 +27,39 @@ public class TttBoard {
 	final int MAX_SPACES = 1000000;
 
 	public static void main(String args[]) {
-
+		TttBoard board = new TttBoard(5, 2, "x", "o");
+		TttBot ai0 = new TttTreeBot(board,0);
+		TttBot ai1 = new TttDumbBot(board,1);
+		int move = ai0.firstMove();
+		System.out.println("Player 0 bot wants: " + move);
+		board.move(0, move);
+		ai0.registerMove(move);
+		move = ai1.firstMove();
+		System.out.println("Player 1 bot wants: " + move);
+		board.move(1, move);
+		ai0.registerMove(move);
+		while (true) {
+			long start = System.nanoTime();
+			if (board.openSpots.size() == 0) break;
+			board.printBoardMap();
+			move = ai0.move();
+			System.out.println("Player 0 bot wants: " + move);
+			board.move(0, move);
+			ai0.registerMove(move);
+			move = ai1.move();
+			System.out.println("Player 1 bot wants: " + move);
+			board.move(1, move);
+			ai0.registerMove(move);
+			long stop = System.nanoTime();
+			System.out.println("Pair of moves taken in " + (stop-start)/1000000 + " ms");
+		}
 	}
 
 	public TttBoard(Integer order, Integer dim, String p0, String p1) {
 		this.order = order;
 		dimension = dim;
+		if (dimension == 3 && order < 5)
+			System.out.println("Cannot play TTT on cube of size < 5!");
 		magicNum = (order * (pow(order, dimension) + 1)) / 2;
 		player0 = p0;
 		player1 = p1;
@@ -48,15 +75,18 @@ public class TttBoard {
 	}
 
 	public TttBoard(TttBoard parent) {
+		//System.out.println("Copy constructor called");
 		player0 = parent.player0;
 		player1 = parent.player1;
-		boardMap = parent.boardMap;
-		magicNCube = parent.magicNCube;
-		player0Spots = parent.player0Spots;
-		player1Spots = parent.player1Spots;
-		openSpots = parent.openSpots;
-		player0Pairs = parent.getPlayer0Pairs();
-		player1Pairs = parent.getPlayer1Pairs();
+		order = parent.order;
+		dimension = parent.dimension;
+		boardMap = new HashMap<Integer,Integer>(parent.boardMap);
+		magicNCube = new HashMap<Integer,Integer>(parent.magicNCube);
+		player0Spots = new HashSet<Integer>(parent.player0Spots);
+		player1Spots = new HashSet<Integer>(parent.player1Spots);
+		openSpots = new HashSet<Integer>(parent.openSpots);
+		player0Pairs = new HashSet<Integer>(parent.getPlayer0Pairs());
+		player1Pairs = new HashSet<Integer>(parent.getPlayer1Pairs());
 	}
 
 	public int getOrder() {
@@ -211,6 +241,8 @@ public class TttBoard {
 	}
 
 	public boolean moveSuppressWin(int player, int key) {
+		//System.out.println("Player " + player + " is taking spot " + key);
+		//printBoardMap();
 		if (!openSpots.contains(key))
 			// already occupied or invalid coords
 			return false;
@@ -261,6 +293,8 @@ public class TttBoard {
 				}
 			}
 		}
+		//System.out.println("Spots: " + spots);
+		//System.out.println("Pairs: " + pairs);
 		return true;
 	}
 
@@ -273,10 +307,16 @@ public class TttBoard {
 		}
 		HashSet<Integer> pairs = (player == 0) ? getPlayer0Pairs()
 				: getPlayer1Pairs();
+		HashSet<Integer> spots = (player ==0) ? player0Spots : player1Spots;
 		String winner = (player == 0) ? player0 : player1; // not necessarily
 															// the winner yet
 		for (int i : pairs) {
 			if (i + magicNCube.get(key) == magicNum) {
+				//System.out.println(key + " was the winning move");
+				//System.out.println(spots);
+				//System.out.println(pairs);
+				//System.out.println(magicNCube.get(key));
+				//printMagicSquare();
 				win(winner);
 				return true;
 			}
@@ -301,6 +341,14 @@ public class TttBoard {
 	// perform the winning operation given the winner
 	private void win(String winner) {
 		System.out.println(winner + " has won!");
+//		System.out.println("Board map: " + boardMap);
+//		System.out.println("x spots: " + player0Spots);
+//		System.out.println("o spots: " + player1Spots);
+//		System.out.println("x pairs: " + player0Pairs);
+//		System.out.println("o pairs: " + player1Pairs);
+//		printBoardMap();
+//		printMagicSquare();
+		System.exit(0);
 	}
 
 	// prints magic square in row-major oder
@@ -344,14 +392,14 @@ public class TttBoard {
 	}
 
 	private void printBoardMap2D() {
-		int spaces = Math.max(player0.length(), player1.length()) + 3;
+		int spaces = Math.max(player0.length(), player1.length());
 		String string0 = player0;
 		while (string0.length() < spaces)
 			string0 += " ";
 		String string1 = player1;
 		while (string1.length() < spaces)
 			string1 += " ";
-		String blank = " ";
+		String blank = "_";
 		for (int i = 0; i < spaces - 1; i++) {
 			blank += blank;
 		}
@@ -407,7 +455,7 @@ public class TttBoard {
 		System.out.println("End BoardMap");
 	}
 
-	private void printBoardMap() {
+	public void printBoardMap() {
 		if (dimension == 2) {
 			printBoardMap2D();
 		} else if (dimension == 3) {
