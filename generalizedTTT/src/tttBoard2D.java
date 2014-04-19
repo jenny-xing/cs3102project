@@ -7,7 +7,7 @@
 
 import java.util.*;
 
-public class tttBoard2D {
+public class TttBoard2D {
 
 	public final int order;
 	public final int magicNum;
@@ -25,7 +25,7 @@ public class tttBoard2D {
 
 	public static void main(String args[]) {
 		// testing
-		tttBoard2D testBoard = new tttBoard2D(3, "x", "o");
+		TttBoard2D testBoard = new TttBoard2D(3, "x", "o");
 		// testBoard.printMagicSquare();
 		String input = "8430 8481 8532 8583 8634 8685 8736 8787 8838 8889 8940 8991 9042 9093 9144 9195 9246 9297 9348 9399 9450 9501 9552 9603 1    52   103  154  205  256  307  358  409  460  511  562  613  664  715  766  817  868  919  970  1021 1072 1123 1174 1225 6029 6080 6131 6182 6233 6284 6335 6386 6437 6488 6539 6590 6641 6692 6743 6794 6845 6896 6947 6998 7049 7100 7151 7202 4803 4854 2504 2555 2606 2657 2708 2759 2810 2861 2912 2963 3014 3065 3116 3167 3218 3269 3320 3371 3422 3473 3524 3575 3626 ";
 		String[] vals = input.split("\\s+");
@@ -58,7 +58,7 @@ public class tttBoard2D {
 		printBoardMap();
 	}
 
-	public tttBoard2D(Integer order, String p0, String p1) {
+	public TttBoard2D(Integer order, String p0, String p1) {
 		this.order = order;
 		magicNum = (order * (order * order + 1)) / 2;
 		player0 = p0;

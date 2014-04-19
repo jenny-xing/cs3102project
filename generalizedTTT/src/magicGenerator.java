@@ -1,10 +1,10 @@
 import java.io.*;
 import java.util.*;
 
-public class magicGenerator {
+public class MagicGenerator {
 
 	public static void main(String[] args) {
-		magicGenerator tester = new magicGenerator(63, 2);
+		MagicGenerator tester = new MagicGenerator(63, 2);
 		HashMap<Integer, Integer> testmagicsquare = tester.generateMagic();
 		// tester.printMagicThing();
 		tester.writeMagic();
@@ -15,7 +15,7 @@ public class magicGenerator {
 	private static int dimension;
 	private HashMap<Integer, Integer> magicThing;
 
-	public magicGenerator(Integer o, Integer d) {
+	public MagicGenerator(Integer o, Integer d) {
 		order = o;
 		dimension = d;
 		magicThing = new HashMap<Integer, Integer>((int) Math.pow(0, d),
