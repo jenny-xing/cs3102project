@@ -2,3 +2,6 @@
 1397931326147	Rename type 'tttBoard2D'
 1397931339598	Rename type 'tttBoard'
 1397931349831	Rename type 'magicGenerator'
+1397934046952	Delete element
+1397937089488	Encapsulate field 'player0Pairs'
+1397937118295	Encapsulate field 'player1Pairs'

@@ -1,0 +1,15 @@
+/**
+ * @author Robert Mina (ram2aq)
+ * @author Jenny Xing (yx4qu)
+ * 
+ * A class that represents a tree of all possible TTT boards
+ * descending from a particular board configuration.
+ */
+public class TttGameTree {
+
+	private TttBoard root;
+	public int toMove; //player # of who is about to move
+	
+	
+	
+}

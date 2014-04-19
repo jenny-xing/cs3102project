@@ -9,7 +9,7 @@
 
 import java.util.*;
 
-public class TttDumbBot {
+public class TttDumbBot implements TttBot {
 
 	private TttBoard board;
 	private int id; // the player # of this object
@@ -96,7 +96,7 @@ public class TttDumbBot {
 		HashSet<Integer> openSpots = board.getOpenSpots();
 		return randomMove(openSpots);
 	}
-	
+
 	public int firstMove() {
 		HashSet<Integer> openSpots = board.getOpenSpots();
 		if (board.order%2 == 1) // there is only one center spot
@@ -104,10 +104,57 @@ public class TttDumbBot {
 			int center = TttBoard.pow(board.order, board.dimension)/2;
 			if (openSpots.contains(center))
 				return center;
-			else return randomMove(openSpots);
 		}
 		else { //there are multiple "center" spots
-			
+			int dimCoord = board.order/2;
+			int[] coords = new int[board.dimension];
+			for (int i=0; i<board.dimension; i++)
+				coords[i] = dimCoord;
+			int key = board.getKey(coords);
+			//note the following could be much more elegant
+			//also, it only works for 3d
+			if (openSpots.contains(key))
+				return key;
+			key++;
+			coords[0]++;
+			if (openSpots.contains(key))
+				return key;
+			coords[0]--;
+			coords[1]++;
+			key += board.dimension-1;
+			if (openSpots.contains(key))
+				return key;
+			coords[0]++;
+			key++;
+			if (openSpots.contains(key))
+				return key;
+			if (board.dimension > 2) { //ie. 3d
+				coords[2]++;
+				coords[0]--;
+				coords[1]--;
+				key = board.getKey(coords);
+				if (openSpots.contains(key))
+					return key;
+				key++;
+				coords[0]++;
+				if (openSpots.contains(key))
+					return key;
+				coords[0]--;
+				coords[1]++;
+				key += board.dimension-1;
+				if (openSpots.contains(key))
+					return key;
+				coords[0]++;
+				key++;
+				if (openSpots.contains(key))
+					return key;
+			}
 		}
+		return randomMove(openSpots);
+	}
+
+	@Override
+	public void registerMove(int key) {
+		return; //this is the dumb bot, don't do anything
 	}
 }

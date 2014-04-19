@@ -1,0 +1,38 @@
+/**
+ * 
+ */
+
+/**
+ * @author Robert
+ *
+ */
+public class TttP1Bot implements TttBot {
+
+	/* (non-Javadoc)
+	 * @see TttBot#move()
+	 */
+	@Override
+	public int move() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	/* (non-Javadoc)
+	 * @see TttBot#randomMove()
+	 */
+	@Override
+	public int randomMove() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	/* (non-Javadoc)
+	 * @see TttBot#firstMove()
+	 */
+	@Override
+	public int firstMove() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+}

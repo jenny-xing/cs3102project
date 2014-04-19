@@ -45,6 +45,18 @@ public class TttBoard {
 		player1Pairs = new HashSet<Integer>();
 	}
 
+	public TttBoard(TttBoard parent) {
+		player0 = parent.player0;
+		player1 = parent.player1;
+		boardMap = parent.boardMap;
+		magicCube = parent.magicCube;
+		player0Spots = parent.player0Spots;
+		player1Spots = parent.player1Spots;
+		openSpots = parent.openSpots;
+		player0Pairs = parent.getPlayer0Pairs();
+		player1Pairs = parent.getPlayer1Pairs();
+	}
+
 	public int getOrder() {
 		return order;
 	}
@@ -66,7 +78,7 @@ public class TttBoard {
 	}
 
 	public HashSet<Integer> getPlayerPairs(int player) {
-		return new HashSet<Integer>(player == 0 ? player0Pairs : player1Pairs);
+		return new HashSet<Integer>(player == 0 ? getPlayer0Pairs() : getPlayer1Pairs());
 	}
 
 	public int getDimension() {
@@ -111,10 +123,15 @@ public class TttBoard {
 	// param player: 0 or 1, the player number
 	// param coords: coordinates within the n-cube
 	// return boolean true if move successful, false otherwise
-	private boolean move(int player, int[] coords) {
+	public boolean move(int player, int[] coords) {
 		if (player != 0 && player != 1) 
 			return false;
 		int key = getKey(coords);
+		return move(player, key);
+
+	}
+	
+	public boolean move(int player, int key) {
 		if (!openSpots.contains(key))
 			// already occupied or invalid coords
 			return false;
@@ -128,6 +145,20 @@ public class TttBoard {
 		updatePairs(key, player);
 		return true;
 	}
+	
+	public boolean moveSuppressWin(int player, int key) {
+		if (!openSpots.contains(key))
+			// already occupied or invalid coords
+			return false;
+		boardMap.put(key, player);
+		if (player == 1) {
+			player1Spots.add(magicCube.get(key));
+		} else
+			player0Spots.add(magicCube.get(key));
+		openSpots.remove(key);
+		updatePairs(key, player);
+		return true;
+	}
 
 	// update pairs set for player to include all new possible pairs
 	// NOTE: the current move HAS been added to the spots set
@@ -138,7 +169,7 @@ public class TttBoard {
 		if (!boardMap.containsKey(key)) { // invalid coords
 			return false;
 		}
-		HashSet<Integer> pairs = (player == 0) ? player0Pairs : player1Pairs;
+		HashSet<Integer> pairs = (player == 0) ? getPlayer0Pairs() : getPlayer1Pairs();
 		HashSet<Integer> spots = (player == 0) ? player0Spots : player1Spots;
 		int value = magicCube.get(key);
 		int[] nPair = new int[order - 1]; // pair of order - 1 spots
@@ -175,7 +206,7 @@ public class TttBoard {
 		if (player != 0 && player != 1) { // invalid player
 			return false;
 		}
-		HashSet<Integer> pairs = (player == 0) ? player0Pairs : player1Pairs;
+		HashSet<Integer> pairs = (player == 0) ? getPlayer0Pairs() : getPlayer1Pairs();
 		String winner = (player == 0) ? player0 : player1; // not necessarily
 															// the winner yet
 		for (int i : pairs) {
@@ -257,6 +288,14 @@ public class TttBoard {
 			System.out.println("");
 		}
 		System.out.println("End BoardMap");
+	}
+
+	public HashSet<Integer> getPlayer0Pairs() {
+		return player0Pairs;
+	}
+
+	public HashSet<Integer> getPlayer1Pairs() {
+		return player1Pairs;
 	}
 
 }

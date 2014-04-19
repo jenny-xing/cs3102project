@@ -1,0 +1,57 @@
+import java.util.HashMap;
+import java.util.HashSet;
+
+/**
+ * @author Robert Mina (ram2aq)
+ * @author Jenny Xing (yx4qu)
+ * 
+ * A class that represents a tree of all possible TTT boards
+ * descending from a particular board configuration.
+ */
+public class TttGameTree {
+
+	private TttBoard root;
+	public final int toMove; //player # of who is about to move
+	private HashMap<Integer,TttGameTree> children;
+	private int treeCount = 0;
+	
+	/**
+	 * 
+	 * @param parent's board
+	 * @param key of the spot that was previously taken
+	 * @param player who just moved
+	 */
+	public TttGameTree(TttGameTree parent, int key, int player) {
+		toMove = player==1 ? 0 : 1;
+		root = new TttBoard(parent.root);
+		root.move(player, key);
+		children = new HashMap<Integer,TttGameTree>();
+	}
+	
+	public int populateChildren() {
+		int count = 0;
+		HashSet<Integer> openSpots = root.getOpenSpots();
+		while (treeCount < 1000) {
+			for (int key : openSpots) {
+				children.put(key, new TttGameTree(this, key, toMove));
+				count++;
+				treeCount++;
+			}
+			for (TttGameTree child : children.values()) {
+				int temp = child.populateChildren(1000 - treeCount);
+				count += temp;
+				treeCount += temp;
+			}
+		}
+		return count;
+	}
+	
+	private int populateChildren(int max) {
+		
+	}
+	
+	public void selectChild(int key) {
+		
+	}
+	
+}

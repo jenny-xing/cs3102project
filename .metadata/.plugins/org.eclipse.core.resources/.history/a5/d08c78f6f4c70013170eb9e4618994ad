@@ -1,0 +1,22 @@
+
+public class TttTreeBot implements TttBot {
+
+	@Override
+	public int move() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int randomMove() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int firstMove() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+}

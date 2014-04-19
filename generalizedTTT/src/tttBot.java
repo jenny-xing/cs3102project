@@ -26,5 +26,9 @@ public interface TttBot {
 	 */
 	public int firstMove();
 	
-	
+	/**
+	 * Register that a move was made
+	 * @param key is the key of the move that was just made
+	 */
+	public void registerMove(int key);
 }
