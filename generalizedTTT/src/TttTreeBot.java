@@ -1,80 +1,37 @@
+import java.util.HashSet;
+import java.util.Random;
+
 /**
  * @author Robert Mina (ram2aq)
  * @author Jenny Xing (yx4qu)
  * 
- * A class that implements an AI to play tic-tac-toe with 2 players.
- * A dumb bot that only: checks for a winning move, checks for a win block,
- * and then picks a random spot.
+ *         A class that implements an AI to play tic-tac-toe with 2 players. A
+ *         clever bot that searches in the game space for up to 1000
+ *         possibilities before deciding where to move.
+ * 
+ *         If the entire game space is < 1000, this bot will play perfectly.
+ * 
  */
-
-import java.util.*;
-
-public class TttDumbBot implements TttBot {
+public class TttTreeBot implements TttBot {
 
 	private TttBoard board;
+	private TttGameTree tree;
 	private int id; // the player # of this object
+	private int prev;
 
-	public TttDumbBot(TttBoard board, int id) {
-		this.board = board;
+	public TttTreeBot(TttBoard board, int id) {
+		tree = new TttGameTree(board, id);
 		this.id = id;
+		this.board = board;
 	}
 
-	/**
-	 * @return int representing key of spot to be taken
-	 */
+	@Override
 	public int move() {
-		HashSet<Integer> openSpots = board.getOpenSpots();
-		HashSet<Integer> myPairs = board.getPlayerPairs(id);
-		HashSet<Integer> oppPairs = board.getPlayerPairs(id == 0 ? 1 : 0);
-
-		if (openSpots.size() == 0)
-			return -1; // no open spots
-
-		int key;
-		if ((key = findWin(openSpots, myPairs)) != -1)
-			return key;
-		if ((key = findWinBlock(openSpots, oppPairs)) != -1)
-			return key;
-		return randomMove(openSpots);
-	}
-
-	/**
-	 * Find a move that will win on this turn
-	 * 
-	 * @param openSpots
-	 * @param myPairs
-	 * @return int representing move to make, or -1 if no winning move found
-	 */
-	private int findWin(HashSet<Integer> openSpots, HashSet<Integer> myPairs) {
-		int winningMove;
-		for (int i : myPairs) {
-			winningMove = board.magicNum - i;
-			if (winningMove < 0)
-				continue;
-			if (openSpots.contains(winningMove))
-				return winningMove;
-		}
-		return -1;
-	}
-
-	/**
-	 * Find a move that will block an opponent win on next turn
-	 * 
-	 * @param openSpots
-	 * @param oppPairs
-	 * @return int representing move to make, or -1 if not blocking move found
-	 */
-	private int findWinBlock(HashSet<Integer> openSpots,
-			HashSet<Integer> oppPairs) {
-		int blockingMove;
-		for (int i : oppPairs) {
-			blockingMove = board.magicNum - i;
-			if (blockingMove < 0)
-				continue;
-			if (openSpots.contains(blockingMove))
-				return blockingMove;
-		}
-		return -1;
+		int ret = tree.findBestMove();
+		if (ret != -1)
+			return ret;
+		else
+			return randomMove();
 	}
 
 	/**
@@ -93,11 +50,13 @@ public class TttDumbBot implements TttBot {
 		}
 	}
 
+	@Override
 	public int randomMove() {
 		HashSet<Integer> openSpots = board.getOpenSpots();
 		return randomMove(openSpots);
 	}
 
+	@Override
 	public int firstMove() {
 		HashSet<Integer> openSpots = board.getOpenSpots();
 		if (board.order % 2 == 1) // there is only one center spot
@@ -155,6 +114,14 @@ public class TttDumbBot implements TttBot {
 
 	@Override
 	public void registerMove(int key) {
-		return; // this is the dumb bot, don't do anything
+		prev = key;
+		updateTree();
 	}
+
+	// Update the game tree using the value of prev
+	// to specify the last move that was made.
+	private void updateTree() {
+		tree = tree.selectChild(prev);
+	}
+
 }
