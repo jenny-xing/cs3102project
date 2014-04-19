@@ -5,6 +5,7 @@
  * A Class for a 2-dimensional tic-tac-toe board using magic squares to determine winner
  */
 
+import java.io.*;
 import java.util.*;
 
 public class TttBoard2D {
@@ -24,17 +25,21 @@ public class TttBoard2D {
 	final int MAX_SPACES = 1000000;
 
 	public static void main(String args[]) {
-		// testing
+		// // testing
 		TttBoard2D testBoard = new TttBoard2D(3, "x", "o");
-		// testBoard.printMagicSquare();
-		String input = "8430 8481 8532 8583 8634 8685 8736 8787 8838 8889 8940 8991 9042 9093 9144 9195 9246 9297 9348 9399 9450 9501 9552 9603 1    52   103  154  205  256  307  358  409  460  511  562  613  664  715  766  817  868  919  970  1021 1072 1123 1174 1225 6029 6080 6131 6182 6233 6284 6335 6386 6437 6488 6539 6590 6641 6692 6743 6794 6845 6896 6947 6998 7049 7100 7151 7202 4803 4854 2504 2555 2606 2657 2708 2759 2810 2861 2912 2963 3014 3065 3116 3167 3218 3269 3320 3371 3422 3473 3524 3575 3626 ";
-		String[] vals = input.split("\\s+");
-		int total = 0;
-		for (String x : vals) {
-			total += Integer.parseInt(x);
-		}
-		// System.out.println(total + " should equal " + testBoard.magicNum);
-		testBoard.test();
+		testBoard.printMagicSquare();
+		// // testBoard.printMagicSquare();
+		// String input =
+		// "8430 8481 8532 8583 8634 8685 8736 8787 8838 8889 8940 8991 9042 9093 9144 9195 9246 9297 9348 9399 9450 9501 9552 9603 1    52   103  154  205  256  307  358  409  460  511  562  613  664  715  766  817  868  919  970  1021 1072 1123 1174 1225 6029 6080 6131 6182 6233 6284 6335 6386 6437 6488 6539 6590 6641 6692 6743 6794 6845 6896 6947 6998 7049 7100 7151 7202 4803 4854 2504 2555 2606 2657 2708 2759 2810 2861 2912 2963 3014 3065 3116 3167 3218 3269 3320 3371 3422 3473 3524 3575 3626 ";
+		// String[] vals = input.split("\\s+");
+		// int total = 0;
+		// for (String x : vals) {
+		// total += Integer.parseInt(x);
+		// }
+		// // System.out.println(total + " should equal " + testBoard.magicNum);
+		// testBoard.test();
+
+		// testBoard.loadMagicSquare();
 	}
 
 	private void test() {
@@ -107,144 +112,29 @@ public class TttBoard2D {
 		}
 	}
 
-	// load Integer values into the correct values in the magicSquare map
+	// reads in the .txt file and loads them into magicSquare
 	private void loadMagicSquare() {
+		String filename = order + "_" + 2 + ".txt";
+		String filepath = "src/magic squares and cubes/" + filename;
 
-		if (order < 3)
-			throw new RuntimeException("invalid order for tic-tac-toe board.");
-
-		// generation for odd orders
-		if (order % 2 == 1) {
-			for (int row = 1; row <= order; row++) {
-				for (int col = 1; col <= order; col++) {
-					// formula given by Wikipedia
-					int value = order * ((row + col - 1 + order / 2) % order)
-							+ ((row + 2 * col - 2) % order) + 1;
-					magicSquare.put(getKey(row - 1, col - 1), value);
-				}
-			}
-			// printMagicSquare();
-		}
-
-		// generation for doubly even (divisible by 4) orders.
-		// http://www.1728.org/magicsq2.htm
-		if (order % 4 == 0) {
-			// fills the "diagonals"
-			int count = 1;
-			final int smaller_order = order / 4;
-			for (int row = 1; row <= order; row++) {
-				for (int col = 1; col <= order; col++) {
-					int key = getKey(row - 1, col - 1);
-					// fills in the corner squares that are order/4 x order/4
-					if ((col <= smaller_order && row <= smaller_order)
-							|| (col > order - smaller_order && row > order
-									- smaller_order)
-							|| (col <= smaller_order && row > order
-									- smaller_order)
-							|| (col > order - smaller_order && row <= smaller_order)) {
-						magicSquare.put(key, count);
-					}
-
-					// fills the inner square that is order/2 x order/2
-					if (col > smaller_order && col <= order - smaller_order
-							&& row > smaller_order
-							&& row <= order - smaller_order) {
-						magicSquare.put(key, count);
-					}
-
-					count++;
-				}
-			}
-
-			// fills in the rest from the bottom right to top left
-			count = 1;
-			for (int row = order - 1; row >= 0; row--) {
-				for (int col = order - 1; col >= 0; col--) {
-					int key = getKey(row, col);
-					if (!magicSquare.containsKey(key)) {
-						magicSquare.put(key, count);
-					}
-					count++;
-				}
-			}
-			// printMagicSquare();
-		}
-
-		// generation for singly even (divisible by 2 but not by 4) orders
-		// http://www.1728.org/magicsq3.htm
-		if (order % 2 == 0 && !(order % 4 == 0)) {
-
-			final int smaller_order = order / 2;
-
-			// fills in the board with smaller odd order magic squares
-			for (int row = 1; row <= order; row++) {
-				for (int col = 1; col <= order; col++) {
-					// formula given by wikipedia
-					int value = smaller_order
-							* ((row + col - 1 + smaller_order / 2) % smaller_order)
-							+ ((row + 2 * col - 2) % smaller_order) + 1;
-					magicSquare.put(getKey(row - 1, col - 1), value);
-				}
-			}
-
-			// increments the quadrants so that they match the ACDB filling
-			// pattern
-			for (int row = 1; row <= order; row++) {
-				for (int col = 1; col <= order; col++) {
-					int key = getKey(row - 1, col - 1);
-					int value = magicSquare.get(key);
-					int s2 = smaller_order * smaller_order;
-
-					// quadrant A stays the same
-					// quadrant B
-					if (row > smaller_order && col > smaller_order)
-						magicSquare.put(key, value + s2);
-
-					// quadrant C
-					if (row <= smaller_order && col > smaller_order)
-						magicSquare.put(key, value + 2 * s2);
-
-					// quadrant D
-					if (row > smaller_order && col <= smaller_order)
-						magicSquare.put(key, value + 3 * s2);
-
-				}
-			}
-
-			// swap (almost) ALL the values!
-
-			// swaps right side values
-			int rightWidth = (smaller_order - 3) / 2;
-
-			for (int row = 1; row <= order; row++) {
-				for (int col = 1; col <= order; col++) {
-					if (col > order - rightWidth && row <= order / 2) {
-						// unnecessary variables are unnecessary
-						int key = getKey(row - 1, col - 1);
-						int swapkey = key + (order * order) / 2;
-						swapValues(key, swapkey);
+		try {
+			Scanner scanner = new Scanner(new File(filepath));
+			while (scanner.hasNext()) {
+				for (int row = 0; row < order; row++) {
+					for (int col = 0; col < order; col++) {
+						if (scanner.hasNext()) {
+							String x = scanner.next();
+							Integer num = Integer.parseInt(x);
+							magicSquare.put(getKey(row, col), num);
+						}
 					}
 				}
 			}
+			System.out.println("magicThing has been read.");
 
-			// swaps left side values
-			int leftWidth = rightWidth + 1;
-
-			for (int row = 1; row <= order; row++) {
-				for (int col = 1; col <= order; col++) {
-					if (col <= leftWidth && row <= order / 2) {
-						// unnecessary variables are unnecessary
-						int key = getKey(row - 1, col - 1);
-						int swapkey = key + (order * order) / 2;
-						swapValues(key, swapkey);
-					}
-				}
-			}
-			// accounts for indent on left side values
-			swapValues(getKey(leftWidth, 0), getKey(leftWidth, 0)
-					+ (order * order) / 2);
-			swapValues(getKey(leftWidth, 0) + leftWidth, getKey(leftWidth, 0)
-					+ leftWidth + (order * order) / 2);
+		} catch (IOException ex) {
+			System.out
+					.println("file does not exist: this magic square has not yet been generated.");
 		}
 
 	}
@@ -427,14 +317,6 @@ public class TttBoard2D {
 	// perform the winning operation given the winner
 	private void win(String winner) {
 		System.out.println(winner + " has won!");
-	}
-
-	// x and y are the keys
-	private void swapValues(int x, int y) {
-		int xval = magicSquare.get(x);
-		int yval = magicSquare.get(y);
-		magicSquare.put(x, yval);
-		magicSquare.put(y, xval);
 	}
 
 	// prints magic square in row-major oder

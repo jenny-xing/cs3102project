@@ -112,7 +112,7 @@ public class TttBoard {
 	// param coords: coordinates within the n-cube
 	// return boolean true if move successful, false otherwise
 	private boolean move(int player, int[] coords) {
-		if (player != 0 && player != 1) 
+		if (player != 0 && player != 1)
 			return false;
 		int key = getKey(coords);
 		if (!openSpots.contains(key))

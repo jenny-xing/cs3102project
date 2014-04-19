@@ -4,11 +4,11 @@ import java.util.*;
 public class MagicGenerator {
 
 	public static void main(String[] args) {
-		MagicGenerator tester = new MagicGenerator(63, 2);
-		HashMap<Integer, Integer> testmagicsquare = tester.generateMagic();
-		// tester.printMagicThing();
-		tester.writeMagic();
-		tester.readMagic();
+		for (int x = 5; x < 101; x++) {
+			MagicGenerator tester = new MagicGenerator(x, 2);
+			tester.generateMagic();
+			tester.writeMagic();
+		}
 	}
 
 	private static int order;
@@ -179,41 +179,26 @@ public class MagicGenerator {
 
 	// the hashmap is written to a file named so: order_dimension.ser
 	public void writeMagic() {
-		String filename = order + "_" + dimension + ".ser";
+		String filename = order + "_" + dimension + ".txt";
+		String filepath = "src/magic squares and cubes/" + filename;
+		Writer writer = null;
 
 		try {
-			FileOutputStream fos = new FileOutputStream(filename);
-			ObjectOutputStream oos = new ObjectOutputStream(fos);
-			oos.writeObject(magicThing);
-			oos.close();
-			fos.close();
+			writer = new BufferedWriter(new OutputStreamWriter(
+					new FileOutputStream(filepath), "utf-8"));
+			for (Integer value : magicThing.values()) {
+				writer.write(value.toString());
+				writer.write(" ");
+			}
 			System.out.println("the magic thing is saved in " + filename);
-		} catch (IOException ioe) {
-			ioe.printStackTrace();
+		} catch (IOException ex) {
+			System.out.println("Error writing magicThing");
+		} finally {
+			try {
+				writer.close();
+			} catch (Exception ex) {
+			}
 		}
-	}
-
-	public void readMagic() {
-		String filename = order + "_" + dimension + ".ser";
-
-		try {
-			FileInputStream fis = new FileInputStream(filename);
-			ObjectInputStream ois = new ObjectInputStream(fis);
-			magicThing = (HashMap) ois.readObject();
-			ois.close();
-			fis.close();
-		} catch (IOException ioe) {
-			ioe.printStackTrace();
-			return;
-		} catch (ClassNotFoundException c) {
-			System.out.println("Class not found");
-			c.printStackTrace();
-			return;
-		}
-
-		// prints out the deserialized hashmap
-		System.out.println("Deserialized magicThing:");
-		printMagic();
 	}
 
 	private void printMagicSquare() {

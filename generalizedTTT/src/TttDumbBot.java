@@ -86,7 +86,8 @@ public class TttDumbBot {
 	private int randomMove(HashSet<Integer> openSpots) {
 		Random myRand = new Random();
 		while (true) {
-			int next = myRand.nextInt(TttBoard.pow(board.order, board.dimension));
+			int next = myRand.nextInt(TttBoard
+					.pow(board.order, board.dimension));
 			if (openSpots.contains(next))
 				return next;
 		}
@@ -96,18 +97,18 @@ public class TttDumbBot {
 		HashSet<Integer> openSpots = board.getOpenSpots();
 		return randomMove(openSpots);
 	}
-	
+
 	public int firstMove() {
 		HashSet<Integer> openSpots = board.getOpenSpots();
-		if (board.order%2 == 1) // there is only one center spot
+		if (board.order % 2 == 1) // there is only one center spot
 		{
-			int center = TttBoard.pow(board.order, board.dimension)/2;
+			int center = TttBoard.pow(board.order, board.dimension) / 2;
 			if (openSpots.contains(center))
 				return center;
-			else return randomMove(openSpots);
-		}
-		else { //there are multiple "center" spots
-			
+			else
+				return randomMove(openSpots);
+		} else { // there are multiple "center" spots
+
 		}
 	}
 }

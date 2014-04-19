@@ -1,0 +1,378 @@
+/**
+ * @author Robert Mina (ram2aq)
+ * @author Jenny Xing (yx4qu)
+ * 
+ * A Class for a 2-dimensional tic-tac-toe board using magic squares to determine winner
+ */
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.util.*;
+
+public class TttBoard2D {
+
+	public final int order;
+	public final int magicNum;
+	private final String player0;
+	private final String player1;
+	private HashMap<Integer, Integer> boardMap; // values are 0 or 1
+	private HashMap<Integer, Integer> magicSquare;
+	private HashSet<Integer> player0Spots; // contains magic square values
+	private HashSet<Integer> player1Spots; // contains magic square values
+	private HashSet<Integer> openSpots; // contains keys
+	private HashSet<Integer> player0Pairs; // sums of magic square values
+	private HashSet<Integer> player1Pairs;
+
+	final int MAX_SPACES = 1000000;
+
+	public static void main(String args[]) {
+		// // testing
+		TttBoard2D testBoard = new TttBoard2D(50, "x", "o");
+		// // testBoard.printMagicSquare();
+		// String input =
+		// "8430 8481 8532 8583 8634 8685 8736 8787 8838 8889 8940 8991 9042 9093 9144 9195 9246 9297 9348 9399 9450 9501 9552 9603 1    52   103  154  205  256  307  358  409  460  511  562  613  664  715  766  817  868  919  970  1021 1072 1123 1174 1225 6029 6080 6131 6182 6233 6284 6335 6386 6437 6488 6539 6590 6641 6692 6743 6794 6845 6896 6947 6998 7049 7100 7151 7202 4803 4854 2504 2555 2606 2657 2708 2759 2810 2861 2912 2963 3014 3065 3116 3167 3218 3269 3320 3371 3422 3473 3524 3575 3626 ";
+		// String[] vals = input.split("\\s+");
+		// int total = 0;
+		// for (String x : vals) {
+		// total += Integer.parseInt(x);
+		// }
+		// // System.out.println(total + " should equal " + testBoard.magicNum);
+		// testBoard.test();
+
+		// testBoard.loadMagicSquare();
+	}
+
+	private void test() {
+		System.out.println("-----------------------------------------");
+		System.out.println("Initializing board of order: " + order);
+		System.out.println("Open spots: " + openSpots);
+		System.out.println("Player 0: " + player0);
+		System.out.println("Player 1: " + player1);
+		System.out.println("Board Map: ");
+		printBoardMap();
+		System.out.println("Magic number: " + magicNum);
+		System.out.println("Printing magic square: ");
+		printMagicSquare();
+		System.out.println("-----------------------------------------");
+		move(0, 1, 1);
+		move(0, 0, 1);
+		move(0, 2, 1);
+		System.out.println("Player 0 spots: " + player0Spots);
+		System.out.println("Player 0 pairs: " + player0Pairs);
+		System.out.println("Open spots: " + openSpots);
+		printBoardMap();
+	}
+
+	public TttBoard2D(Integer order, String p0, String p1) {
+		this.order = order;
+		magicNum = (order * (order * order + 1)) / 2;
+		player0 = p0;
+		player1 = p1;
+		boardMap = new HashMap<Integer, Integer>(order * order, (float) 1.0);
+		magicSquare = new HashMap<Integer, Integer>(order * order, (float) 1.0);
+		loadMagicSquare();
+		player0Spots = new HashSet<Integer>();
+		player1Spots = new HashSet<Integer>();
+		openSpots = new HashSet<Integer>();
+		loadOpenSpots();
+		player0Pairs = new HashSet<Integer>();
+		player1Pairs = new HashSet<Integer>();
+	}
+
+	public int getOrder() {
+		return order;
+	}
+
+	public HashMap<Integer, Integer> getBoardMap() {
+		return new HashMap<Integer, Integer>(boardMap);
+	}
+
+	public HashSet<Integer> getOpenSpots() {
+		return new HashSet<Integer>(openSpots);
+	}
+
+	public HashSet<Integer> getPlayerSpots(int player) {
+		return new HashSet<Integer>(player == 0 ? player0Spots : player1Spots);
+	}
+
+	public HashMap<Integer, Integer> getMagicSquare() {
+		return new HashMap<Integer, Integer>(magicSquare);
+	}
+
+	public HashSet<Integer> getPlayerPairs(int player) {
+		return new HashSet<Integer>(player == 0 ? player0Pairs : player1Pairs);
+	}
+
+	// load all possible key values into openSpots set
+	private void loadOpenSpots() {
+		for (int i = 0; i < order; i++) {
+			for (int j = 0; j < order; j++) {
+				openSpots.add(getKey(i, j));
+			}
+		}
+	}
+
+	// reads in the .txt file and loads them into magicSquare
+	private void loadMagicSquare() {
+		String filename = order + "_" + 2 + ".txt";
+		try {
+			Scanner scanner = new Scanner(new File(filename));
+
+			while (scanner.hasNext()) {
+				String x = scanner.next();
+				Integer num = Integer.parseInt(x);
+				System.out.println(num);
+			}
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		}
+
+		System.out.println("magicThing has been read.");
+	}
+
+	// params row and col: coordinates within the square (0 to
+	// order^2-1)
+	// return int key corresponding to the key in the maps for those coords
+	private int getKey(int row, int col) {
+		return order * row + col;
+	}
+
+	// param player: 0 or 1, the player number
+	// params row and col: coordinates within the square
+	// return boolean true if move successful, false otherwise
+	public boolean move(int player, int row, int col) {
+		if (player != 0 && player != 1) // invalid player
+			return false;
+		int key = getKey(row, col);
+		if (!openSpots.contains(key))
+			// already occupied or invalid coords
+			return false;
+		// valid move
+		boardMap.put(key, player);
+		if (player == 1) {
+			player1Spots.add(magicSquare.get(key));
+		} else if (player == 0) {
+			player0Spots.add(magicSquare.get(key));
+		}
+		openSpots.remove(key);
+		check(key, player); // check for winning move and draw
+		updatePairs(key, player); // update pairs set
+		return true;
+	}
+
+	// update pairs set for player to include all new possible pairs
+	// NOTE: the current move HAS been added to the spots set
+	private boolean updatePairs(int key, int player) {
+		if (player != 0 && player != 1) { // invalid player
+			return false;
+		}
+		if (key >= order * order) { // invalid coords
+			return false;
+		}
+		HashSet<Integer> pairs = (player == 0) ? player0Pairs : player1Pairs;
+		HashSet<Integer> spots = (player == 0) ? player0Spots : player1Spots;
+		int value = magicSquare.get(key);
+		int[] nPair = new int[order - 1]; // pair of order - 1 spots
+		int[] nIndices = new int[order - 2];
+		nPair[order - 2] = value; // last value in nPair is the current value
+		ArrayList<Integer> spotsList = new ArrayList<Integer>(spots);
+		spotsList.remove(spotsList.indexOf(value)); // don't add the current
+													// value twice to any pairs
+		for (int i = 0; i < spotsList.size() - (order - 3); i++) {
+			// loop over elements in the list, grabbing each possible
+			// combination of size-2 spots
+			for (int j = 0; j < order - 2; j++) { // assign indices
+				nIndices[j] = i + j;
+				nPair[j] = spotsList.get(nIndices[j]);
+			} // indices default to first unchecked size elements
+			while (true) {
+				int sum = sum(nPair);
+				pairs.add(sum);
+				if (nIndices[order - 3] == spotsList.size() - 1)
+					break; // no more nPairs with this first value
+				for (int j = order - 3; j >= 0; j--) {
+					nIndices[j]++;
+					nPair[j] = spotsList.get(nIndices[j]);
+				}
+			}
+		}
+		return true;
+	}
+
+	// check for win or draw conditions
+	// NOTE: the current move has NOT been added to relevant pairs set
+	// param player: 0 or 1, the player number
+	private boolean check(int key, int player) {
+		if (player != 0 && player != 1) { // invalid player
+			return false;
+		}
+		// checkWin() // deprecated
+		HashSet<Integer> pairs = (player == 0) ? player0Pairs : player1Pairs;
+		String winner = (player == 0) ? player0 : player1; // not necessarily
+															// the winner yet
+		int value = magicSquare.get(key);
+		for (int i : pairs) {
+			if (i + value == magicNum) {
+				win(winner);
+				return true;
+			}
+		}
+		checkDraw();
+		return true;
+	}
+
+	// method to check for draw condition
+	// TODO: currently only checks that all spaces are filled
+	// TODO: draw condition can occur before this is true
+	private void checkDraw() {
+		if (openSpots.size() == 0)
+			draw();
+	}
+
+	// perform draw operation
+	private void draw() {
+		System.out.println("Draw!");
+	}
+
+	// deprecated method to check if there is a winner
+	private void checkWin() {
+		if (player0Spots.size() < order && player1Spots.size() < order)
+			return; // not possible that someone has won
+		int[] nPair = new int[order];
+		int[] nIndices = new int[order];
+		ArrayList<Integer> player0SpotsList = new ArrayList<Integer>(
+				player0Spots);
+		for (int i = 0; i < player0SpotsList.size() - order; i++) {
+			// loop over elements in the list, grabbing each possible
+			// combination of size spots and seeing if they sum to the magic
+			// number
+			for (int j = 0; j < order - 1; j++) { // assign indices
+				nIndices[j] = i + j;
+				nPair[j] = player0SpotsList.get(nIndices[j]);
+			} // indices default to first unchecked size elements
+			while (true) {
+				int sum = sum(nPair);
+				if (sum == magicNum) {
+					win(player0);
+					return;
+				} else if (sum > magicNum)
+					break; // continue to next starting digit
+				else { // re-assign indices and nPair
+					if (nIndices[order - 1] == player0SpotsList.size() - 1)
+						break; // no more nPairs with this first value
+					for (int j = order - 1; j >= 0; j--) {
+						nIndices[j]++;
+						nPair[j] = player0SpotsList.get(nIndices[j]);
+					}
+				}
+			}
+		}
+		ArrayList<Integer> player1SpotsList = new ArrayList<Integer>(
+				player1Spots);
+		for (int i = 0; i < player1SpotsList.size() - order; i++) {
+			// loop over elements in the list, grabbing each possible
+			// combination of size spots and seeing if they sum to the magic
+			// number
+			for (int j = 0; j < order - 1; j++) { // assign indices
+				nIndices[j] = i + j;
+				nPair[j] = player1SpotsList.get(nIndices[j]);
+			} // indices default to first unchecked size elements
+			while (true) {
+				int sum = sum(nPair);
+				if (sum == magicNum) {
+					win(player1);
+					return;
+				} else if (sum > magicNum)
+					break; // continue to next starting digit
+				else { // re-assign indices and nPair
+					if (nIndices[order - 1] == player1SpotsList.size() - 1)
+						break; // no more nPairs with this first value
+					for (int j = order - 1; j >= 0; j--) {
+						nIndices[j]++;
+						nPair[j] = player1SpotsList.get(nIndices[j]);
+					}
+				}
+			}
+		}
+	}
+
+	// sums an array of ints
+	private int sum(int[] nPair) {
+		int retval = 0;
+		for (int i = 0; i < nPair.length; i++) {
+			retval += nPair[i];
+		}
+		return retval;
+	}
+
+	// perform the winning operation given the winner
+	private void win(String winner) {
+		System.out.println(winner + " has won!");
+	}
+
+	// x and y are the keys
+	private void swapValues(int x, int y) {
+		int xval = magicSquare.get(x);
+		int yval = magicSquare.get(y);
+		magicSquare.put(x, yval);
+		magicSquare.put(y, xval);
+	}
+
+	// prints magic square in row-major oder
+	private void printMagicSquare() {
+		System.out.println("Start MagicSquare");
+		for (int row = 0; row < order; row++) {
+			for (int col = 0; col < order; col++) {
+				// System.out.println("(" + row + ", " + col + "): "
+				// + magicSquare.get(getKey(row, col)));
+				if (magicSquare.containsKey(getKey(row, col))) {
+					int value = magicSquare.get(getKey(row, col));
+					System.out.print(value);
+					if (value < 10000)
+						System.out.print(" ");
+					if (value < 1000)
+						System.out.print(" ");
+					if (value < 100)
+						System.out.print(" ");
+					if (value < 10)
+						System.out.print(" ");
+				}
+			}
+			System.out.println();
+		}
+		System.out.println("End MagicSquare");
+	}
+
+	private void printBoardMap() {
+		int spaces = Math.max(player0.length(), player1.length()) + 3;
+		String string0 = player0;
+		while (string0.length() < spaces)
+			string0 += " ";
+		String string1 = player1;
+		while (string1.length() < spaces)
+			string1 += " ";
+		String blank = " ";
+		for (int i = 0; i < spaces - 1; i++) {
+			blank += blank;
+		}
+		System.out.println("Start BoardMap");
+		for (int row = 0; row < order; row++) {
+			for (int col = 0; col < order; col++) {
+				int key = getKey(row, col);
+				if (!boardMap.containsKey(key))
+					System.out.print(blank);
+				else if (boardMap.get(key) == 0)
+					System.out.print(string0);
+				else
+					System.out.print(string1);
+			}
+			System.out.println();
+		}
+		System.out.println("End BoardMap");
+	}
+
+}
