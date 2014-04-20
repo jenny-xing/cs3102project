@@ -5,7 +5,8 @@
  * A Class for an n-dimensional tic-tac-toe board using magic n-cubes to determine winner
  */
 
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
 import java.util.*;
 
 public class TttBoard {
@@ -26,9 +27,9 @@ public class TttBoard {
 	final int MAX_SPACES = 1000000;
 
 	public static void main(String args[]) {
-		TttBoard board = new TttBoard(3, 2, "x", "o");
-		TttBot ai0 = new TttTreeBot(board, 0);
-		TttBot ai1 = new TttDumbBot(board, 1);
+		TttBoard board = new TttBoard(5, 2, "x", "o");
+		TttBot ai0 = new TttTreeBot(board,0);
+		TttBot ai1 = new TttDumbBot(board,1);
 		int move = ai0.firstMove();
 		System.out.println("Player 0 bot wants: " + move);
 		board.move(0, move);
@@ -39,8 +40,7 @@ public class TttBoard {
 		ai0.registerMove(move);
 		while (true) {
 			long start = System.nanoTime();
-			if (board.openSpots.size() == 0)
-				break;
+			if (board.openSpots.size() == 0) break;
 			board.printBoardMap();
 			move = ai0.move();
 			System.out.println("Player 0 bot wants: " + move);
@@ -51,8 +51,7 @@ public class TttBoard {
 			board.move(1, move);
 			ai0.registerMove(move);
 			long stop = System.nanoTime();
-			System.out.println("Pair of moves taken in " + (stop - start)
-					/ 1000000 + " ms");
+			System.out.println("Pair of moves taken in " + (stop-start)/1000000 + " ms");
 		}
 	}
 
@@ -76,13 +75,13 @@ public class TttBoard {
 	}
 
 	public TttBoard(TttBoard parent) {
-		// System.out.println("Copy constructor called");
+		//System.out.println("Copy constructor called");
 		player0 = parent.player0;
 		player1 = parent.player1;
 		order = parent.order;
 		dimension = parent.dimension;
-		boardMap = new HashMap<Integer, Integer>(parent.boardMap);
-		magicNCube = new HashMap<Integer, Integer>(parent.magicNCube);
+		boardMap = new HashMap<Integer,Integer>(parent.boardMap);
+		magicNCube = new HashMap<Integer,Integer>(parent.magicNCube);
 		player0Spots = new HashSet<Integer>(parent.player0Spots);
 		player1Spots = new HashSet<Integer>(parent.player1Spots);
 		openSpots = new HashSet<Integer>(parent.openSpots);
@@ -242,8 +241,8 @@ public class TttBoard {
 	}
 
 	public boolean moveSuppressWin(int player, int key) {
-		// System.out.println("Player " + player + " is taking spot " + key);
-		// printBoardMap();
+		//System.out.println("Player " + player + " is taking spot " + key);
+		//printBoardMap();
 		if (!openSpots.contains(key))
 			// already occupied or invalid coords
 			return false;
@@ -294,8 +293,8 @@ public class TttBoard {
 				}
 			}
 		}
-		// System.out.println("Spots: " + spots);
-		// System.out.println("Pairs: " + pairs);
+		//System.out.println("Spots: " + spots);
+		//System.out.println("Pairs: " + pairs);
 		return true;
 	}
 
@@ -308,16 +307,16 @@ public class TttBoard {
 		}
 		HashSet<Integer> pairs = (player == 0) ? getPlayer0Pairs()
 				: getPlayer1Pairs();
-		HashSet<Integer> spots = (player == 0) ? player0Spots : player1Spots;
+		HashSet<Integer> spots = (player ==0) ? player0Spots : player1Spots;
 		String winner = (player == 0) ? player0 : player1; // not necessarily
 															// the winner yet
 		for (int i : pairs) {
 			if (i + magicNCube.get(key) == magicNum) {
-				// System.out.println(key + " was the winning move");
-				// System.out.println(spots);
-				// System.out.println(pairs);
-				// System.out.println(magicNCube.get(key));
-				// printMagicSquare();
+				//System.out.println(key + " was the winning move");
+				//System.out.println(spots);
+				//System.out.println(pairs);
+				//System.out.println(magicNCube.get(key));
+				//printMagicSquare();
 				win(winner);
 				return true;
 			}
@@ -342,13 +341,13 @@ public class TttBoard {
 	// perform the winning operation given the winner
 	private void win(String winner) {
 		System.out.println(winner + " has won!");
-		// System.out.println("Board map: " + boardMap);
-		// System.out.println("x spots: " + player0Spots);
-		// System.out.println("o spots: " + player1Spots);
-		// System.out.println("x pairs: " + player0Pairs);
-		// System.out.println("o pairs: " + player1Pairs);
-		// printBoardMap();
-		// printMagicSquare();
+//		System.out.println("Board map: " + boardMap);
+//		System.out.println("x spots: " + player0Spots);
+//		System.out.println("o spots: " + player1Spots);
+//		System.out.println("x pairs: " + player0Pairs);
+//		System.out.println("o pairs: " + player1Pairs);
+//		printBoardMap();
+//		printMagicSquare();
 		System.exit(0);
 	}
 
@@ -378,7 +377,7 @@ public class TttBoard {
 	}
 
 	private void printMagicCube() {
-		System.out.println("this will not be implemented.");
+
 	}
 
 	private void printMagicNCube() {

@@ -378,7 +378,7 @@ public class TttBoard {
 	}
 
 	private void printMagicCube() {
-		System.out.println("this will not be implemented.");
+
 	}
 
 	private void printMagicNCube() {

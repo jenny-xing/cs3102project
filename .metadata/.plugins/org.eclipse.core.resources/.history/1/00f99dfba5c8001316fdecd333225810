@@ -1,4 +1,5 @@
-import java.util.*;
+import java.util.HashSet;
+import java.util.Random;
 
 /**
  * @author Robert Mina (ram2aq)

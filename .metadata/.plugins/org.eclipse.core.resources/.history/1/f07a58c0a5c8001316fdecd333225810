@@ -227,7 +227,7 @@ public class MagicGenerator {
 
 	// cube here meaning dimension>2
 	private void printMagicCube() {
-		System.out.println("this will not be implemented");
+		System.out.println("this has yet to be written.");
 	}
 
 	public void printMagic() {

@@ -1,4 +1,5 @@
-import java.util.*;
+import java.util.HashSet;
+import java.util.Random;
 
 /**
  * @author Robert Mina (ram2aq)
@@ -120,8 +121,7 @@ public class TttTreeBot implements TttBot {
 	// Update the game tree using the value of prev
 	// to specify the last move that was made.
 	private void updateTree() {
-		if (prev == -1)
-			return;
+		if (prev == -1) return;
 		tree = tree.selectChild(prev);
 	}
 

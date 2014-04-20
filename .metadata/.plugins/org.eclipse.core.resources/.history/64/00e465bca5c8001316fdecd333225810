@@ -1,0 +1,38 @@
+/**
+ * @author Robert Mina (ram2aq)
+ * @author Jenny Xing (yx4qu)
+ * 
+ *         An interface that includes the required API for a tic-tac-toe AI.
+ *         This will be implemented by three different AI classes.
+ */
+public interface TttBot {
+
+	/**
+	 * A general move.
+	 * 
+	 * @return int representing key of spot to be taken
+	 */
+	public int move();
+
+	/**
+	 * A move with no logic (ie. completely random).
+	 * 
+	 * @return int representing key of spot to be taken
+	 */
+	public int randomMove();
+
+	/**
+	 * The first move. This will always be to take the center spot.
+	 * 
+	 * @return int representing key of spot to be taken
+	 */
+	public int firstMove();
+
+	/**
+	 * Register that a move was made
+	 * 
+	 * @param key
+	 *            is the key of the move that was just made
+	 */
+	public void registerMove(int key);
+}
