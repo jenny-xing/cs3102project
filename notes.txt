@@ -1,3 +1,14 @@
+HALT!
+"A tic-tac-toe board can be represented as a perfect square where every cell is represented 
+by a unique integer in the range 1 to 9 (see Figure 1). Notice, that every row, column, and 
+diagonal sums to 15, and there is no way to get a sum of 15 from three cells unless they share a 
+row, column or diagonal." -http://rowdy.msudenver.edu/~gordona/cs1050/progs/tictactoermccsc.pdf
+let x = number of ways to add up to the magic number using the numbers from 1 to order^2
+let y = number of winning paths in a standard game of 2-d tic tac toe
+they must be strictly equal (if x<y, then a magic square cannot be constructed. if x>y then the algorithm cannot be used)
+this property is unique(?) to the 3x3 2 dimensional magic square: 
+the number of ways to add up to 15 using 3 different numbers from 1-9 is the same as the number of winning paths in a standard game of tic tac toe, which is 8. 
+even increasing the board to 4x4 in 2D violates this rule. 
 LINKS:
 http://www.one-tab.com/page/TeI0NRYHSfuBKxCd9P7GhA
 
