@@ -4,20 +4,4 @@ CS 3102 Spring 2014 Term Project
 Authors: Rob Mina and Jenny Xing
 ====================================
 
-A stimulator and AI for playing multidimensional, multiplayer, and multi-size tic-tac-toe.
-
-====================================
-Operation
-====================================
-
-====================================
-File manifest
-====================================
-
-====================================
-Known bugs
-====================================
-
-====================================
-Credits and acknowledgments
-====================================
+The project writeup can be accessed at https://docs.google.com/a/virginia.edu/document/d/1OEJKYph1ZqPQiNmR_P5lQXYurFljW_soQQ10g4bZjc0/edit?usp=sharing
