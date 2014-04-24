@@ -1,0 +1,17 @@
+import javax.swing.*;
+import java.awt.*;
+
+public class TttGUI extends JPanel {
+
+	public static void main(String[] args) {
+		JFrame frame = new JFrame("Generalized Tic-tac-toe");
+		frame.setSize(600, 400);
+		frame.setLocation(40, 100);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		// frame.setContentPane(new /*Change THIS--->*/ BeerPong());
+		frame.setVisible(true);
+		
+		JTextField textField = new JTextField(20);
+	}
+
+}

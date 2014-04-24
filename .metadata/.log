@@ -1789,3 +1789,21 @@ org.eclipse.core.runtime.CoreException: The file does not exist.
 
 !ENTRY org.eclipse.ui 4 4 2014-04-20 12:13:29.494
 !MESSAGE Invalid preference page path: XML Syntax
+!SESSION 2014-04-23 21:11:34.838 -----------------------------------------------
+eclipse.buildId=M20120208-0800
+java.version=1.7.0_45
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=en_US
+Command-line arguments:  -os win32 -ws win32 -arch x86
+
+!ENTRY org.eclipse.ui 4 4 2014-04-23 21:11:59.393
+!MESSAGE Invalid preference page path: XML Syntax
+!SESSION 2014-04-23 21:26:52.025 -----------------------------------------------
+eclipse.buildId=M20120208-0800
+java.version=1.7.0_45
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=en_US
+Command-line arguments:  -os win32 -ws win32 -arch x86 -data C:\Users\Jenny\Documents\GitHub\cs3102project
+
+!ENTRY org.eclipse.ui 4 4 2014-04-23 22:28:48.263
+!MESSAGE Invalid preference page path: XML Syntax

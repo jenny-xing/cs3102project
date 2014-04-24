@@ -1,0 +1,11 @@
+import javax.swing.*;
+import java.awt.*;
+
+public class TttGUI extends JPanel{
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}
