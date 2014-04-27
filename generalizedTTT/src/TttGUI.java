@@ -3,45 +3,223 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class TttGUI extends JPanel {
+public class TttGUI extends JFrame {
 
-	static JTextField textfield = new JTextField(20);
-	static JTextArea textarea = new JTextArea(5, 7);
+	private static final int WIDTH = 450;
+	private static final int HEIGHT = 600;
 
-	public static void main(String[] args) {
-		JFrame frame = new JFrame("Generalized Tic-tac-toe");
-		frame.setSize(600, 400);
-		frame.setLocation(40, 100);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		// frame.setContentPane(new /*Change THIS--->*/ BeerPong());
-		frame.setVisible(true);
+	private Container content;
+	private JLabel result;
+	private JButton[] cells;
+	private JButton exitButton;
+	private JButton initButton;
+	private CellButtonHandler[] cellHandlers;
+	private ExitButtonHandler exitHandler;
+	private InitButtonHandler initHandler;
 
-		JPanel panel = null;
-		panel = new JPanel(new BoxLayout(panel, 5));
+	private boolean player1;
+	private boolean gameOver;
 
-		JLabel label = new JLabel("T");
+	public TttGUI(int order, int dimension) {
+		// Necessary initialization code
+		setTitle("TttGUI");
+		setSize(WIDTH, HEIGHT);
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-		panel.add(label);
+		// Get content pane
+		content = getContentPane();
+		content.setBackground(Color.blue.darker());
 
-		panel.add(textarea);
+		// Set layout
+		content.setLayout(new GridLayout(order, order));
 
-		JButton button = new JButton("Search");
+		// Create cells and handlers
+		cells = new JButton[9];
+		cellHandlers = new CellButtonHandler[9];
+		for (int i = 0; i < 9; i++) {
+			char ch = (char) ('0' + i + 1);
+			cells[i] = new JButton("" + ch);
+			cellHandlers[i] = new CellButtonHandler();
+			cells[i].addActionListener(cellHandlers[i]);
+		}
 
-		panel.add(button);
+		// Create init and exit buttons and handlers
+		exitButton = new JButton("EXIT");
+		exitHandler = new ExitButtonHandler();
+		exitButton.addActionListener(exitHandler);
+		initButton = new JButton("CLEAR");
+		initHandler = new InitButtonHandler();
+		initButton.addActionListener(initHandler);
 
-		panel.add(textfield);
+		// Create result label
+		result = new JLabel("player1", SwingConstants.CENTER);
+		result.setForeground(Color.white);
 
-		frame.getContentPane().add(panel, BorderLayout.NORTH);
-		frame.setVisible(true);
+		// Add elements to the grid content pane
+		for (int i = 0; i < 9; i++) {
+			content.add(cells[i]);
+		}
+		content.add(initButton);
+		content.add(result);
+		content.add(exitButton);
 
+		// Initialize
+		init();
 	}
 
-	static class Action implements ActionListener {
+	public void init() {
+		// Initialize booleans
+		player1 = true;
+		gameOver = false;
+
+		// Initialize text in buttons
+		for (int i = 0; i < 9; i++) {
+			// char ch = (char) ('0' + i + 1);
+			cells[i].setText(Integer.toString(i));
+		}
+
+		// Initialize result label
+		result.setText("player1");
+
+		setVisible(true);
+	}
+
+	public boolean checkWinner() {
+		if (cells[0].getText().equals(cells[1].getText())
+				&& cells[1].getText().equals(cells[2].getText())) {
+			return true;
+		} else if (cells[3].getText().equals(cells[4].getText())
+				&& cells[4].getText().equals(cells[5].getText())) {
+			return true;
+		} else if (cells[6].getText().equals(cells[7].getText())
+				&& cells[7].getText().equals(cells[8].getText())) {
+			return true;
+		} else if (cells[0].getText().equals(cells[3].getText())
+				&& cells[3].getText().equals(cells[6].getText())) {
+			return true;
+		} else if (cells[1].getText().equals(cells[4].getText())
+				&& cells[4].getText().equals(cells[7].getText())) {
+			return true;
+		} else if (cells[2].getText().equals(cells[5].getText())
+				&& cells[5].getText().equals(cells[8].getText())) {
+			return true;
+		} else if (cells[0].getText().equals(cells[4].getText())
+				&& cells[4].getText().equals(cells[8].getText())) {
+			return true;
+		} else if (cells[2].getText().equals(cells[4].getText())
+				&& cells[4].getText().equals(cells[6].getText())) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public static void main(String[] args) {
+		// get order and dimension from the user
+		int o = 0, d = 0;
+		JTextField order = new JTextField(5);
+		JTextField dimension = new JTextField(5);
+
+		JPanel myPanel = new JPanel();
+		myPanel.add(new JLabel("Order:"));
+		myPanel.add(order);
+		myPanel.add(Box.createHorizontalStrut(10)); // a spacer
+		myPanel.add(new JLabel("Dimension:"));
+		myPanel.add(dimension);
+
+		do {
+			int result = JOptionPane.showConfirmDialog(null, myPanel,
+					"Please Enter Order and Dimension",
+					JOptionPane.OK_CANCEL_OPTION);
+			if (result == JOptionPane.OK_CANCEL_OPTION
+					|| result == JOptionPane.CLOSED_OPTION) {
+				System.exit(0);
+			}
+			if (result == JOptionPane.OK_OPTION) {
+				try {
+					o = Integer.parseInt(order.getText());
+					d = Integer.parseInt(dimension.getText());
+				} catch (NumberFormatException e) {
+					JOptionPane.showMessageDialog(null,
+							"Please only enter integers.");
+				}
+				if (d != 2) {
+					JOptionPane
+							.showMessageDialog(null,
+									"Error in dimension! Only dimension of 2 is allowed (for now).");
+				}
+				if (o < 3 || o > 100) {
+					JOptionPane
+							.showMessageDialog(null,
+									"Error in order! Order must be between 3 and 100. ");
+				}
+			}
+
+		} while (o < 3 || o > 100 || d != 2);
+
+		// Create TicTacToe object
+		TttGUI gui = new TttGUI(o, d);
+	}
+
+	private class CellButtonHandler implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			String text = textfield.getText();
-			System.out.println(text);
-			textarea.append(text);
-			textfield.selectAll();
+			// If game over, ignore
+			if (gameOver) {
+				return;
+			}
+
+			// Get button pressed
+			JButton pressed = (JButton) (e.getSource());
+
+			// Get text of button
+			String text = pressed.getText();
+
+			// If player1 or player2, ignore
+			if (text.equals("O") || text.equals("X")) {
+				return;
+			}
+
+			// Add nought or player2
+			if (player1) {
+				pressed.setText("X");
+			} else {
+				pressed.setText("O");
+			}
+
+			// Check winner
+			if (checkWinner()) {
+				// End of game
+				gameOver = true;
+
+				// Display winner message
+				if (player1) {
+					result.setText("player1 wins!");
+				} else {
+					result.setText("player2 wins!");
+				}
+			} else {
+				// Change player
+				player1 = !player1;
+
+				// Display player message
+				if (player1) {
+					result.setText("player1's turn");
+				} else {
+					result.setText("player2's turn");
+				}
+			}
+		}
+	}
+
+	private class ExitButtonHandler implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			System.exit(0);
+		}
+	}
+
+	private class InitButtonHandler implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			init();
 		}
 	}
 

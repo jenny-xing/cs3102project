@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<workbench progressCount="32" version="2.0">
+<workbench progressCount="30" version="2.0">
 <workbenchAdvisor/>
 <window height="754" maximized="true" width="1370" x="-8" y="-8">
 <fastViewData fastViewLocation="1024"/>
@@ -301,7 +301,6 @@
 <workingSets/>
 <navigationHistory>
 <editors>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/generalizedTTT/src/TttTreeBot.java"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/generalizedTTT/src/MagicGenerator.java"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/generalizedTTT/src/TttBoard.java"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/generalizedTTT/src/TttBoard2D.java"/>
@@ -318,156 +317,162 @@
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/generalizedTTT/src/TttDumbBot.java"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/generalizedTTT/src/TttGameTree.java"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/generalizedTTT/src/TttGUI.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/generalizedTTT/src/TttBoard2D.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/generalizedTTT/src/TttBoard.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/generalizedTTT/src/MagicGenerator.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/generalizedTTT/src/TttDumbBot.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/generalizedTTT/src/TttGameTree.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/generalizedTTT/src/TttTreeBot.java"/>
 </editors>
-<item historyLabel="MagicGenerator.java" index="1">
-<position info="not_deleted" x="145" y="0"/>
-</item>
-<item historyLabel="TttDumbBot.java" index="4">
-<position info="not_deleted" x="911" y="0"/>
-</item>
-<item historyLabel="TttGameTree.java" index="5">
-<position info="not_deleted" x="19" y="0"/>
-</item>
-<item historyLabel="TttTreeBot.java" index="0">
-<position info="not_deleted" x="2789" y="0"/>
-</item>
-<item historyLabel="TttGameTree.java" index="5">
-<position info="not_deleted" x="19" y="0"/>
-</item>
-<item historyLabel="TttBoard.java" index="2">
-<position info="not_deleted" x="189" y="0"/>
-</item>
-<item historyLabel="TttBoard.java" index="2">
-<position info="not_deleted" x="1760" y="0"/>
-</item>
-<item historyLabel="TttBoard.java" index="2">
-<position info="not_deleted" x="3757" y="15"/>
-</item>
-<item historyLabel="TttBoard.java" index="2">
-<position info="not_deleted" x="4134" y="3"/>
-</item>
-<item historyLabel="TttBoard.java" index="2">
+<item historyLabel="TttBoard.java" index="1">
 <position info="not_deleted" x="4337" y="13"/>
 </item>
-<item historyLabel="TttBoard.java" index="2">
+<item historyLabel="TttBoard.java" index="1">
 <position info="not_deleted" x="4564" y="14"/>
 </item>
-<item historyLabel="TttBoard.java" index="2">
+<item historyLabel="TttBoard.java" index="1">
 <position info="not_deleted" x="4818" y="15"/>
 </item>
-<item historyLabel="TttBoard.java" index="2">
+<item historyLabel="TttBoard.java" index="1">
 <position info="not_deleted" x="5955" y="6"/>
 </item>
-<item historyLabel="TttBoard.java" index="2">
+<item historyLabel="TttBoard.java" index="1">
 <position info="not_deleted" x="6835" y="15"/>
 </item>
-<item historyLabel="TttBoard.java" index="2">
+<item historyLabel="TttBoard.java" index="1">
 <position info="not_deleted" x="11511" y="15"/>
 </item>
-<item historyLabel="TttBoard.java" index="2">
+<item historyLabel="TttBoard.java" index="1">
 <position info="not_deleted" x="11530" y="0"/>
 </item>
-<item historyLabel="TttBoard.java" index="2">
+<item historyLabel="TttBoard.java" index="1">
 <position info="not_deleted" x="9108" y="5"/>
 </item>
-<item historyLabel="TttBoard.java" index="2">
+<item historyLabel="TttBoard.java" index="1">
 <position info="not_deleted" x="669" y="10"/>
 </item>
-<item historyLabel="TttBoard.java" index="2">
+<item historyLabel="TttBoard.java" index="1">
 <position info="not_deleted" x="714" y="4"/>
 </item>
-<item historyLabel="TttBoard.java" index="2">
+<item historyLabel="TttBoard.java" index="1">
 <position info="not_deleted" x="1677" y="8"/>
 </item>
-<item historyLabel="TttBoard.java" index="2">
+<item historyLabel="TttBoard.java" index="1">
 <position info="not_deleted" x="3947" y="3"/>
 </item>
-<item historyLabel="MagicGenerator.java" index="1">
+<item historyLabel="MagicGenerator.java" index="0">
 <position info="not_deleted" x="145" y="0"/>
 </item>
-<item historyLabel="MagicGenerator.java" index="1">
+<item historyLabel="MagicGenerator.java" index="0">
 <position info="not_deleted" x="6894" y="13"/>
 </item>
-<item historyLabel="MagicGenerator.java" index="1">
+<item historyLabel="MagicGenerator.java" index="0">
 <position info="not_deleted" x="6755" y="10"/>
 </item>
-<item historyLabel="TttBoard.java" index="2">
+<item historyLabel="TttBoard.java" index="1">
 <position info="not_deleted" x="3947" y="3"/>
 </item>
-<item historyLabel="TttBoard.java" index="2">
+<item historyLabel="TttBoard.java" index="1">
 <position info="not_deleted" x="4005" y="0"/>
 </item>
-<item historyLabel="TttBoard.java" index="2">
+<item historyLabel="TttBoard.java" index="1">
 <position info="not_deleted" x="11486" y="0"/>
 </item>
-<item historyLabel="MagicGenerator.java" index="1">
+<item historyLabel="MagicGenerator.java" index="0">
 <position info="not_deleted" x="6755" y="10"/>
 </item>
-<item historyLabel="MagicGenerator.java" index="1">
+<item historyLabel="MagicGenerator.java" index="0">
 <position info="not_deleted" x="6731" y="0"/>
 </item>
-<item historyLabel="TttDumbBot.java" index="4">
+<item historyLabel="TttDumbBot.java" index="3">
 <position info="not_deleted" x="405" y="0"/>
 </item>
-<item historyLabel="TttGameTree.java" index="5">
+<item historyLabel="TttGameTree.java" index="4">
 <position info="not_deleted" x="345" y="0"/>
 </item>
-<item historyLabel="TttBoard2D.java" index="3">
+<item historyLabel="TttBoard2D.java" index="2">
 <position info="not_deleted" x="169" y="0"/>
 </item>
-<item historyLabel="TttBoard.java" index="6">
+<item historyLabel="TttBoard.java" index="5">
 <position info="not_deleted" x="5" y="0"/>
 </item>
-<item historyLabel="TttBoard.java" index="6">
+<item historyLabel="TttBoard.java" index="5">
 <position info="not_deleted" x="11486" y="0"/>
 </item>
-<item historyLabel="MagicGenerator.java" index="7">
+<item historyLabel="MagicGenerator.java" index="6">
 <position info="not_deleted" x="6731" y="0"/>
 </item>
-<item historyLabel="TttDumbBot.java" index="8">
+<item historyLabel="TttDumbBot.java" index="7">
 <position info="not_deleted" x="5" y="0"/>
 </item>
-<item historyLabel="TttDumbBot.java" index="8">
+<item historyLabel="TttDumbBot.java" index="7">
 <position info="not_deleted" x="405" y="0"/>
 </item>
-<item historyLabel="TttGameTree.java" index="9">
+<item historyLabel="TttGameTree.java" index="8">
 <position info="not_deleted" x="345" y="0"/>
 </item>
-<item historyLabel="TttTreeBot.java" index="10">
+<item historyLabel="TttTreeBot.java" index="9">
 <position info="not_deleted" x="2789" y="0"/>
 </item>
-<item historyLabel="TttBoard2D.java" index="11">
+<item historyLabel="TttBoard2D.java" index="10">
 <position info="not_deleted" x="240" y="0"/>
 </item>
-<item historyLabel="TttBoard.java" index="12">
+<item historyLabel="TttBoard.java" index="11">
 <position info="not_deleted" x="5" y="0"/>
 </item>
-<item historyLabel="TttBoard.java" index="12">
+<item historyLabel="TttBoard.java" index="11">
 <position info="not_deleted" x="11486" y="0"/>
 </item>
-<item historyLabel="MagicGenerator.java" index="13">
+<item historyLabel="MagicGenerator.java" index="12">
 <position info="not_deleted" x="6731" y="0"/>
 </item>
-<item historyLabel="TttDumbBot.java" index="14">
+<item historyLabel="TttDumbBot.java" index="13">
 <position info="not_deleted" x="5" y="0"/>
 </item>
-<item historyLabel="TttDumbBot.java" index="14">
+<item historyLabel="TttDumbBot.java" index="13">
 <position info="not_deleted" x="405" y="0"/>
 </item>
-<item historyLabel="TttGameTree.java" index="15">
+<item historyLabel="TttGameTree.java" index="14">
 <position info="not_deleted" x="345" y="0"/>
 </item>
-<item historyLabel="TttTreeBot.java" index="10">
+<item historyLabel="TttTreeBot.java" index="9">
 <position info="not_deleted" x="2789" y="0"/>
 </item>
-<item historyLabel="MagicGenerator.java" index="13">
+<item historyLabel="MagicGenerator.java" index="12">
 <position info="not_deleted" x="233" y="0"/>
 </item>
-<item historyLabel="TttGUI.java" index="16">
+<item historyLabel="TttGUI.java" index="15">
 <position info="not_deleted" x="118" y="0"/>
 </item>
-<item active="true" historyLabel="TttGUI.java" index="16">
+<item historyLabel="TttGUI.java" index="15">
 <position info="not_deleted" x="1088" y="0"/>
+</item>
+<item historyLabel="TttBoard2D.java" index="16">
+<position info="not_deleted" x="5" y="0"/>
+</item>
+<item historyLabel="TttBoard2D.java" index="16">
+<position info="not_deleted" x="293" y="0"/>
+</item>
+<item historyLabel="TttBoard.java" index="17">
+<position info="not_deleted" x="5" y="0"/>
+</item>
+<item historyLabel="TttBoard.java" index="17">
+<position info="not_deleted" x="11486" y="0"/>
+</item>
+<item historyLabel="MagicGenerator.java" index="18">
+<position info="not_deleted" x="233" y="0"/>
+</item>
+<item historyLabel="TttDumbBot.java" index="19">
+<position info="not_deleted" x="5" y="0"/>
+</item>
+<item historyLabel="TttDumbBot.java" index="19">
+<position info="not_deleted" x="405" y="0"/>
+</item>
+<item historyLabel="TttGameTree.java" index="20">
+<position info="not_deleted" x="345" y="0"/>
+</item>
+<item active="true" historyLabel="TttTreeBot.java" index="21">
+<position info="not_deleted" x="2789" y="0"/>
 </item>
 </navigationHistory>
 <input factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/" type="8"/>

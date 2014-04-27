@@ -1807,3 +1807,21 @@ Command-line arguments:  -os win32 -ws win32 -arch x86 -data C:\Users\Jenny\Docu
 
 !ENTRY org.eclipse.ui 4 4 2014-04-23 22:28:48.263
 !MESSAGE Invalid preference page path: XML Syntax
+!SESSION 2014-04-24 09:28:55.889 -----------------------------------------------
+eclipse.buildId=M20120208-0800
+java.version=1.7.0_45
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=en_US
+Command-line arguments:  -os win32 -ws win32 -arch x86
+
+!ENTRY org.eclipse.ui 4 4 2014-04-24 09:29:36.894
+!MESSAGE Invalid preference page path: XML Syntax
+!SESSION 2014-04-27 11:23:42.398 -----------------------------------------------
+eclipse.buildId=M20120208-0800
+java.version=1.7.0_45
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=en_US
+Command-line arguments:  -os win32 -ws win32 -arch x86
+
+!ENTRY org.eclipse.ui 4 4 2014-04-27 12:29:09.959
+!MESSAGE Invalid preference page path: XML Syntax

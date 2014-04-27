@@ -26,10 +26,12 @@ public class TttBoard {
 	final int MAX_SPACES = 1000000;
 
 	public static void main(String args[]) {
-		TttBoard board = new TttBoard(3, 2, "x", "o");
+		
+	TttBoard board = new TttBoard(3, 2, "x", "o");
 		TttBot ai0 = new TttTreeBot(board, 0);
 		TttBot ai1 = new TttDumbBot(board, 1);
 		int move = ai0.firstMove();
+		System.out.println();
 		System.out.println("Player 0 bot wants: " + move);
 		board.move(0, move);
 		ai0.registerMove(move);
@@ -42,6 +44,7 @@ public class TttBoard {
 			if (board.openSpots.size() == 0)
 				break;
 			board.printBoardMap();
+			System.out.println();
 			move = ai0.move();
 			System.out.println("Player 0 bot wants: " + move);
 			board.move(0, move);
@@ -341,14 +344,15 @@ public class TttBoard {
 
 	// perform the winning operation given the winner
 	private void win(String winner) {
-		System.out.println(winner + " has won!");
 		// System.out.println("Board map: " + boardMap);
 		// System.out.println("x spots: " + player0Spots);
 		// System.out.println("o spots: " + player1Spots);
 		// System.out.println("x pairs: " + player0Pairs);
 		// System.out.println("o pairs: " + player1Pairs);
-		// printBoardMap();
+		printBoardMap();
 		// printMagicSquare();
+		System.out.println(winner + " has won!");
+
 		System.exit(0);
 	}
 
