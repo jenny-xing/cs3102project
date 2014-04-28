@@ -26,8 +26,8 @@ public class TttBoard {
 	final int MAX_SPACES = 1000000;
 
 	public static void main(String args[]) {
-		
-	TttBoard board = new TttBoard(3, 2, "x", "o");
+
+		TttBoard board = new TttBoard(3, 2, "x", "o");
 		TttBot ai0 = new TttTreeBot(board, 0);
 		TttBot ai1 = new TttDumbBot(board, 1);
 		int move = ai0.firstMove();

@@ -5,8 +5,8 @@ import java.awt.event.ActionListener;
 
 public class TttGUI extends JFrame {
 
-	private static final int WIDTH = 450;
-	private static final int HEIGHT = 600;
+	private static final int WIDTH = 900;
+	private static final int HEIGHT = 700;
 
 	private Container content;
 	private JLabel result;
@@ -17,28 +17,29 @@ public class TttGUI extends JFrame {
 	private ExitButtonHandler exitHandler;
 	private InitButtonHandler initHandler;
 
+	private int order, dimension, numSpaces;
 	private boolean player1;
 	private boolean gameOver;
 
-	public TttGUI(int order, int dimension) {
-		// Necessary initialization code
-		setTitle("TttGUI");
+	public TttGUI(int o, int d) {
+		order = o;
+		dimension = d;
+		numSpaces = o * o;
+		setTitle("Tic-Tac-Toe Board");
 		setSize(WIDTH, HEIGHT);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-		// Get content pane
 		content = getContentPane();
 		content.setBackground(Color.blue.darker());
 
-		// Set layout
-		content.setLayout(new GridLayout(order, order));
+		GridLayout gl = new GridLayout(order, order);
+		content.setLayout(gl);
 
 		// Create cells and handlers
-		cells = new JButton[9];
-		cellHandlers = new CellButtonHandler[9];
-		for (int i = 0; i < 9; i++) {
-			char ch = (char) ('0' + i + 1);
-			cells[i] = new JButton("" + ch);
+		cells = new JButton[numSpaces];
+		cellHandlers = new CellButtonHandler[numSpaces];
+		for (int i = 0; i < numSpaces; i++) {
+			cells[i] = new JButton(Integer.toString(i));
 			cellHandlers[i] = new CellButtonHandler();
 			cells[i].addActionListener(cellHandlers[i]);
 		}
@@ -56,12 +57,15 @@ public class TttGUI extends JFrame {
 		result.setForeground(Color.white);
 
 		// Add elements to the grid content pane
-		for (int i = 0; i < 9; i++) {
+		for (int i = 0; i < numSpaces; i++) {
 			content.add(cells[i]);
 		}
-		content.add(initButton);
-		content.add(result);
-		content.add(exitButton);
+		// gl.addLayoutComponent("", initButton);
+		// gl.addLayoutComponent("", result);
+		// gl.addLayoutComponent("", exitButton);
+		// content.add(initButton);
+		// content.add(result);
+		// content.add(exitButton);
 
 		// Initialize
 		init();
@@ -73,8 +77,7 @@ public class TttGUI extends JFrame {
 		gameOver = false;
 
 		// Initialize text in buttons
-		for (int i = 0; i < 9; i++) {
-			// char ch = (char) ('0' + i + 1);
+		for (int i = 0; i < numSpaces; i++) {
 			cells[i].setText(Integer.toString(i));
 		}
 
@@ -115,50 +118,29 @@ public class TttGUI extends JFrame {
 	}
 
 	public static void main(String[] args) {
-		// get order and dimension from the user
-		int o = 0, d = 0;
-		JTextField order = new JTextField(5);
-		JTextField dimension = new JTextField(5);
+		int[] od = promptOrderAndDimension();
+		TttGUI gui = new TttGUI(od[0], od[1]);
 
-		JPanel myPanel = new JPanel();
-		myPanel.add(new JLabel("Order:"));
-		myPanel.add(order);
-		myPanel.add(Box.createHorizontalStrut(10)); // a spacer
-		myPanel.add(new JLabel("Dimension:"));
-		myPanel.add(dimension);
+		JFrame player0moves = new JFrame();
+		player0moves.setTitle("Player 0 (X) Moves");
+		player0moves.setSize(450, 350);
+		player0moves.setLocation(900, 0);
+		JFrame player1moves = new JFrame();
+		player1moves.setTitle("Player 1 (O) Moves");
+		player1moves.setSize(450, 350);
+		player1moves.setLocation(900, 350);
 
-		do {
-			int result = JOptionPane.showConfirmDialog(null, myPanel,
-					"Please Enter Order and Dimension",
-					JOptionPane.OK_CANCEL_OPTION);
-			if (result == JOptionPane.OK_CANCEL_OPTION
-					|| result == JOptionPane.CLOSED_OPTION) {
-				System.exit(0);
-			}
-			if (result == JOptionPane.OK_OPTION) {
-				try {
-					o = Integer.parseInt(order.getText());
-					d = Integer.parseInt(dimension.getText());
-				} catch (NumberFormatException e) {
-					JOptionPane.showMessageDialog(null,
-							"Please only enter integers.");
-				}
-				if (d != 2) {
-					JOptionPane
-							.showMessageDialog(null,
-									"Error in dimension! Only dimension of 2 is allowed (for now).");
-				}
-				if (o < 3 || o > 100) {
-					JOptionPane
-							.showMessageDialog(null,
-									"Error in order! Order must be between 3 and 100. ");
-				}
-			}
+		JTextArea p0m = new JTextArea();
+		p0m.setEditable(false);
+		p0m.setLineWrap(true);
+		JTextArea p1m = new JTextArea();
+		p1m.setEditable(false);
+		p1m.setLineWrap(true);
 
-		} while (o < 3 || o > 100 || d != 2);
+		player0moves.add(p0m);
+		player0moves.setVisible(true);
+		player1moves.setVisible(true);
 
-		// Create TicTacToe object
-		TttGUI gui = new TttGUI(o, d);
 	}
 
 	private class CellButtonHandler implements ActionListener {
@@ -211,6 +193,53 @@ public class TttGUI extends JFrame {
 		}
 	}
 
+	public static int[] promptOrderAndDimension() {
+		// get order and dimension from the user
+		int o = 0, d = 0;
+		JTextField order = new JTextField(5);
+		JTextField dimension = new JTextField(5);
+
+		JPanel myPanel = new JPanel();
+		myPanel.add(new JLabel("Order:"));
+		myPanel.add(order);
+		myPanel.add(Box.createHorizontalStrut(10)); // a spacer
+		myPanel.add(new JLabel("Dimension:"));
+		myPanel.add(dimension);
+
+		do {
+			int result = JOptionPane.showConfirmDialog(null, myPanel,
+					"Please Enter Order and Dimension",
+					JOptionPane.OK_CANCEL_OPTION);
+			if (result == JOptionPane.OK_CANCEL_OPTION
+					|| result == JOptionPane.CLOSED_OPTION) {
+				System.exit(0);
+			}
+			if (result == JOptionPane.OK_OPTION) {
+				try {
+					o = Integer.parseInt(order.getText());
+					d = Integer.parseInt(dimension.getText());
+				} catch (NumberFormatException e) {
+					JOptionPane.showMessageDialog(null,
+							"Please only enter integers.");
+				}
+				if (d != 2) {
+					JOptionPane
+							.showMessageDialog(null,
+									"Error in dimension! Only dimension of 2 is allowed (for now).");
+				}
+				if (o < 3 || o > 100) {
+					JOptionPane
+							.showMessageDialog(null,
+									"Error in order! Order must be between 3 and 100. ");
+				}
+			}
+
+		} while (o < 3 || o > 100 || d != 2);
+
+		int[] od = { o, d };
+		return od;
+	}
+
 	private class ExitButtonHandler implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			System.exit(0);
@@ -222,5 +251,4 @@ public class TttGUI extends JFrame {
 			init();
 		}
 	}
-
 }
