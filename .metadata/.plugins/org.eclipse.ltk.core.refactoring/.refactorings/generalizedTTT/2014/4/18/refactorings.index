@@ -2,3 +2,6 @@
 1398615233860	Rename local variable 'yField'
 1398653301907	Copy type
 1398654435039	Rename method 'promptOrderDimension'
+1398657973557	Rename field 'player1'
+1398732903417	Rename field 'player0total'
+1398732912505	Rename field 'player1total'

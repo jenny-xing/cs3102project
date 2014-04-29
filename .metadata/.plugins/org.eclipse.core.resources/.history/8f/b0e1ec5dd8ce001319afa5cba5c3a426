@@ -1,0 +1,237 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.HashMap;
+
+public class TttGUI extends JFrame {
+
+	private Container content;
+	private JButton[] cells;
+	private CellButtonHandler[] cellHandlers;
+	TttBoard board;
+
+	private JFrame player0moves;
+	private JFrame player1moves;
+	private JTextArea p0m;
+	private JTextArea p1m;
+
+	private int order, dimension, numSpaces;
+	private boolean player0;
+	private boolean gameOver;
+
+	public TttGUI(int o, int d, String gameType) {
+		order = o;
+		dimension = d;
+		numSpaces = o * o;
+		board = new TttBoard(o, d, "X", "O");
+
+		setTitle("Tic-Tac-Toe Board");
+		setSize(900, 700);
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
+
+		content = getContentPane();
+		content.setBackground(Color.blue.darker());
+
+		GridLayout gl = new GridLayout(order, order);
+		content.setLayout(gl);
+
+		cells = new JButton[numSpaces];
+		cellHandlers = new CellButtonHandler[numSpaces];
+		for (int i = 0; i < numSpaces; i++) {
+			cells[i] = new JButton(Integer.toString(i));
+			cellHandlers[i] = new CellButtonHandler();
+			cells[i].addActionListener(cellHandlers[i]);
+		}
+
+		for (int i = 0; i < numSpaces; i++) {
+			content.add(cells[i]);
+		}
+
+		init();
+	}
+
+	public void init() {
+		player0 = true;
+		gameOver = false;
+		// board.loadMagicNCube();
+		MagicGenerator g = new MagicGenerator(3, 2);
+		HashMap<Integer, Integer> magicSquare = g.generateMagic();
+
+		for (int i = 0; i < numSpaces; i++) {
+			cells[i].setText("<html>Cell Number: " + Integer.toString(i)
+					+ "<br />Magic Square Number: " + magicSquare.get(i)
+					+ "</html>");
+		}
+
+		setVisible(true);
+
+		player0moves = new JFrame();
+		player0moves.setTitle("Player 0 (X) Moves (Makes the first move)");
+		player0moves.setSize(450, 350);
+		player0moves.setLocation(900, 0);
+		player1moves = new JFrame();
+		player1moves.setTitle("Player 1 (O) Moves");
+		player1moves.setSize(450, 350);
+		player1moves.setLocation(900, 350);
+
+		p0m = new JTextArea();
+		p0m.setEditable(false);
+		p0m.setLineWrap(true);
+		p1m = new JTextArea();
+		p1m.setEditable(false);
+		p1m.setLineWrap(true);
+
+		player0moves.add(p0m);
+		player1moves.add(p1m);
+		player0moves.setVisible(true);
+		player1moves.setVisible(true);
+	}
+
+	public boolean checkWinner() {
+		if (cells[0].getText().equals(cells[1].getText())
+				&& cells[1].getText().equals(cells[2].getText())) {
+			return true;
+		} else if (cells[3].getText().equals(cells[4].getText())
+				&& cells[4].getText().equals(cells[5].getText())) {
+			return true;
+		} else if (cells[6].getText().equals(cells[7].getText())
+				&& cells[7].getText().equals(cells[8].getText())) {
+			return true;
+		} else if (cells[0].getText().equals(cells[3].getText())
+				&& cells[3].getText().equals(cells[6].getText())) {
+			return true;
+		} else if (cells[1].getText().equals(cells[4].getText())
+				&& cells[4].getText().equals(cells[7].getText())) {
+			return true;
+		} else if (cells[2].getText().equals(cells[5].getText())
+				&& cells[5].getText().equals(cells[8].getText())) {
+			return true;
+		} else if (cells[0].getText().equals(cells[4].getText())
+				&& cells[4].getText().equals(cells[8].getText())) {
+			return true;
+		} else if (cells[2].getText().equals(cells[4].getText())
+				&& cells[4].getText().equals(cells[6].getText())) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public static void main(String[] args) {
+		int[] od = promptOrderAndDimension();
+		// note: when it is bot v. human, the bot always goes first
+		Object[] gameOptions = { "Bot v. Bot", "Bot v. Human", "Human v. Human" };
+		String gameType = (String) JOptionPane.showInputDialog(new JFrame(),
+				"Choose Game Type: ", "", JOptionPane.PLAIN_MESSAGE, null,
+				gameOptions, "");
+		TttGUI gui = new TttGUI(od[0], od[1], gameType);
+
+	}
+
+	private class CellButtonHandler implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			// If game over, ignore
+			if (gameOver) {
+				return;
+			}
+
+			// Get button pressed
+			JButton pressed = (JButton) (e.getSource());
+
+			// Get text of button
+			String text = pressed.getText();
+			System.out.println(text);
+
+			// If player1 or player2, ignore
+			if (text.equals("O") || text.equals("X")) {
+				return;
+			}
+
+			// Add nought or player2
+			if (player0) {
+				pressed.setText("X");
+				p0m.append("Moved in spot: " + text + "\n");
+				board.move(0, Integer.parseInt(text));
+			} else {
+				pressed.setText("O");
+				p1m.append("Moved in spot: " + text + "\n");
+				board.move(1, Integer.parseInt(text));
+			}
+
+			// Check winner
+			if (checkWinner()) {
+				// End of game
+				gameOver = true;
+
+				// Display winner message
+				if (player0) {
+					p0m.append("You win!\n");
+				} else {
+					p1m.append("You win!\n");
+				}
+			} else {
+				// Change player
+				player0 = !player0;
+
+				// Display player message
+				if (player0) {
+					player0moves
+							.setTitle("Player 0 (X) Moves (current player)");
+					player1moves.setTitle("Player 1 (O) Moves)");
+				} else {
+					player1moves
+							.setTitle("Player 1 (O) Moves (current player)");
+					player0moves.setTitle("Player 0 (X) Moves" + "");
+				}
+			}
+		}
+	}
+
+	public static int[] promptOrderAndDimension() {
+		// get order and dimension from the user
+		int o = 0, d = 0;
+		JTextField order = new JTextField(5);
+		JTextField dimension = new JTextField(5);
+
+		JPanel myPanel = new JPanel();
+		myPanel.add(new JLabel("Order:"));
+		myPanel.add(order);
+		myPanel.add(Box.createHorizontalStrut(10)); // a spacer
+		myPanel.add(new JLabel("Dimension:"));
+		myPanel.add(dimension);
+
+		do {
+			int result = JOptionPane.showConfirmDialog(null, myPanel,
+					"Please Enter Order and Dimension",
+					JOptionPane.OK_CANCEL_OPTION);
+			if (result == JOptionPane.OK_CANCEL_OPTION
+					|| result == JOptionPane.CLOSED_OPTION) {
+				System.exit(0);
+			}
+			if (result == JOptionPane.OK_OPTION) {
+				try {
+					o = Integer.parseInt(order.getText());
+					d = Integer.parseInt(dimension.getText());
+				} catch (NumberFormatException e) {
+					JOptionPane.showMessageDialog(null,
+							"Please only enter integers.");
+				}
+				if (d != 2) {
+					JOptionPane
+							.showMessageDialog(null,
+									"Error in dimension! Only dimension of 2 is allowed (for now).");
+				}
+				if (o < 3 || o > 100) {
+					JOptionPane
+							.showMessageDialog(null,
+									"Error in order! Order must be between 3 and 100. ");
+				}
+			}
+
+		} while (o < 3 || o > 100 || d != 2);
+
+		int[] od = { o, d };
+		return od;
+	}
+}

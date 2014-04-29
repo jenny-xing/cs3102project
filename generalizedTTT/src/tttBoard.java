@@ -12,6 +12,7 @@ public class TttBoard {
 
 	public int order;
 	public int magicNum;
+
 	public int dimension;
 	private String player0;
 	private String player1;
@@ -27,32 +28,40 @@ public class TttBoard {
 
 	public static void main(String args[]) {
 
-		TttBoard board = new TttBoard(3, 2, "x", "o");
+		TttBoard board = new TttBoard(4, 2, "x", "o");
 		TttBot ai0 = new TttTreeBot(board, 0);
 		TttBot ai1 = new TttDumbBot(board, 1);
+
 		int move = ai0.firstMove();
 		System.out.println();
 		System.out.println("Player 0 bot wants: " + move);
 		board.move(0, move);
 		ai0.registerMove(move);
+
 		move = ai1.firstMove();
 		System.out.println("Player 1 bot wants: " + move);
 		board.move(1, move);
 		ai0.registerMove(move);
+
 		while (true) {
 			long start = System.nanoTime();
+
 			if (board.openSpots.size() == 0)
 				break;
+
 			board.printBoardMap();
 			System.out.println();
+
 			move = ai0.move();
 			System.out.println("Player 0 bot wants: " + move);
 			board.move(0, move);
 			ai0.registerMove(move);
+
 			move = ai1.move();
 			System.out.println("Player 1 bot wants: " + move);
 			board.move(1, move);
 			ai0.registerMove(move);
+
 			long stop = System.nanoTime();
 			System.out.println("Pair of moves taken in " + (stop - start)
 					/ 1000000 + " ms");
@@ -93,6 +102,10 @@ public class TttBoard {
 		player1Pairs = new HashSet<Integer>(parent.getPlayer1Pairs());
 	}
 
+	public int getMagicNum() {
+		return magicNum;
+	}
+
 	public int getOrder() {
 		return order;
 	}
@@ -110,7 +123,7 @@ public class TttBoard {
 	}
 
 	public HashMap<Integer, Integer> getMagicCube() {
-		return new HashMap<Integer, Integer>(magicNCube);
+		return magicNCube;
 	}
 
 	public HashSet<Integer> getPlayerPairs(int player) {
@@ -160,7 +173,7 @@ public class TttBoard {
 
 	// load Integer values into the correct values in the magicCube map
 	// TODO: implement for n-dimensions
-	private void loadMagicNCube() {
+	public void loadMagicNCube() {
 		if (dimension == 2) {
 			loadMagicSquare();
 		} else if (dimension == 3) {
@@ -188,7 +201,7 @@ public class TttBoard {
 					}
 				}
 			}
-			System.out.println("magic square has been read.");
+			// System.out.println("magic square has been read.");
 
 		} catch (IOException ex) {
 			System.out
@@ -239,9 +252,8 @@ public class TttBoard {
 		} else
 			player0Spots.add(magicNCube.get(key));
 		openSpots.remove(key);
-		check(key, player);
 		updatePairs(key, player);
-		return true;
+		return check(key, player);
 	}
 
 	public boolean moveSuppressWin(int player, int key) {
@@ -322,11 +334,13 @@ public class TttBoard {
 				// System.out.println(magicNCube.get(key));
 				// printMagicSquare();
 				win(winner);
+				System.out.println("the winning number was " + i
+						+ magicNCube.get(key));
 				return true;
 			}
 		}
-		checkDraw();
-		return true;
+		// checkDraw();
+		return false;
 	}
 
 	// method to check for draw condition
@@ -353,7 +367,7 @@ public class TttBoard {
 		// printMagicSquare();
 		System.out.println(winner + " has won!");
 
-		System.exit(0);
+		// System.exit(0);
 	}
 
 	// prints magic square in row-major oder

@@ -1825,3 +1825,33 @@ Command-line arguments:  -os win32 -ws win32 -arch x86
 
 !ENTRY org.eclipse.ui 4 4 2014-04-27 12:29:09.959
 !MESSAGE Invalid preference page path: XML Syntax
+!SESSION 2014-04-28 08:56:39.243 -----------------------------------------------
+eclipse.buildId=M20120208-0800
+java.version=1.7.0_45
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=en_US
+Command-line arguments:  -os win32 -ws win32 -arch x86
+
+!ENTRY org.eclipse.core.resources 2 10035 2014-04-28 08:56:42.651
+!MESSAGE The workspace exited with unsaved changes in the previous session; refreshing workspace to recover changes.
+
+!ENTRY org.eclipse.ui 4 4 2014-04-28 11:10:18.584
+!MESSAGE Invalid preference page path: XML Syntax
+!SESSION 2014-04-28 17:37:17.498 -----------------------------------------------
+eclipse.buildId=M20120208-0800
+java.version=1.7.0_45
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=en_US
+Command-line arguments:  -os win32 -ws win32 -arch x86
+
+!ENTRY org.eclipse.ui 4 4 2014-04-28 17:37:40.262
+!MESSAGE Invalid preference page path: XML Syntax
+!SESSION 2014-04-28 19:14:43.418 -----------------------------------------------
+eclipse.buildId=M20120208-0800
+java.version=1.7.0_45
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=en_US
+Command-line arguments:  -os win32 -ws win32 -arch x86 -data C:\Users\Jenny\Documents\GitHub\cs3102project
+
+!ENTRY org.eclipse.ui 4 4 2014-04-28 19:57:53.136
+!MESSAGE Invalid preference page path: XML Syntax

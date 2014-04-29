@@ -2,31 +2,39 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Arrays;
+import java.util.HashMap;
 
 public class TttGUI extends JFrame {
 
-	private static final int WIDTH = 900;
-	private static final int HEIGHT = 700;
-
 	private Container content;
-	private JLabel result;
 	private JButton[] cells;
-	private JButton exitButton;
-	private JButton initButton;
 	private CellButtonHandler[] cellHandlers;
-	private ExitButtonHandler exitHandler;
-	private InitButtonHandler initHandler;
+	private TttBoard board;
+
+	private JFrame player0moves;
+	private JFrame player1moves;
+	private JTextArea p0m;
+	private JTextArea p1m;
+	private String player0magicints;
+	private String player1magicints;
 
 	private int order, dimension, numSpaces;
-	private boolean player1;
+	private boolean player0;
 	private boolean gameOver;
+	private TttBot ai0, ai1;
 
-	public TttGUI(int o, int d) {
+	public TttGUI(int o, int d, String gameType) {
 		order = o;
 		dimension = d;
 		numSpaces = o * o;
-		setTitle("Tic-Tac-Toe Board");
-		setSize(WIDTH, HEIGHT);
+		board = new TttBoard(o, d, "X", "O");
+		player0magicints = "";
+		player1magicints = "";
+
+		setTitle("Tic-Tac-Toe Board (the magic number is "
+				+ board.getMagicNum() + ")");
+		setSize(900, 700);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 
 		content = getContentPane();
@@ -35,7 +43,6 @@ public class TttGUI extends JFrame {
 		GridLayout gl = new GridLayout(order, order);
 		content.setLayout(gl);
 
-		// Create cells and handlers
 		cells = new JButton[numSpaces];
 		cellHandlers = new CellButtonHandler[numSpaces];
 		for (int i = 0; i < numSpaces; i++) {
@@ -44,152 +51,173 @@ public class TttGUI extends JFrame {
 			cells[i].addActionListener(cellHandlers[i]);
 		}
 
-		// Create init and exit buttons and handlers
-		exitButton = new JButton("EXIT");
-		exitHandler = new ExitButtonHandler();
-		exitButton.addActionListener(exitHandler);
-		initButton = new JButton("CLEAR");
-		initHandler = new InitButtonHandler();
-		initButton.addActionListener(initHandler);
-
-		// Create result label
-		result = new JLabel("player1", SwingConstants.CENTER);
-		result.setForeground(Color.white);
-
-		// Add elements to the grid content pane
 		for (int i = 0; i < numSpaces; i++) {
 			content.add(cells[i]);
 		}
-		// gl.addLayoutComponent("", initButton);
-		// gl.addLayoutComponent("", result);
-		// gl.addLayoutComponent("", exitButton);
-		// content.add(initButton);
-		// content.add(result);
-		// content.add(exitButton);
 
-		// Initialize
 		init();
 	}
 
-	public void init() {
-		// Initialize booleans
-		player1 = true;
+	private void init() {
+		player0 = true;
 		gameOver = false;
 
-		// Initialize text in buttons
 		for (int i = 0; i < numSpaces; i++) {
-			cells[i].setText(Integer.toString(i));
+			cells[i].setText("<html>Cell Number: " + Integer.toString(i)
+					+ "<br />Magic Square Number: "
+					+ board.getMagicCube().get(i) + "</html>");
 		}
-
-		// Initialize result label
-		result.setText("player1");
 
 		setVisible(true);
-	}
 
-	public boolean checkWinner() {
-		if (cells[0].getText().equals(cells[1].getText())
-				&& cells[1].getText().equals(cells[2].getText())) {
-			return true;
-		} else if (cells[3].getText().equals(cells[4].getText())
-				&& cells[4].getText().equals(cells[5].getText())) {
-			return true;
-		} else if (cells[6].getText().equals(cells[7].getText())
-				&& cells[7].getText().equals(cells[8].getText())) {
-			return true;
-		} else if (cells[0].getText().equals(cells[3].getText())
-				&& cells[3].getText().equals(cells[6].getText())) {
-			return true;
-		} else if (cells[1].getText().equals(cells[4].getText())
-				&& cells[4].getText().equals(cells[7].getText())) {
-			return true;
-		} else if (cells[2].getText().equals(cells[5].getText())
-				&& cells[5].getText().equals(cells[8].getText())) {
-			return true;
-		} else if (cells[0].getText().equals(cells[4].getText())
-				&& cells[4].getText().equals(cells[8].getText())) {
-			return true;
-		} else if (cells[2].getText().equals(cells[4].getText())
-				&& cells[4].getText().equals(cells[6].getText())) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-
-	public static void main(String[] args) {
-		int[] od = promptOrderAndDimension();
-		TttGUI gui = new TttGUI(od[0], od[1]);
-
-		JFrame player0moves = new JFrame();
-		player0moves.setTitle("Player 0 (X) Moves");
+		player0moves = new JFrame();
+		player0moves.setTitle("Player 0 (X) Moves (Makes the first move)");
 		player0moves.setSize(450, 350);
 		player0moves.setLocation(900, 0);
-		JFrame player1moves = new JFrame();
+		player1moves = new JFrame();
 		player1moves.setTitle("Player 1 (O) Moves");
 		player1moves.setSize(450, 350);
 		player1moves.setLocation(900, 350);
 
-		JTextArea p0m = new JTextArea();
+		p0m = new JTextArea();
 		p0m.setEditable(false);
 		p0m.setLineWrap(true);
-		JTextArea p1m = new JTextArea();
+		p1m = new JTextArea();
 		p1m.setEditable(false);
 		p1m.setLineWrap(true);
 
 		player0moves.add(p0m);
+		player1moves.add(p1m);
 		player0moves.setVisible(true);
 		player1moves.setVisible(true);
+
+		ai0 = new TttTreeBot(board, 0);
+		ai1 = new TttDumbBot(board, 1);
+	}
+
+	public static void main(String[] args) {
+		JOptionPane
+				.showMessageDialog(
+						null,
+						"Welcome to Magic Square Tic-Tac-Toe! \n"
+								+ "The goal is to pick cells that will add up to the magic number. \n");
+		int[] od = promptOrderAndDimension();
+		// note: when it is bot v. human, the bot always goes first
+		String[] gameOptions = { "Bot v. Bot", "Bot (easy) v. Human",
+				"Bot (hard) b. Human", "Human v. Human" };
+		String gameType = (String) JOptionPane.showInputDialog(new JFrame(),
+				"Choose Game Type: ", "", JOptionPane.PLAIN_MESSAGE, null,
+				gameOptions, "");
+		int choice = Arrays.asList(gameOptions).indexOf(gameType) + 1;
+
+		TttGUI gui = new TttGUI(od[0], od[1], gameType);
 
 	}
 
 	private class CellButtonHandler implements ActionListener {
+
 		public void actionPerformed(ActionEvent e) {
 			// If game over, ignore
 			if (gameOver) {
 				return;
 			}
 
-			// Get button pressed
 			JButton pressed = (JButton) (e.getSource());
 
-			// Get text of button
-			String text = pressed.getText();
+			int spot = -1;
 
-			// If player1 or player2, ignore
-			if (text.equals("O") || text.equals("X")) {
+			for (int i = 0; i < numSpaces; i++) {
+				if (cells[i].equals(pressed))
+					spot = i;
+			}
+
+			String spotNum = Integer.toString(spot);
+			if (pressed.getText().equals("O") || pressed.getText().equals("X")) {
 				return;
 			}
 
-			// Add nought or player2
-			if (player1) {
+			String magicInt = pressed.getText().substring(
+					pressed.getText().indexOf("Magic Square Number:") + 21,
+					pressed.getText().indexOf("</html>"));
+
+			// If space already played, ignore
+
+			if (player0) {
 				pressed.setText("X");
+				player0magicints += magicInt + " ";
+				p0m.append("Moved in spot: " + spotNum + "\tYour Magic Ints: "
+						+ player0magicints + "\n");
+
+				if (board.move(0, Integer.parseInt(spotNum))) {
+					gameOver = true;
+					p0m.append("You win!\n");
+					return;
+				} else {
+					player0 = !player0;
+					if (player0) {
+						player0moves
+								.setTitle("Player 0 (X) Moves (current player)");
+						player1moves.setTitle("Player 1 (O) Moves)");
+					} else {
+						player1moves
+								.setTitle("Player 1 (O) Moves (current player)");
+						player0moves.setTitle("Player 0 (X) Moves" + "");
+					}
+				}
 			} else {
 				pressed.setText("O");
-			}
+				player1magicints += magicInt + " ";
+				p1m.append("Moved in spot: " + spotNum + "\tYour Magic Ints: "
+						+ player1magicints + "\n");
 
-			// Check winner
-			if (checkWinner()) {
-				// End of game
-				gameOver = true;
-
-				// Display winner message
-				if (player1) {
-					result.setText("player1 wins!");
+				if (board.move(1, Integer.parseInt(spotNum))) {
+					gameOver = true;
+					p1m.append("You win!\n");
+					return;
 				} else {
-					result.setText("player2 wins!");
-				}
-			} else {
-				// Change player
-				player1 = !player1;
-
-				// Display player message
-				if (player1) {
-					result.setText("player1's turn");
-				} else {
-					result.setText("player2's turn");
+					player0 = !player0;
+					if (player0) {
+						player0moves
+								.setTitle("Player 0 (X) Moves (current player)");
+						player1moves.setTitle("Player 1 (O) Moves)");
+					} else {
+						player1moves
+								.setTitle("Player 1 (O) Moves (current player)");
+						player0moves.setTitle("Player 0 (X) Moves" + "");
+					}
 				}
 			}
+
+			// // TODO check win is incorrect
+			// if (board.check(spot, 0)) {
+			// // End of game
+			// gameOver = true;
+			//
+			// // Display winner message
+			// // if (player0) {
+			// p0m.append("You win!\n");
+			// // } else {
+			// // p1m.append("You win!\n");
+			// // }
+			// } else if (board.check(spot, 1)) {
+			// gameOver = true;
+			// p1m.append("You win!\n");
+			// } else {
+			//
+			// // Change player
+			// player0 = !player0;
+			//
+			// // Display player message
+			// if (player0) {
+			// player0moves
+			// .setTitle("Player 0 (X) Moves (current player)");
+			// player1moves.setTitle("Player 1 (O) Moves)");
+			// } else {
+			// player1moves
+			// .setTitle("Player 1 (O) Moves (current player)");
+			// player0moves.setTitle("Player 0 (X) Moves" + "");
+			// }
+			// }
 		}
 	}
 
@@ -238,17 +266,5 @@ public class TttGUI extends JFrame {
 
 		int[] od = { o, d };
 		return od;
-	}
-
-	private class ExitButtonHandler implements ActionListener {
-		public void actionPerformed(ActionEvent e) {
-			System.exit(0);
-		}
-	}
-
-	private class InitButtonHandler implements ActionListener {
-		public void actionPerformed(ActionEvent e) {
-			init();
-		}
 	}
 }
