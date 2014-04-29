@@ -95,6 +95,23 @@ public class TttGUI extends JFrame {
 		ai1 = new TttDumbBot(board, 1);
 	}
 
+	private int moveBot(TttBot b, boolean firstmove, int opponentmove) {
+		int move = -1;
+		if (firstmove) {
+			move = b.firstMove();
+		} else {
+			move = b.move();
+		}
+		if (b instanceof TttTreeBot) {
+			b.registerMove(opponentmove);
+		}
+		return move;
+	}
+
+	public void botvbotPlay(TttBot bot0, TttBot bot1) {
+
+	}
+
 	public static void main(String[] args) {
 		JOptionPane
 				.showMessageDialog(
@@ -104,7 +121,7 @@ public class TttGUI extends JFrame {
 		int[] od = promptOrderAndDimension();
 		// note: when it is bot v. human, the bot always goes first
 		String[] gameOptions = { "Bot v. Bot", "Bot (easy) v. Human",
-				"Bot (hard) b. Human", "Human v. Human" };
+				"Bot (hard) v. Human", "Human v. Human" };
 		String gameType = (String) JOptionPane.showInputDialog(new JFrame(),
 				"Choose Game Type: ", "", JOptionPane.PLAIN_MESSAGE, null,
 				gameOptions, "");
@@ -175,6 +192,7 @@ public class TttGUI extends JFrame {
 					p1m.append("You win!\n");
 					return;
 				} else {
+					
 					player0 = !player0;
 					if (player0) {
 						player0moves
@@ -185,6 +203,7 @@ public class TttGUI extends JFrame {
 								.setTitle("Player 1 (O) Moves (current player)");
 						player0moves.setTitle("Player 0 (X) Moves" + "");
 					}
+					
 				}
 			}
 

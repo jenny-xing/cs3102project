@@ -327,15 +327,14 @@ public class TttBoard {
 		String winner = (player == 0) ? player0 : player1; // not necessarily
 															// the winner yet
 		for (int i : pairs) {
+
 			if (i + magicNCube.get(key) == magicNum) {
 				// System.out.println(key + " was the winning move");
 				// System.out.println(spots);
-				// System.out.println(pairs);
+				System.out.println(pairs);
 				// System.out.println(magicNCube.get(key));
 				// printMagicSquare();
 				win(winner);
-				System.out.println("the winning number was " + i
-						+ magicNCube.get(key));
 				return true;
 			}
 		}

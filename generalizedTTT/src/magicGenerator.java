@@ -9,6 +9,10 @@ public class MagicGenerator {
 			tester.generateMagic();
 			tester.writeMagic();
 		}
+
+		MagicGenerator tester = new MagicGenerator(7, 2);
+		tester.generateMagic();
+		tester.writeMagic();
 	}
 
 	private static int order;
@@ -186,11 +190,12 @@ public class MagicGenerator {
 		try {
 			writer = new BufferedWriter(new OutputStreamWriter(
 					new FileOutputStream(filepath), "utf-8"));
-			for (Integer value : magicThing.values()) {
+			for (int i = 0; i < TttBoard.pow(order, dimension); i++) {
+				Integer value = magicThing.get(i);
 				writer.write(value.toString());
 				writer.write(" ");
 			}
-			System.out.println("the magic thing is saved in " + filename);
+			// System.out.println("the magic thing is saved in " + filename);
 		} catch (IOException ex) {
 			System.out.println("Error writing magicThing");
 		} finally {
