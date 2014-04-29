@@ -331,7 +331,7 @@ public class TttBoard {
 			if (i + magicNCube.get(key) == magicNum) {
 				// System.out.println(key + " was the winning move");
 				// System.out.println(spots);
-				// System.out.println(pairs);
+				System.out.println(pairs);
 				// System.out.println(magicNCube.get(key));
 				// printMagicSquare();
 				win(winner);
@@ -362,13 +362,15 @@ public class TttBoard {
 		// System.out.println("o spots: " + player1Spots);
 		// System.out.println("x pairs: " + player0Pairs);
 		// System.out.println("o pairs: " + player1Pairs);
-		// printBoardMap();
+		printBoardMap();
 		// printMagicSquare();
-		// System.out.println(winner + " has won!");
+		System.out.println(winner + " has won!");
+
+		// System.exit(0);
 	}
 
 	// prints magic square in row-major oder
-	public void printMagicSquare() {
+	private void printMagicSquare() {
 		System.out.println("Start MagicSquare");
 		for (int row = 0; row < order; row++) {
 			for (int col = 0; col < order; col++) {

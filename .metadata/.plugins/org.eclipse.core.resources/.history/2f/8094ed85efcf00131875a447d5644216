@@ -1,5 +1,4 @@
 import javax.swing.*;
-
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -113,75 +112,8 @@ public class TttGUI extends JFrame {
 	}
 
 	private void botvbotplay() {
-		boolean ai0turn = true;
-
-		int move = ai0.firstMove();
-		ai0turn = !ai0turn;
-		updateUI(move, "ai0");
-		board.move(0, move);
-		ai0.registerMove(move);
-
-		move = ai1.firstMove();
-		updateUI(move, "ai1");
-		board.move(1, move);
-		ai0.registerMove(move);
-
+		int ai0firstmove = ai0.firstMove();
 		while (!gameOver) {
-			if (ai0turn) {
-				move = ai0.move();
-				updateUI(move, "ai0");
-				if (board.move(0, move)) {
-					gameOver = true;
-					p0m.append("The Smart Bot Wins!\n");
-				}
-				ai0.registerMove(move);
-				ai0turn = !ai0turn;
-
-			} else {
-				move = ai1.move();
-				updateUI(move, "ai1");
-				if (board.move(1, move)) {
-					p1m.append("The Dumb Bot Wins!\n");
-					gameOver = true;
-				}
-				ai1.registerMove(move);
-				ai0turn = !ai0turn;
-			}
-		}
-
-		// this was just bad HCI-wise
-
-		// int restart = JOptionPane.showConfirmDialog(null, "Stimulate again?",
-		// null, JOptionPane.YES_NO_OPTION);
-		// switch (restart) {
-		// case JOptionPane.YES_OPTION:
-		// botvbotplay();
-		// case JOptionPane.NO_OPTION:
-		// System.exit(0);
-		// }
-	}
-
-	private void updateUI(int spot, String botname) {
-		JButton correspondingbutton = cells[spot];
-		String spotNum = Integer.toString(spot);
-
-		String magicInt = correspondingbutton.getText()
-				.substring(
-						correspondingbutton.getText().indexOf(
-								"Magic Square Number:") + 21,
-						correspondingbutton.getText().indexOf("</html>"));
-
-		if (botname == "ai0") {
-			correspondingbutton.setText("X");
-			player0magicints += magicInt + " ";
-			p0m.append("Moved in spot: " + spotNum + "\tYour Magic Ints: "
-					+ player0magicints + "\n");
-		}
-		if (botname == "ai1") {
-			correspondingbutton.setText("O");
-			player1magicints += magicInt + " ";
-			p1m.append("Moved in spot: " + spotNum + "\tYour Magic Ints: "
-					+ player1magicints + "\n");
 		}
 	}
 
@@ -194,7 +126,7 @@ public class TttGUI extends JFrame {
 		int[] od = promptOrderAndDimension();
 		// note: when it is bot v. human, the bot always goes first
 		String[] gameOptions = { "Human v. Human", "Human v. Human (assisted)",
-				"Bot v. Bot" };
+				"Human (assisted) v. Human (assisted)" };
 		String gameType = (String) JOptionPane.showInputDialog(new JFrame(),
 				"Choose Game Type: ", "", JOptionPane.PLAIN_MESSAGE, null,
 				gameOptions, "");
@@ -211,9 +143,7 @@ public class TttGUI extends JFrame {
 			break;
 		}
 		TttGUI gui = new TttGUI(od[0], od[1], gameType);
-		if (choice == 3) {
-			gui.botvbotplay();
-		}
+		gui.botvbotplay();
 	}
 
 	private class CellButtonHandler implements ActionListener {

@@ -1,5 +1,4 @@
 import javax.swing.*;
-
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -125,6 +124,8 @@ public class TttGUI extends JFrame {
 		updateUI(move, "ai1");
 		board.move(1, move);
 		ai0.registerMove(move);
+		board.printBoardMap();
+		board.printMagicSquare();
 
 		while (!gameOver) {
 			if (ai0turn) {
@@ -149,16 +150,14 @@ public class TttGUI extends JFrame {
 			}
 		}
 
-		// this was just bad HCI-wise
-
-		// int restart = JOptionPane.showConfirmDialog(null, "Stimulate again?",
-		// null, JOptionPane.YES_NO_OPTION);
-		// switch (restart) {
-		// case JOptionPane.YES_OPTION:
-		// botvbotplay();
-		// case JOptionPane.NO_OPTION:
-		// System.exit(0);
-		// }
+		int restart = JOptionPane.showConfirmDialog(null, "Stimulate again?",
+				null, JOptionPane.YES_NO_OPTION);
+		switch (restart) {
+		case JOptionPane.YES_OPTION:
+			botvbotplay();
+		case JOptionPane.NO_OPTION:
+			System.exit(0);
+		}
 	}
 
 	private void updateUI(int spot, String botname) {
@@ -194,7 +193,7 @@ public class TttGUI extends JFrame {
 		int[] od = promptOrderAndDimension();
 		// note: when it is bot v. human, the bot always goes first
 		String[] gameOptions = { "Human v. Human", "Human v. Human (assisted)",
-				"Bot v. Bot" };
+				"Human (assisted) v. Human (assisted)" };
 		String gameType = (String) JOptionPane.showInputDialog(new JFrame(),
 				"Choose Game Type: ", "", JOptionPane.PLAIN_MESSAGE, null,
 				gameOptions, "");
@@ -211,9 +210,7 @@ public class TttGUI extends JFrame {
 			break;
 		}
 		TttGUI gui = new TttGUI(od[0], od[1], gameType);
-		if (choice == 3) {
-			gui.botvbotplay();
-		}
+		gui.botvbotplay();
 	}
 
 	private class CellButtonHandler implements ActionListener {

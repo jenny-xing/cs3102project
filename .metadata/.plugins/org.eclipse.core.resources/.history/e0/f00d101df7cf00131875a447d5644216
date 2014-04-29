@@ -25,6 +25,7 @@ public class TttGUI extends JFrame {
 	private boolean gameOver;
 	private TttBot ai0, ai1;
 	public static boolean useai0, useai1;
+	public static int choice;
 
 	public TttGUI(int o, int d, String gameType) {
 		order = o;
@@ -125,6 +126,8 @@ public class TttGUI extends JFrame {
 		updateUI(move, "ai1");
 		board.move(1, move);
 		ai0.registerMove(move);
+		board.printBoardMap();
+		board.printMagicSquare();
 
 		while (!gameOver) {
 			if (ai0turn) {
@@ -198,7 +201,7 @@ public class TttGUI extends JFrame {
 		String gameType = (String) JOptionPane.showInputDialog(new JFrame(),
 				"Choose Game Type: ", "", JOptionPane.PLAIN_MESSAGE, null,
 				gameOptions, "");
-		int choice = Arrays.asList(gameOptions).indexOf(gameType) + 1;
+		choice = Arrays.asList(gameOptions).indexOf(gameType) + 1;
 		switch (choice) {
 		case 1:
 			break;
@@ -219,11 +222,13 @@ public class TttGUI extends JFrame {
 	private class CellButtonHandler implements ActionListener {
 
 		public void actionPerformed(ActionEvent e) {
-			// If game over, ignore
+			if (choice == 3) {
+				botvbotplay();
+				return;
+			}
 			if (gameOver) {
 				return;
 			}
-
 			JButton pressed = (JButton) (e.getSource());
 
 			int spot = -1;

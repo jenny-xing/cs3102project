@@ -1,5 +1,4 @@
 import javax.swing.*;
-
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -98,10 +97,9 @@ public class TttGUI extends JFrame {
 	}
 
 	// TODO is this complete?
-	// first move is 0
-	private int moveBot(TttBot b, int firstmove, int opponentmove) {
+	private int moveBot(TttBot b, boolean firstmove, int opponentmove) {
 		int move = -1;
-		if (firstmove == 1) {
+		if (firstmove) {
 			move = b.firstMove();
 		} else {
 			move = b.move();
@@ -112,79 +110,6 @@ public class TttGUI extends JFrame {
 		return move;
 	}
 
-	private void botvbotplay() {
-		boolean ai0turn = true;
-
-		int move = ai0.firstMove();
-		ai0turn = !ai0turn;
-		updateUI(move, "ai0");
-		board.move(0, move);
-		ai0.registerMove(move);
-
-		move = ai1.firstMove();
-		updateUI(move, "ai1");
-		board.move(1, move);
-		ai0.registerMove(move);
-
-		while (!gameOver) {
-			if (ai0turn) {
-				move = ai0.move();
-				updateUI(move, "ai0");
-				if (board.move(0, move)) {
-					gameOver = true;
-					p0m.append("The Smart Bot Wins!\n");
-				}
-				ai0.registerMove(move);
-				ai0turn = !ai0turn;
-
-			} else {
-				move = ai1.move();
-				updateUI(move, "ai1");
-				if (board.move(1, move)) {
-					p1m.append("The Dumb Bot Wins!\n");
-					gameOver = true;
-				}
-				ai1.registerMove(move);
-				ai0turn = !ai0turn;
-			}
-		}
-
-		// this was just bad HCI-wise
-
-		// int restart = JOptionPane.showConfirmDialog(null, "Stimulate again?",
-		// null, JOptionPane.YES_NO_OPTION);
-		// switch (restart) {
-		// case JOptionPane.YES_OPTION:
-		// botvbotplay();
-		// case JOptionPane.NO_OPTION:
-		// System.exit(0);
-		// }
-	}
-
-	private void updateUI(int spot, String botname) {
-		JButton correspondingbutton = cells[spot];
-		String spotNum = Integer.toString(spot);
-
-		String magicInt = correspondingbutton.getText()
-				.substring(
-						correspondingbutton.getText().indexOf(
-								"Magic Square Number:") + 21,
-						correspondingbutton.getText().indexOf("</html>"));
-
-		if (botname == "ai0") {
-			correspondingbutton.setText("X");
-			player0magicints += magicInt + " ";
-			p0m.append("Moved in spot: " + spotNum + "\tYour Magic Ints: "
-					+ player0magicints + "\n");
-		}
-		if (botname == "ai1") {
-			correspondingbutton.setText("O");
-			player1magicints += magicInt + " ";
-			p1m.append("Moved in spot: " + spotNum + "\tYour Magic Ints: "
-					+ player1magicints + "\n");
-		}
-	}
-
 	public static void main(String[] args) {
 		JOptionPane
 				.showMessageDialog(
@@ -193,8 +118,8 @@ public class TttGUI extends JFrame {
 								+ "The goal is to pick cells that will add up to the magic number. \n");
 		int[] od = promptOrderAndDimension();
 		// note: when it is bot v. human, the bot always goes first
-		String[] gameOptions = { "Human v. Human", "Human v. Human (assisted)",
-				"Bot v. Bot" };
+		String[] gameOptions = { "Human v. Human", "Human (assisted) v. Human",
+				"Human (assisted) v. Human (assisted)" };
 		String gameType = (String) JOptionPane.showInputDialog(new JFrame(),
 				"Choose Game Type: ", "", JOptionPane.PLAIN_MESSAGE, null,
 				gameOptions, "");
@@ -211,9 +136,7 @@ public class TttGUI extends JFrame {
 			break;
 		}
 		TttGUI gui = new TttGUI(od[0], od[1], gameType);
-		if (choice == 3) {
-			gui.botvbotplay();
-		}
+
 	}
 
 	private class CellButtonHandler implements ActionListener {
@@ -233,17 +156,17 @@ public class TttGUI extends JFrame {
 					spot = i;
 			}
 
+			String spotNum = Integer.toString(spot);
 			if (pressed.getText().equals("O") || pressed.getText().equals("X")) {
 				return;
 			}
-
-			String spotNum = Integer.toString(spot);
 
 			String magicInt = pressed.getText().substring(
 					pressed.getText().indexOf("Magic Square Number:") + 21,
 					pressed.getText().indexOf("</html>"));
 
-			// TODO the rest of this needs to be refactored
+			// If space already played, ignore
+
 			if (player0) {
 				pressed.setText("X");
 				player0magicints += magicInt + " ";
@@ -266,10 +189,6 @@ public class TttGUI extends JFrame {
 						player0moves.setTitle("Player 0 (X) Moves" + "");
 					}
 				}
-				if (useai0) {
-					System.out.println("have ai tell player 1 where to move");
-					ai0.registerMove(spot);
-				}
 			} else {
 				pressed.setText("O");
 				player1magicints += magicInt + " ";
@@ -281,6 +200,7 @@ public class TttGUI extends JFrame {
 					p1m.append("You win!\n");
 					return;
 				} else {
+
 					player0 = !player0;
 					if (player0) {
 						player0moves
@@ -292,12 +212,44 @@ public class TttGUI extends JFrame {
 						player0moves.setTitle("Player 0 (X) Moves" + "");
 					}
 
-				}
-				if (useai1) {
-					System.out.println("have ai tell player 0 where to move");
+					if (player0 && useai0) {
+						System.out
+								.println("have ai tell player 0 where to move");
+					}
+
 				}
 			}
 
+			// // TODO check win is incorrect
+			// if (board.check(spot, 0)) {
+			// // End of game
+			// gameOver = true;
+			//
+			// // Display winner message
+			// // if (player0) {
+			// p0m.append("You win!\n");
+			// // } else {
+			// // p1m.append("You win!\n");
+			// // }
+			// } else if (board.check(spot, 1)) {
+			// gameOver = true;
+			// p1m.append("You win!\n");
+			// } else {
+			//
+			// // Change player
+			// player0 = !player0;
+			//
+			// // Display player message
+			// if (player0) {
+			// player0moves
+			// .setTitle("Player 0 (X) Moves (current player)");
+			// player1moves.setTitle("Player 1 (O) Moves)");
+			// } else {
+			// player1moves
+			// .setTitle("Player 1 (O) Moves (current player)");
+			// player0moves.setTitle("Player 0 (X) Moves" + "");
+			// }
+			// }
 		}
 	}
 

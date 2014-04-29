@@ -125,6 +125,8 @@ public class TttGUI extends JFrame {
 		updateUI(move, "ai1");
 		board.move(1, move);
 		ai0.registerMove(move);
+		board.printBoardMap();
+		board.printMagicSquare();
 
 		while (!gameOver) {
 			if (ai0turn) {
