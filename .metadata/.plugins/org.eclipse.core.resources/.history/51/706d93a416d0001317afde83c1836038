@@ -252,9 +252,8 @@ public class TttBoard {
 		} else
 			player0Spots.add(magicNCube.get(key));
 		openSpots.remove(key);
-		boolean c = check(key, player);
 		updatePairs(key, player);
-		return c;
+		return check(key, player);
 	}
 
 	public boolean moveSuppressWin(int player, int key) {
