@@ -4,15 +4,15 @@ import java.util.*;
 public class MagicGenerator {
 
 	public static void main(String[] args) {
-		// for (int x = 5; x < 101; x++) {
-		// MagicGenerator tester = new MagicGenerator(x, 2);
-		// tester.generateMagic();
-		// tester.writeMagic();
-		// }
+		 for (int x = 5; x < 101; x++) {
+		 MagicGenerator tester = new MagicGenerator(x, 2);
+		 tester.generateMagic();
+		 tester.writeMagic();
+		 }
 
-		MagicGenerator tester = new MagicGenerator(7, 2);
-		tester.generateMagic();
-		tester.printMagic();
+		//MagicGenerator tester = new MagicGenerator(7, 2);
+		//tester.generateMagic();
+		//tester.printMagic();
 	}
 
 	private static int order;
