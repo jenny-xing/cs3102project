@@ -272,7 +272,6 @@ public class TttGUI extends JFrame {
 
 			} else {
 				ai0.registerMove(spot);
-				
 				pressed.setText("O");
 				player1magicints += magicInt + " ";
 				p1m.append("Moved in spot: " + spotNum + "\tYour Magic Ints: "

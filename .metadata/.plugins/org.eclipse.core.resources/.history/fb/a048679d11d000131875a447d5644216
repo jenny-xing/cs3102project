@@ -257,11 +257,9 @@ public class TttGUI extends JFrame {
 					ai0.registerMove(spot);
 					int suggestedmove = -1;
 					if (aifirstmove) {
-						System.out.println("first move was suggested");
 						suggestedmove = ai0.firstMove();
 						aifirstmove = !aifirstmove;
 					} else {
-						System.out.println("non-first move was suggested");
 						suggestedmove = ai0.move();
 					}
 					JOptionPane.showMessageDialog(null,
@@ -272,7 +270,6 @@ public class TttGUI extends JFrame {
 
 			} else {
 				ai0.registerMove(spot);
-				
 				pressed.setText("O");
 				player1magicints += magicInt + " ";
 				p1m.append("Moved in spot: " + spotNum + "\tYour Magic Ints: "

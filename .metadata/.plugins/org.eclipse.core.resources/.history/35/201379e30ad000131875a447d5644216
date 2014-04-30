@@ -25,7 +25,6 @@ public class TttGUI extends JFrame {
 	private boolean gameOver;
 	private TttBot ai0, ai1;
 	public static boolean useai;
-	public static boolean aifirstmove = true;
 
 	public TttGUI(int o, int d, String gameType) {
 		order = o;
@@ -130,7 +129,6 @@ public class TttGUI extends JFrame {
 
 		while (!gameOver) {
 			if (ai0turn) {
-				// TODO ref here
 				move = ai0.move();
 				updateUI(move, "ai0");
 				if (board.move(0, move)) {
@@ -202,9 +200,20 @@ public class TttGUI extends JFrame {
 				"Choose Game Type: ", "", JOptionPane.PLAIN_MESSAGE, null,
 				gameOptions, "");
 		int choice = Arrays.asList(gameOptions).indexOf(gameType) + 1;
+		switch (choice) {
+		case 1:
+			break;
+		case 2:
+			useai0 = true;
+			break;
+		case 3:
+			useai0 = true;
+			useai1 = true;
+			break;
+		}
 		TttGUI gui = new TttGUI(od[0], od[1], gameType);
 		if (choice == 2) {
-			useai = true;
+
 		}
 		if (choice == 3) {
 			gui.botvbotplay();
@@ -238,6 +247,7 @@ public class TttGUI extends JFrame {
 					pressed.getText().indexOf("Magic Square Number:") + 21,
 					pressed.getText().indexOf("</html>"));
 
+			// TODO the rest of this needs to be refactored
 			if (player0) {
 				pressed.setText("X");
 				player0magicints += magicInt + " ";
@@ -248,31 +258,23 @@ public class TttGUI extends JFrame {
 					gameOver = true;
 					p0m.append("You win!\n");
 					return;
-				}
-
-				player1moves.setTitle("Player 1 (O) Moves (current player)");
-				player0moves.setTitle("Player 0 (X) Moves" + "");
-
-				if (useai) {
-					ai0.registerMove(spot);
-					int suggestedmove = -1;
-					if (aifirstmove) {
-						System.out.println("first move was suggested");
-						suggestedmove = ai0.firstMove();
-						aifirstmove = !aifirstmove;
+				} else {
+					player0 = !player0;
+					if (player0) {
+						player0moves
+								.setTitle("Player 0 (X) Moves (current player)");
+						player1moves.setTitle("Player 1 (O) Moves)");
 					} else {
-						System.out.println("non-first move was suggested");
-						suggestedmove = ai0.move();
+						player1moves
+								.setTitle("Player 1 (O) Moves (current player)");
+						player0moves.setTitle("Player 0 (X) Moves" + "");
 					}
-					JOptionPane.showMessageDialog(null,
-							"The game wizard suggests that you move in spot "
-									+ suggestedmove);
 				}
-				player0 = !player0;
-
+				if (useai0) {
+					System.out.println("have ai tell player 1 where to move");
+					ai0.registerMove(spot);
+				}
 			} else {
-				ai0.registerMove(spot);
-				
 				pressed.setText("O");
 				player1magicints += magicInt + " ";
 				p1m.append("Moved in spot: " + spotNum + "\tYour Magic Ints: "
@@ -282,11 +284,22 @@ public class TttGUI extends JFrame {
 					gameOver = true;
 					p1m.append("You win!\n");
 					return;
-				}
-				player0moves.setTitle("Player 0 (X) Moves (current player)");
-				player1moves.setTitle("Player 1 (O) Moves)");
+				} else {
+					player0 = !player0;
+					if (player0) {
+						player0moves
+								.setTitle("Player 0 (X) Moves (current player)");
+						player1moves.setTitle("Player 1 (O) Moves)");
+					} else {
+						player1moves
+								.setTitle("Player 1 (O) Moves (current player)");
+						player0moves.setTitle("Player 0 (X) Moves" + "");
+					}
 
-				player0 = !player0;
+				}
+				if (useai1) {
+					System.out.println("have ai tell player 0 where to move");
+				}
 			}
 
 		}

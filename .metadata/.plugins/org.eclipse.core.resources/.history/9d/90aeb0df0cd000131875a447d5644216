@@ -357,13 +357,13 @@ public class TttBoard {
 
 	// perform the winning operation given the winner
 	private void win(String winner) {
-		System.out.println("Board map: " + boardMap);
-		System.out.println("x spots: " + player0Spots);
-		System.out.println("o spots: " + player1Spots);
-		System.out.println("x pairs: " + player0Pairs);
-		System.out.println("o pairs: " + player1Pairs);
-		printBoardMap();
-		printMagicSquare();
+		// System.out.println("Board map: " + boardMap);
+		// System.out.println("x spots: " + player0Spots);
+		// System.out.println("o spots: " + player1Spots);
+		// System.out.println("x pairs: " + player0Pairs);
+		// System.out.println("o pairs: " + player1Pairs);
+		// printBoardMap();
+		// printMagicSquare();
 		// System.out.println(winner + " has won!");
 	}
 

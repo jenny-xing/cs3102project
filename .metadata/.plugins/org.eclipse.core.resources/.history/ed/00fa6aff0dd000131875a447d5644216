@@ -239,6 +239,16 @@ public class TttGUI extends JFrame {
 					pressed.getText().indexOf("</html>"));
 
 			if (player0) {
+				// TODO here
+				int move = -1;
+				if (useai) {
+					if (aifirstmove) {
+						move = ai0.firstMove();
+					}
+					ai0.registerMove(spot);
+					player0 = !player0;
+					return;
+				}
 				pressed.setText("X");
 				player0magicints += magicInt + " ";
 				p0m.append("Moved in spot: " + spotNum + "\tYour Magic Ints: "
@@ -253,26 +263,10 @@ public class TttGUI extends JFrame {
 				player1moves.setTitle("Player 1 (O) Moves (current player)");
 				player0moves.setTitle("Player 0 (X) Moves" + "");
 
-				if (useai) {
-					ai0.registerMove(spot);
-					int suggestedmove = -1;
-					if (aifirstmove) {
-						System.out.println("first move was suggested");
-						suggestedmove = ai0.firstMove();
-						aifirstmove = !aifirstmove;
-					} else {
-						System.out.println("non-first move was suggested");
-						suggestedmove = ai0.move();
-					}
-					JOptionPane.showMessageDialog(null,
-							"The game wizard suggests that you move in spot "
-									+ suggestedmove);
-				}
 				player0 = !player0;
 
 			} else {
 				ai0.registerMove(spot);
-				
 				pressed.setText("O");
 				player1magicints += magicInt + " ";
 				p1m.append("Moved in spot: " + spotNum + "\tYour Magic Ints: "
