@@ -1,6 +1,10 @@
 ====================================
+
 Tactful Tic-Tac-Toe Tactics
+
 ====================================
+
+
 CS 3102 Spring 2014 Term Project
 Authors: Rob Mina and Jenny Xing
 
